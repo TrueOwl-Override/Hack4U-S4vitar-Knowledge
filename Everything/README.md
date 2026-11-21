@@ -16,38 +16,38 @@
 
 ### 🐧 Linux Commands
 
-| | Category | What's inside | Commands |
-|:-:|:--|:--|:--|
-| 📁 | **[Navigation & Files](notes/navigation-files.md)** | Move around the filesystem and create, copy, delete and inspect files and folders. | `pwd` `ls` `cd` `mkdir` `touch` `cp` `ln` `rm` `file` `stat` `*` `readlink` `basename` `pushd` `popd` |
-| 📝 | **[Viewing & Editing Files](notes/viewing-editing-files.md)** | Read files in the terminal, page through output, compare files and edit text. | `cat` `more` `less` `head` `tail` `rev` `diff` `nano` `vi` `man` |
-| 🔍 | **[Searching](notes/searching.md)** | Find files anywhere on the system and locate where commands live. | `find` `grep` `which` `command` `xargs` |
-| ✂️ | **[Text Processing](notes/text-processing.md)** | Filter, cut, transform and sort text coming from files or other commands. | `echo` `awk` `cut` `tr` `sed` `sort` `wc` `uniq` `tee` `sponge` `column` |
-| 🔀 | **[Pipes, Redirection & Operators](notes/pipes-redirection-operators.md)** | Chain commands, decide where output and errors go, and run things in the background. | `\|` `;` `&&` `\|\|` `&` `>` `>>` `2>/dev/null` `2>&1` `&>/dev/null` `exec` `disown` `<` `<<` `<<<` `\|&` `2>` `<(command)` `>(command)` `>&2` `\` |
-| 👤 | **[Users & Groups](notes/users-groups.md)** | Check who you are, switch users, and manage accounts, passwords and groups. | `whoami` `id` `sudo` `su` `useradd` `usermod` `passwd` `groupadd` |
-| 🔐 | **[Permissions & Attributes](notes/permissions-attributes.md)** | Control who can read, write and run files, plus special attributes and capabilities. | `chmod` `chown` `chgrp` `lsattr` `chattr` `getcap` `setcap` |
-| 🐚 | **[Shell & Environment](notes/shell-environment.md)** | Shell settings, environment variables, aliases and handy history shortcuts. | `bash` `export` `env` `tty` `alias` `!$` `!!` `!?` `Ctrl + L` `Tab` `Ctrl + C` `sh` `type` `shopt` |
-| ⏱️ | **[Processes & Scheduling](notes/processes-scheduling.md)** | See what's running, limit or repeat commands, and schedule jobs with cron. | `ps` `kill` `fg` `sleep` `timeout` `time` `watch` `crontab` `pkill` `pgrep` |
-| 🌐 | **[Networking](notes/networking.md)** | Network interfaces, open ports and sockets, and raw connections with netcat. | `hostname` `ifconfig` `iwconfig` `ss` `lsof` `nc` `ncat` `ping` `ip` `dig` |
-| 🔑 | **[SSH & Remote Access](notes/ssh-remote-access.md)** | Connect to remote machines and manage SSH keys. | `ssh` `sshpass` `ssh-keygen` `ssh-copy-id` |
-| 🧬 | **[Binary, Encoding & Compression](notes/binary-encoding-compression.md)** | Inspect binary data, convert between formats, hash files and work with archives. | `strings` `xxd` `ghex` `base64` `md5sum` `bc` `7z` `dd` `hexedit` |
-| 📦 | **[System & Packages](notes/system-packages.md)** | Update the system, manage packages and check system info. | `apt` `parrot-upgrade` `reboot` `neofetch` `uname` `uptime` `date` |
-| 🗂️ | **[System & Device Files](notes/system-device-files.md)** | Special device files and system paths you read from or write to. | `/dev/null` `/dev/zero` `/dev/urandom` |
-| 🌿 | **[Git](notes/git.md)** | Version control: clone projects, explore history, work with branches and publish changes. | `git clone` `git log` `git show` `git branch` `git checkout` `git tag` `git add` `git commit` `git push` |
+| | Category | Commands & parameters |
+|:-:|:--|:--|
+| 📁 | **[Navigation & Files](notes/navigation-files.md)** | **`pwd`**<br>**`ls`** `-l` `-a` `/etc/cron.d` `/etc` `/bin /sbin /usr/sbin` `/dev` `-l /usr/bin/sh`<br>**`cd`** `.` `..` `(absolute path)` `(relative path)` `/` `~`<br>**`mkdir`** `-p`<br>**`touch`**<br>**`cp`**<br>**`ln`** `-s` `-sf`<br>**`rm`** `-r` `-f` `-r /tmp/$var`<br>**`file`**<br>**`stat`**<br>**`*`**<br>**`readlink`** `-f`<br>**`basename`**<br>**`pushd`**<br>**`popd`** |
+| 📝 | **[Viewing & Editing Files](notes/viewing-editing-files.md)** | **`cat`** `/etc/group` `/etc/passwd` `/etc/shells` `/etc/hosts` `/etc/shadow` `/etc/login.defs` `/home/bandit1/-` `./-` `$(pwd)/-` `"spaces in this filename"` `spaces\ in\ this\ filename` `s*` `home/bandit/s*` `~/.ssh/authorized_keys` `/proc/net/tcp` `<< 'EOF'`<br>**`more`** `v` `:set shell=/bin/bash` `:shell`<br>**`less`**<br>**`head`** `-n 1` `-n -3` `-c`<br>**`tail`** `-n` `-n 1` `-1`<br>**`rev`**<br>**`diff`**<br>**`nano`**<br>**`vi`** `V` `> / <` `y` `p / P` `d` `yy` `.file.swp` `:%s/old/new/g`<br>**`man`** |
+| 🔍 | **[Searching](notes/searching.md)** | **`find`** `-name` `-type` `-perm` `-group` `-user` `-writable` `-executable` `-readable` `.` `-size` `-perm -o+w` `-perm -2000`<br>**`grep`** `-n` `-i` `-r "\w"` `-vE "bashrc\\|profile"` `-A 5` `-B 5` `-C 5` `-oP` `-v` `-E` `-vE` `^pattern$` `-oE` `-q` `-qE`<br>**`which`** `/usr/bin/bash /bin/bash /usr/bin/zsh /bin/zsh`<br>**`command`** `-v`<br>**`xargs`** `(join lines)` |
+| ✂️ | **[Text Processing](notes/text-processing.md)** | **`echo`** `$PATH` `$HOME` `$SHELL` `$?` `-e` `-e "\n"` `-e "\t"` `-n` `"obase=10; ibase=16; $hexNum" \| bc` `'$HOME'` `$ZSH_VERSION` `$BASH_VERSION` `\$ \" \\` `$'...'` `$a+$b` `$USER` `$PWD` `$OLDPWD` `$TERM` `$HOSTNAME`<br>**`awk`** `'{print $1}'` `'NR==2'` `FS="/"` `'{print $2}' FS=":"` `'NF{print $NF}'` `"/name: \"Forge\"/,/resuelta:/"` `-F` `NR>1 {print $N}`<br>**`cut`** `-d` `-f` `-d ':' -f 2` `-f1,7`<br>**`tr`** `':' ' '` `'[A-Za-z]' '[N-ZA-Mn-za-m]'` `-d ' '` `' ' ','` `' ' '\n'` `-dc`<br>**`sed`** `'s/^ *//'`<br>**`sort`** `-u` `-n` `-rn`<br>**`wc`** `-c` `-l`<br>**`uniq`** `-u` `-c`<br>**`tee`** `-a`<br>**`sponge`**<br>**`column`** |
+| 🔀 | **[Pipes, Redirection & Operators](notes/pipes-redirection-operators.md)** | **`\|`**<br>**`;`**<br>**`&&`**<br>**`\|\|`**<br>**`&`**<br>**`>`** `/dev/null` `done > file` `> file`<br>**`>>`**<br>**`2>/dev/null`**<br>**`2>&1`** `3>&1 1>&2 2>&3`<br>**`&>/dev/null`**<br>**`exec`** `3<> file` `>&3` `3>&-` `5>&3` `8>&3-`<br>**`disown`**<br>**`<`**<br>**`<<`**<br>**`<<<`**<br>**`\|&`**<br>**`2>`**<br>**`<(command)`**<br>**`>(command)`**<br>**`>&2`**<br>**`\`** |
+| 👤 | **[Users & Groups](notes/users-groups.md)** | **`whoami`**<br>**`id`** `-u`<br>**`sudo`** `su` `pacman -Syu` `pacman -S`<br>**`su`**<br>**`useradd`** `-s` `-d`<br>**`usermod`** `-a` `-G`<br>**`passwd`**<br>**`groupadd`** |
+| 🔐 | **[Permissions & Attributes](notes/permissions-attributes.md)** | **`chmod`** `o+w` `o-w` `755` `+t` `4000` `u+s` `2000` `g+s` `S / T` `+x` `u-x` `-x` `o-rx` `700`<br>**`chown`**<br>**`chgrp`**<br>**`lsattr`**<br>**`chattr`** `+i` `-V`<br>**`getcap`** `-r`<br>**`setcap`** `-r` |
+| 🐚 | **[Shell & Environment](notes/shell-environment.md)** | **`bash`** `-p` `script.sh` `-c`<br>**`export`** `variable_name` `TERM=xterm` `PATH=dir:$PATH`<br>**`env`**<br>**`tty`**<br>**`alias`** `name='absolute_path'`<br>**`!$`**<br>**`!!`**<br>**`!?`**<br>**`Ctrl + L`**<br>**`Tab`**<br>**`Ctrl + C`**<br>**`sh`**<br>**`type`**<br>**`shopt`** `-s` |
+| ⏱️ | **[Processes & Scheduling](notes/processes-scheduling.md)** | **`ps`** `-faux` `-eo command` `aux`<br>**`kill`** `-9` `-15`<br>**`fg`**<br>**`sleep`** `0.4`<br>**`timeout`** `1 bash -c ""`<br>**`time`**<br>**`watch`** `-n 1`<br>**`crontab`** `* * * * * command` `*/3 * * * *` `* * * * 6`<br>**`pkill`**<br>**`pgrep`** `-x` |
+| 🌐 | **[Networking](notes/networking.md)** | **`hostname`** `-I`<br>**`ifconfig`**<br>**`iwconfig`**<br>**`ss`** `-nltp` `-tln` `-tn`<br>**`lsof`** `-i:`<br>**`nc`** `-nlvp`<br>**`ncat`** `--ssl`<br>**`ping`** `-c` `-W`<br>**`ip`** `a` `-4 addr show`<br>**`dig`** `+short` |
+| 🔑 | **[SSH & Remote Access](notes/ssh-remote-access.md)** | **`ssh`** `-p` `bandit0@bandit.labs.overthewire.org -p 2220` `-i` `user@host "command"`<br>**`sshpass`** `-p`<br>**`ssh-keygen`** `-f`<br>**`ssh-copy-id`** `-i` |
+| 🧬 | **[Binary, Encoding & Compression](notes/binary-encoding-compression.md)** | **`strings`**<br>**`xxd`** `-p` `-s` `-r` `-l`<br>**`ghex`**<br>**`base64`** `-d`<br>**`md5sum`**<br>**`bc`** `scale=2`<br>**`7z`** `l` `x`<br>**`dd`** `if= of=` `bs= count=`<br>**`hexedit`** |
+| 📦 | **[System & Packages](notes/system-packages.md)** | **`apt`** `update` `upgrade`<br>**`parrot-upgrade`**<br>**`reboot`**<br>**`neofetch`**<br>**`uname`** `-a` `-r` `-m`<br>**`uptime`** `-p`<br>**`date`** `+%Y-%m-%d %H:%M:%S` |
+| 🗂️ | **[System & Device Files](notes/system-device-files.md)** | **`/dev/null`**<br>**`/dev/zero`**<br>**`/dev/urandom`** |
+| 🌿 | **[Git](notes/git.md)** | **`git clone`**<br>**`git log`**<br>**`git show`** `(commit id)` `(tag name)`<br>**`git branch`** `-a`<br>**`git checkout`** `(commit id)` `(branch name)`<br>**`git tag`**<br>**`git add`** `-f`<br>**`git commit`** `-m "identifier"`<br>**`git push`** `-u origin branch` |
 
 ### 🐚 Bash Scripting
 
-| | Category | What's inside | Commands |
-|:-:|:--|:--|:--|
-| 📜 | **[Script Basics](notes/script-basics.md)** | The building blocks of every script: the shebang, exit codes, command substitution and subshells. | `#!/bin/bash` `exit` `$()` `(command)` `#` `$$` `./script.sh` `source` `set` `$!` `$_` `$SECONDS` `$BASHPID` `{ }` |
-| 📦 | **[Variables & Arithmetic](notes/variables-arithmetic.md)** | Store values in variables, read them back and do math with them. | `variable="Hello"` `$variable or ${variable}` `${color_variable}` `declare` `let` `$(( ))` `array=(1 2 3)` `unset` `read` `$RANDOM` `IFS` `(( ))` |
-| ➗ | **[Operators](notes/operators.md)** | Assign, do math, compare numbers and text, and negate conditions. | `=` `+=` `+ - *` `%` `-eq` `-ne` `-gt` `-lt` `-le` `-ge` `==` `!` `**` `/` |
-| 🎯 | **[Arguments & Options](notes/arguments-options.md)** | Read what's passed to your script: positional arguments and flags parsed with getopts. | `$0` `$1, $2...` `$#` `$*` `getopts` `$@` `shift` |
-| 🔀 | **[Conditionals](notes/conditionals.md)** | Make decisions with if and case. | `if` `case` `test` `[` `true` `false` `[[ ]]` `BASH_REMATCH` |
-| 🔁 | **[Loops & Sequences](notes/loops-sequences.md)** | Repeat work with for and while, and generate sequences to loop over. | `for` `while` `seq` `{0000..9999}` `break` |
-| 🧩 | **[Functions & Signals](notes/functions-signals.md)** | Group commands into functions and react to signals like Ctrl+C. | `function name(){ commands }` `trap` |
-| ⚙️ | **[Jobs, Temp Files & Terminal](notes/jobs-temp-files-terminal.md)** | Wait for background jobs, set time limits, create temp files and control the cursor. | `wait` `mktemp` `tput` |
-| 🌐 | **[Networking in Bash](notes/networking-in-bash.md)** | Open TCP connections from pure Bash and make HTTP requests. | `/dev/tcp/$ip/$port` `curl` |
-| 🛠️ | **[Helper Tools](notes/helper-tools.md)** | Handy tools for reading and prettifying code while you script. | `batcat` `js-beautify` |
+| | Category | Commands & parameters |
+|:-:|:--|:--|
+| 📜 | **[Script Basics](notes/script-basics.md)** | **`#!/bin/bash`** `#!/usr/bin/bash` `#!/bin/sh` `#!/usr/bin/python3` `#!/usr/bin/perl` `#!/usr/bin/env bash`<br>**`exit`** `0` `1` `2`<br>**`$()`** `` `command` ``<br>**`(command)`** `(command) 2>/dev/null`<br>**`#`**<br>**`$$`**<br>**`./script.sh`**<br>**`source`** `~/.bashrc`<br>**`set`** `-u`<br>**`$!`**<br>**`$_`**<br>**`$SECONDS`**<br>**`$BASHPID`**<br>**`{ }`** |
+| 📦 | **[Variables & Arithmetic](notes/variables-arithmetic.md)** | **`variable="Hello"`** `=$other_variable` `+="text"` `=""` `${name:-default}` `${name:=default}`<br>**`$variable or ${variable}`** `"$variable text"`<br>**`${color_variable}`**<br>**`declare`** `-i` `-a` `-r`<br>**`let`** `+=` `-=`<br>**`$(( ))`** `+ - *` `%` `**` `/`<br>**`array=(1 2 3)`** `$array` `${array[@]}` `${#array[@]}` `${array[0]}` `${array[-1]}` `+=(5)` `=(${array[@]})`<br>**`unset`** `array[0]` `array[-1]` `variable`<br>**`read`** `-ra ... <<<` `-r` `-a` `-p` `-rp`<br>**`$RANDOM`**<br>**`IFS`**<br>**`(( ))`** `((var++))` `(( a > b ))` `((var+=5))` |
+| ➗ | **[Operators](notes/operators.md)** | **`=`**<br>**`+=`**<br>**`+ - *`**<br>**`%`**<br>**`-eq`**<br>**`-ne`**<br>**`-gt`**<br>**`-lt`**<br>**`-le`**<br>**`-ge`**<br>**`==`**<br>**`!`**<br>**`**`**<br>**`/`** |
+| 🎯 | **[Arguments & Options](notes/arguments-options.md)** | **`$0`**<br>**`$1, $2...`** `${1:-default}` `${10}`<br>**`$#`**<br>**`$*`**<br>**`getopts`** `"m:h" arg` `$OPTARG`<br>**`$@`**<br>**`shift`** |
+| 🔀 | **[Conditionals](notes/conditionals.md)** | **`if`** `-eq` `[ condition ]` `-ne` `-gt` `-lt` `-le` `-ge` `==` `!` `-f` `elif` `else` `[ ] && [ ]` `[ ] \|\| [ ]` `=` `!=` `-z` `-n` `-e` `-d` `-r` `-w` `-x` `-s` `-L` `-p` `-S` `-t` `-nt` `-ot` `-a` `-o`<br>**`case`** `m) command;;`<br>**`test`**<br>**`[`**<br>**`true`**<br>**`false`**<br>**`[[ ]]`** `==` `=~` `< >` `&& \|\|` `@(a\|b)` `!(...)`<br>**`BASH_REMATCH`** |
+| 🔁 | **[Loops & Sequences](notes/loops-sequences.md)** | **`for`** `line in; do; done` `element in ${array[@]}; do; done`<br>**`while`** `[ ]; do; done` `read line; do; done` `true`<br>**`seq`**<br>**`{0000..9999}`** `{a,b,c}`<br>**`break`** |
+| 🧩 | **[Functions & Signals](notes/functions-signals.md)** | **`function name(){ commands }`** `ctrl_c(){}` `local`<br>**`trap`** `ctrl_c INT` |
+| ⚙️ | **[Jobs, Temp Files & Terminal](notes/jobs-temp-files-terminal.md)** | **`wait`** `$!`<br>**`mktemp`** `-d`<br>**`tput`** `civis` `cnorm` |
+| 🌐 | **[Networking in Bash](notes/networking-in-bash.md)** | **`/dev/tcp/$ip/$port`** `/dev/udp/$ip/$port` `bash -i >& ... 0>&1`<br>**`curl`** `-s` `-X GET` `-o` `-w` `--connect-timeout` |
+| 🛠️ | **[Helper Tools](notes/helper-tools.md)** | **`batcat`**<br>**`js-beautify`** |
 
 ## 🛠️ How to update
 

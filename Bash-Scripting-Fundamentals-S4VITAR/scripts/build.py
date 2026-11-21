@@ -123,10 +123,17 @@ def readme_md(cats, by_name, params):
         parts.setdefault(cat["part"], []).append(cat)
     for part, pcats in parts.items():
         out += ["", f"### {part_emoji.get(part, '📂')} {part}", "",
-                "| | Category | What's inside | Commands |", "|:-:|:--|:--|:--|"]
+                "| | Category | Commands & parameters |", "|:-:|:--|:--|"]
         for cat in pcats:
-            cmds = " ".join(code(c["name"]) for c in cat["commands"])
-            out.append(f"| {cat['emoji']} | **[{cat['name']}](notes/{cat['id']}.md)** | {cat['desc']} | {cmds} |")
+            entries = []
+            for c in cat["commands"]:
+                chips = " ".join(code(p["flag"]) for p in c["params"])
+                entry = f"**{code(c['name'])}**"
+                if chips:
+                    entry += " " + chips
+                entries.append(entry)
+            cmds = "<br>".join(entries)
+            out.append(f"| {cat['emoji']} | **[{cat['name']}](notes/{cat['id']}.md)** | {cmds} |")
     out += [
         "",
         "## 🛠️ How to update",
