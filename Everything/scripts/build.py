@@ -132,7 +132,7 @@ def readme_md(cats, by_name, params):
                 if chips:
                     entry += " " + chips
                 entries.append(entry)
-            cmds = "<br>".join(entries)
+            cmds = " ".join(entries)
             out.append(f"| {cat['emoji']} | **[{cat['name']}](notes/{cat['id']}.md)** | {cmds} |")
     out += [
         "",
