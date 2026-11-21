@@ -123,16 +123,9 @@ def readme_md(cats, by_name, params):
         parts.setdefault(cat["part"], []).append(cat)
     for part, pcats in parts.items():
         out += ["", f"### {part_emoji.get(part, '📂')} {part}", "",
-                "| | Category | Commands & parameters |", "|:-:|:--|:--|"]
+                "| | Category | Commands |", "|:-:|:--|:--|"]
         for cat in pcats:
-            entries = []
-            for c in cat["commands"]:
-                chips = " ".join(code(p["flag"]) for p in c["params"])
-                entry = f"**{code(c['name'])}**"
-                if chips:
-                    entry += " " + chips
-                entries.append(entry)
-            cmds = " ".join(entries)
+            cmds = " ".join(code(c["name"]) for c in cat["commands"])
             out.append(f"| {cat['emoji']} | **[{cat['name']}](notes/{cat['id']}.md)** | {cmds} |")
     out += [
         "",
