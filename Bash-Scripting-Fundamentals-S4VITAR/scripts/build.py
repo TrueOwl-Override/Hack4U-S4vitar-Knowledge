@@ -127,11 +127,6 @@ def readme_md(cats, by_name, params):
         for cat in pcats:
             cmds = " ".join(code(c["name"]) for c in cat["commands"])
             out.append(f"| {cat['emoji']} | **[{cat['name']}](notes/{cat['id']}.md)** | {cat['desc']} | {cmds} |")
-    out += ["", "## 🔤 A–Z index", "", "| Command | What it does | Category |", "|:--|:--|:--|"]
-    for name in sorted(by_name, key=lambda x: (not x[0].isalnum(), x.lower())):
-        c = by_name[name]
-        cat = cats[c["category"]]
-        out.append(f"| [{code(name)}](notes/{cat['id']}.md#{cmd_anchor(name)}) | {cell(c['desc'])} | {cat['emoji']} {cat['name']} |")
     out += [
         "",
         "## 🛠️ How to update",
