@@ -2,7 +2,7 @@
 
 > Filter, cut, transform and sort text coming from files or other commands.
 
-**Linux Commands** · **9** commands · **30** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **10** commands · **31** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -17,6 +17,7 @@
 | [`cut`](#cmd-cut) | Extracts parts of a line of text, splitting it by a delimiter |
 | [`column`](#cmd-column) | Arranges incoming text into aligned columns, like a table |
 | [`wc`](#cmd-wc) | Counts the lines, words or characters of a text |
+| [`sed`](#cmd-sed) | Finds, replaces, deletes or modifies text in a file or stream, usually with regular expressions |
 
 ---
 
@@ -195,5 +196,23 @@ cat file.txt | wc
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `-l` | Counts the lines | `find / -perm -4000 2>&1 \| wc -l` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-sed"></a>
+
+## `sed`
+
+Finds, replaces, deletes or modifies text in a file or stream, usually with regular expressions
+
+```bash
+sed 's/old/new/g' file.txt
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `s/old/new/` | Substitutes text (s/^/ / adds spaces at the start of each line) | `sed 's/HTTP/s4vitar/'` |
 
 <sub>[⬆ Back to top](#commands)</sub>

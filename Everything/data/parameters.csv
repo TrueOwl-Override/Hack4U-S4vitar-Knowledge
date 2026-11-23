@@ -153,6 +153,7 @@ uname,-r,Shows only the kernel version,uname -r
 uname,-m,Shows the system architecture,uname -m
 kill,-9,Forces the process to end immediately (SIGKILL),kill -9 1234
 kill,-15,SIGTERM: ends the process in an orderly way (exit code 143),kill -15 $!
+kill,%,Kills a job by its job number (after Ctrl + Z),kill %1
 ln,-s,Creates a symbolic link (a shortcut that points to the original path),ln -s /etc/hosts hosts_link
 ln,-sf,Creates a symbolic link and replaces it if it already exists,sudo ln -sf /usr/bin/dash /usr/bin/sh
 ps,-faux,Shows every process from every user in a detailed tree format,ps -faux
@@ -198,6 +199,7 @@ git add,-f,Forces a file into the staging area even if .gitignore ignores it,git
 git commit,"-m ""identifier""",Sets the message that identifies the commit,"git commit -m ""Add key.txt"""
 git push,-u origin branch,Pushes commits to the given branch on the origin remote and links it so later push/pull don't need it spelled out,git push -u origin master
 sed,'s/^ *//',Removes the spaces at the start of each line,"echo ""   hello"" | sed 's/^ *//'"
+sed,s/old/new/,Substitutes text (s/^/ / adds spaces at the start of each line),sed 's/HTTP/s4vitar/'
 sleep,0.4,Accepts decimals to pause for less than a second,sleep 0.4
 exit,0,"Ends the script with exit code 0, signalling success",exit 0
 exit,1,"Ends the script with exit code 1, signalling an error",exit 1
@@ -262,6 +264,11 @@ if,-ot,True if the first file is older than the second (older than),[ /etc/passw
 if,-a,AND inside a single [ ] (fragile; prefer [ ] && [ ]),"[ ""$u"" = root -a -f /etc/passwd ]"
 if,-o,OR inside a single [ ] (prefer [ ] || [ ]),[ -f a -o -f b ]
 case,m) command;;,Defines a pattern inside case and the block to run if it matches; ;; closes that block,"case $arg in m) echo ""option m"";; esac"
+case,*),"Wildcard: the else of case, matches anything not matched above","*) echo ""unknown"" ;;"
+case,a|b),| acts as OR between patterns,"s|S|yes|YES) echo ""Accepted"" ;;"
+case,*.ext) [a-z]),"Patterns are globs, not regex: * any, ? one char, [...] a range","*.sh|*.bash) echo ""Bash"" ;;"
+case,;&,Runs the block and falls through to the next WITHOUT checking it (fall-through),critical) ... ;& high) ... ;;
+case,;;&,Runs the block and keeps checking the remaining patterns,80|443) ... ;;& 443) ... ;;
 while,[ ]; do; done,Repeats the block while the condition inside the brackets is true,while [ -f file.gz ]; do gunzip file.gz; done
 while,read line; do; done,Reads input line by line and runs the block for each line,cat list.txt | while read line; do echo $line; done
 while,true,"Infinite loop; it only stops with break, exit or Ctrl+C","while true; do echo ""playing""; sleep 1; done"
@@ -280,6 +287,7 @@ curl,-X GET,"Sets the request's HTTP method (GET, POST, PUT...)",curl -s -X GET 
 curl,-o,Where to save the output (/dev/null to discard the body),"curl -s -o /dev/null -w ""%{http_code}"" https://site"
 curl,-w,"Chooses what to print, e.g. %{http_code} for the HTTP code","curl -s -o /dev/null -w ""%{http_code}"" https://site"
 curl,--connect-timeout,Sets a maximum time to connect,curl --connect-timeout 2 http://ip
+curl,-I,Shows only the response headers (head),curl -s -I http://ip
 vi,V,"In Vim, selects whole lines (visual line mode)",V (then move with j/k)
 vi,> / <,"In Vim, indents (>) or unindents (<) the selected lines","V, select the lines, then >"
 vi,y,"In Vim, copies (yanks) the selected lines","V, select the lines, then y"
@@ -288,6 +296,7 @@ vi,d,"In Vim, deletes (cuts) the selection; paste it back with p","V, select the
 vi,yy,"In Vim, copies the current line (paste it with p)","yy, then p"
 vi,.file.swp,Swap file Vim leaves when it closes badly; delete it with rm so you can open the file again,rm .roulette.sh.swp
 vi,:%s/old/new/g,"In Vim/Neovim, replaces in the whole file (% = whole file, g = all per line)",:%s/local_port/port/g
+vi,u,"In Vim, undoes the last change",u
 ping,-c,Number of packets to send,ping -c 1 192.168.100.1
 ping,-W,Maximum seconds to wait for a reply,ping -c 1 -W 1 192.168.100.1
 /dev/tcp/$ip/$port,/dev/udp/$ip/$port,"Same pseudo-device for UDP; both only work in Bash, not in zsh",echo '' > /dev/udp/192.168.100.1/53
@@ -336,3 +345,4 @@ ssh-keygen,-f,Sets the path/name of the key files,ssh-keygen -f ~/.ssh/my_key
 [[ ]],@(a|b),extglob: matches one of several alternatives (needs shopt -s extglob),[[ $f == *.@(tar|gz|zip) ]]
 [[ ]],!(...),extglob: matches everything except those,[[ $f == !(*.sh|*.py) ]]
 shopt,-s,Enables (sets) a shell option,shopt -s extglob
+arp-scan,-I --localnet,"-I picks the interface, --localnet scans the whole local network",sudo arp-scan -I ens33 --localnet

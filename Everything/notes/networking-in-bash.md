@@ -2,7 +2,7 @@
 
 > Open TCP connections from pure Bash and make HTTP requests.
 
-**Bash Scripting** · **2** commands · **7** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **2** commands · **8** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -49,5 +49,6 @@ curl -s -X GET https://example.com
 | `-o` | Where to save the output (/dev/null to discard the body) | `curl -s -o /dev/null -w "%{http_code}" https://site` |
 | `-w` | Chooses what to print, e.g. %{http_code} for the HTTP code | `curl -s -o /dev/null -w "%{http_code}" https://site` |
 | `--connect-timeout` | Sets a maximum time to connect | `curl --connect-timeout 2 http://ip` |
+| `-I` | Shows only the response headers (head) | `curl -s -I http://ip` |
 
 <sub>[⬆ Back to top](#commands)</sub>

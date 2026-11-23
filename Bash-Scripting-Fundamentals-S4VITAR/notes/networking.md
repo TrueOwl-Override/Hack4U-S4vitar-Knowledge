@@ -2,7 +2,7 @@
 
 > Network interfaces, open ports and sockets, and raw connections with netcat.
 
-**Linux Commands** · **8** commands · **10** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **10** commands · **11** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -16,6 +16,8 @@
 | [`nc`](#cmd-nc) | Netcat: creates manual TCP/UDP connections to send and receive data, scan ports or open remote shells |
 | [`lsof`](#cmd-lsof) | Lists the files opened by running processes, including network connections |
 | [`ss`](#cmd-ss) | Shows information about active network sockets, a modern alternative to netstat |
+| [`arp-scan`](#cmd-arp-scan) | Lists the devices connected to the network |
+| [`ipcalc`](#cmd-ipcalc) | Works out a network's host range (already discounts network and broadcast) |
 
 ---
 
@@ -154,5 +156,37 @@ ss
 | `-tln` | Shows the listening TCP ports (no name resolution) | `ss -tln` |
 | `-tn` | Shows the established TCP connections | `ss -tn` |
 | `-nltp` | Shows listening TCP sockets without resolving names, including the process behind each one | `sudo ss -nltp` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-arp-scan"></a>
+
+## `arp-scan`
+
+Lists the devices connected to the network
+
+```bash
+sudo arp-scan -I ens33 --localnet
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `-I --localnet` | -I picks the interface, --localnet scans the whole local network | `sudo arp-scan -I ens33 --localnet` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-ipcalc"></a>
+
+## `ipcalc`
+
+Works out a network's host range (already discounts network and broadcast)
+
+```bash
+ipcalc 192.168.1.0/24
+```
 
 <sub>[⬆ Back to top](#commands)</sub>

@@ -2,7 +2,7 @@
 
 > Make decisions with if and case.
 
-**Bash Scripting** · **7** commands · **24** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **8** commands · **29** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -15,6 +15,7 @@
 | [`false`](#cmd-false) | Always returns exit code 1 (failure) |
 | [`[[ ]]`](#cmd-sym-91-91-93-93) | Bash's improved test: no word-splitting, allows && \|\| inside, glob == and regex =~ (use [ ] only for sh) |
 | [`BASH_REMATCH`](#cmd-bash-rematch) | Array filled after =~ : [0] is the whole match, [1],[2]... the capture groups |
+| [`case`](#cmd-case) | Compares a variable against several patterns and runs the block that matches; closed with esac |
 
 ---
 
@@ -141,5 +142,27 @@ Array filled after =~ : [0] is the whole match, [1],[2]... the capture groups
 ```bash
 [[ $l =~ ([0-9.]+) ]]; echo ${BASH_REMATCH[1]}
 ```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-case"></a>
+
+## `case`
+
+Compares a variable against several patterns and runs the block that matches; closed with esac
+
+```bash
+case $arg in m) echo "option m";; esac
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `*)` | Wildcard: the else of case, matches anything not matched above | `*) echo "unknown" ;;` |
+| `a\|b)` | \| acts as OR between patterns | `s\|S\|yes\|YES) echo "Accepted" ;;` |
+| `*.ext) [a-z])` | Patterns are globs, not regex: * any, ? one char, [...] a range | `*.sh\|*.bash) echo "Bash" ;;` |
+| `;&` | Runs the block and falls through to the next WITHOUT checking it (fall-through) | `critical) ... ;& high) ... ;;` |
+| `;;&` | Runs the block and keeps checking the remaining patterns | `80\|443) ... ;;& 443) ... ;;` |
 
 <sub>[⬆ Back to top](#commands)</sub>

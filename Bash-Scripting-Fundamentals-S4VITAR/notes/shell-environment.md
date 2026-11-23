@@ -2,7 +2,7 @@
 
 > Shell settings, environment variables, aliases and handy history shortcuts.
 
-**Linux Commands** · **6** commands · **5** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **7** commands · **5** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -14,6 +14,7 @@
 | [`export`](#cmd-export) | Turns a variable into an environment variable, available to other processes started from that terminal |
 | [`type`](#cmd-type) | Tells what a name is: builtin, keyword, alias or a file on disk |
 | [`shopt`](#cmd-shopt) | Turns shell options on or off (e.g. extglob for extended patterns) |
+| [`Ctrl + Z`](#cmd-ctrl-z) | Suspends the running process (resume with fg, kill it with kill %) |
 
 ---
 
@@ -110,5 +111,19 @@ shopt -s extglob
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `-s` | Enables (sets) a shell option | `shopt -s extglob` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-ctrl-z"></a>
+
+## `Ctrl + Z`
+
+Suspends the running process (resume with fg, kill it with kill %)
+
+```bash
+Ctrl + Z
+```
 
 <sub>[⬆ Back to top](#commands)</sub>

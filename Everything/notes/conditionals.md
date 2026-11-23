@@ -2,7 +2,7 @@
 
 > Make decisions with if and case.
 
-**Bash Scripting** · **8** commands · **39** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **8** commands · **44** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -81,6 +81,11 @@ case $arg in m) echo "option m";; esac
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `m) command;;` | Defines a pattern inside case and the block to run if it matches; ;; closes that block | `case $arg in m) echo "option m";; esac` |
+| `*)` | Wildcard: the else of case, matches anything not matched above | `*) echo "unknown" ;;` |
+| `a\|b)` | \| acts as OR between patterns | `s\|S\|yes\|YES) echo "Accepted" ;;` |
+| `*.ext) [a-z])` | Patterns are globs, not regex: * any, ? one char, [...] a range | `*.sh\|*.bash) echo "Bash" ;;` |
+| `;&` | Runs the block and falls through to the next WITHOUT checking it (fall-through) | `critical) ... ;& high) ... ;;` |
+| `;;&` | Runs the block and keeps checking the remaining patterns | `80\|443) ... ;;& 443) ... ;;` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

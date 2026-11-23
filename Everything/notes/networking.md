@@ -2,7 +2,7 @@
 
 > Network interfaces, open ports and sockets, and raw connections with netcat.
 
-**Linux Commands** · **10** commands · **12** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **12** commands · **13** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -18,6 +18,8 @@
 | [`ping`](#cmd-ping) | Sends packets to a host to check if it's reachable |
 | [`ip`](#cmd-ip) | Shows and manages network interfaces and their IPs |
 | [`dig`](#cmd-dig) | Resolves a domain's IP (DNS lookup) |
+| [`arp-scan`](#cmd-arp-scan) | Lists the devices connected to the network |
+| [`ipcalc`](#cmd-ipcalc) | Works out a network's host range (already discounts network and broadcast) |
 
 ---
 
@@ -192,5 +194,37 @@ dig +short scanme.nmap.org
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `+short` | Shows only the resolved IP | `dig +short scanme.nmap.org` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-arp-scan"></a>
+
+## `arp-scan`
+
+Lists the devices connected to the network
+
+```bash
+sudo arp-scan -I ens33 --localnet
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `-I --localnet` | -I picks the interface, --localnet scans the whole local network | `sudo arp-scan -I ens33 --localnet` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-ipcalc"></a>
+
+## `ipcalc`
+
+Works out a network's host range (already discounts network and broadcast)
+
+```bash
+ipcalc 192.168.1.0/24
+```
 
 <sub>[⬆ Back to top](#commands)</sub>

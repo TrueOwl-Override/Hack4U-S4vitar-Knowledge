@@ -4,7 +4,7 @@
 
 **Everything I've learned from every course, mixed together and grouped by what it does, with copy-ready examples.**
 
-![Commands](https://img.shields.io/badge/commands-212-2ea44f?style=for-the-badge) ![Parameters](https://img.shields.io/badge/parameters-337-0969da?style=for-the-badge) ![Categories](https://img.shields.io/badge/categories-25-8250df?style=for-the-badge)
+![Commands](https://img.shields.io/badge/commands-215-2ea44f?style=for-the-badge) ![Parameters](https://img.shields.io/badge/parameters-347-0969da?style=for-the-badge) ![Categories](https://img.shields.io/badge/categories-25-8250df?style=for-the-badge)
 
 🌐 **Searchable web version:** [`docs/index.html`](docs/index.html)
 
@@ -25,9 +25,9 @@
 | 🔀 | **[Pipes, Redirection & Operators](notes/pipes-redirection-operators.md)** | `\|` `;` `&&` `\|\|` `&` `>` `>>` `2>/dev/null` `2>&1` `&>/dev/null` `exec` `disown` `<` `<<` `<<<` `\|&` `2>` `<(command)` `>(command)` `>&2` `\` |
 | 👤 | **[Users & Groups](notes/users-groups.md)** | `whoami` `id` `sudo` `su` `useradd` `usermod` `passwd` `groupadd` |
 | 🔐 | **[Permissions & Attributes](notes/permissions-attributes.md)** | `chmod` `chown` `chgrp` `lsattr` `chattr` `getcap` `setcap` |
-| 🐚 | **[Shell & Environment](notes/shell-environment.md)** | `bash` `export` `env` `tty` `alias` `!$` `!!` `!?` `Ctrl + L` `Tab` `Ctrl + C` `sh` `type` `shopt` |
+| 🐚 | **[Shell & Environment](notes/shell-environment.md)** | `bash` `export` `env` `tty` `alias` `!$` `!!` `!?` `Ctrl + L` `Tab` `Ctrl + C` `sh` `type` `shopt` `Ctrl + Z` |
 | ⏱️ | **[Processes & Scheduling](notes/processes-scheduling.md)** | `ps` `kill` `fg` `sleep` `timeout` `time` `watch` `crontab` `pkill` `pgrep` |
-| 🌐 | **[Networking](notes/networking.md)** | `hostname` `ifconfig` `iwconfig` `ss` `lsof` `nc` `ncat` `ping` `ip` `dig` |
+| 🌐 | **[Networking](notes/networking.md)** | `hostname` `ifconfig` `iwconfig` `ss` `lsof` `nc` `ncat` `ping` `ip` `dig` `arp-scan` `ipcalc` |
 | 🔑 | **[SSH & Remote Access](notes/ssh-remote-access.md)** | `ssh` `sshpass` `ssh-keygen` `ssh-copy-id` |
 | 🧬 | **[Binary, Encoding & Compression](notes/binary-encoding-compression.md)** | `strings` `xxd` `ghex` `base64` `md5sum` `bc` `7z` `dd` `hexedit` |
 | 📦 | **[System & Packages](notes/system-packages.md)** | `apt` `parrot-upgrade` `reboot` `neofetch` `uname` `uptime` `date` |

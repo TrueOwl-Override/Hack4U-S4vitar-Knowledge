@@ -2,7 +2,7 @@
 
 > Filter, cut, transform and sort text coming from files or other commands.
 
-**Linux Commands** · **11** commands · **47** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **11** commands · **48** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -141,6 +141,7 @@ sed 's/old/new/g' file.txt
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `'s/^ *//'` | Removes the spaces at the start of each line | `echo "   hello" \| sed 's/^ *//'` |
+| `s/old/new/` | Substitutes text (s/^/ / adds spaces at the start of each line) | `sed 's/HTTP/s4vitar/'` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

@@ -2,7 +2,7 @@
 
 > Read files in the terminal, page through output, compare files and edit text.
 
-**Linux Commands** · **10** commands · **33** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **10** commands · **34** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -190,6 +190,7 @@ vi notes.txt
 | `yy` | In Vim, copies the current line (paste it with p) | `yy, then p` |
 | `.file.swp` | Swap file Vim leaves when it closes badly; delete it with rm so you can open the file again | `rm .roulette.sh.swp` |
 | `:%s/old/new/g` | In Vim/Neovim, replaces in the whole file (% = whole file, g = all per line) | `:%s/local_port/port/g` |
+| `u` | In Vim, undoes the last change | `u` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

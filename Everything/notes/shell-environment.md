@@ -2,7 +2,7 @@
 
 > Shell settings, environment variables, aliases and handy history shortcuts.
 
-**Linux Commands** · **14** commands · **8** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **15** commands · **8** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -22,6 +22,7 @@
 | [`sh`](#cmd-sh) | Runs a script with sh, ignoring its shebang (sh is often a link to dash or bash) |
 | [`type`](#cmd-type) | Tells what a name is: builtin, keyword, alias or a file on disk |
 | [`shopt`](#cmd-shopt) | Turns shell options on or off (e.g. extglob for extended patterns) |
+| [`Ctrl + Z`](#cmd-ctrl-z) | Suspends the running process (resume with fg, kill it with kill %) |
 
 ---
 
@@ -236,5 +237,19 @@ shopt -s extglob
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `-s` | Enables (sets) a shell option | `shopt -s extglob` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-ctrl-z"></a>
+
+## `Ctrl + Z`
+
+Suspends the running process (resume with fg, kill it with kill %)
+
+```bash
+Ctrl + Z
+```
 
 <sub>[⬆ Back to top](#commands)</sub>

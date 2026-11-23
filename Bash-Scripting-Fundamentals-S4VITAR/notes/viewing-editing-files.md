@@ -2,7 +2,7 @@
 
 > Read files in the terminal, page through output, compare files and edit text.
 
-**Linux Commands** · **6** commands · **9** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **6** commands · **10** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -117,5 +117,6 @@ vi notes.txt
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `:%s/old/new/g` | In Vim/Neovim, replaces in the whole file (% = whole file, g = all per line) | `:%s/local_port/port/g` |
+| `u` | In Vim, undoes the last change | `u` |
 
 <sub>[⬆ Back to top](#commands)</sub>

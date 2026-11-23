@@ -2,7 +2,7 @@
 
 > See what's running, limit or repeat commands, and schedule jobs with cron.
 
-**Linux Commands** · **6** commands · **5** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **6** commands · **6** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -81,6 +81,7 @@ kill 1234
 |:--|:--|:--|
 | `-15` | SIGTERM: ends the process in an orderly way (exit code 143) | `kill -15 $!` |
 | `-9` | Forces the process to end immediately (SIGKILL) | `kill -9 1234` |
+| `%` | Kills a job by its job number (after Ctrl + Z) | `kill %1` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

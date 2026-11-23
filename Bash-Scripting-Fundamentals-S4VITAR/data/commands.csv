@@ -29,6 +29,7 @@ Text Processing,tee,Shows a command's output on screen and saves it to a file at
 Text Processing,cut,"Extracts parts of a line of text, splitting it by a delimiter","cut -d "":"" -f 1 /etc/passwd"
 Text Processing,column,"Arranges incoming text into aligned columns, like a table",cat /etc/passwd | column -t -s ':'
 Text Processing,wc,"Counts the lines, words or characters of a text",cat file.txt | wc
+Text Processing,sed,"Finds, replaces, deletes or modifies text in a file or stream, usually with regular expressions",sed 's/old/new/g' file.txt
 "Pipes, Redirection & Operators",|,Pipe: sends one command's output as the next command's input,cat /etc/passwd | grep root
 "Pipes, Redirection & Operators",&>/dev/null,"Sends both normal output and errors to /dev/null, hiding everything",ping -c 1 8.8.8.8 &>/dev/null
 "Pipes, Redirection & Operators",2>/dev/null,Sends errors (stderr) to /dev/null so they aren't shown,"find / -name ""*.conf"" 2>/dev/null"
@@ -47,6 +48,7 @@ Text Processing,wc,"Counts the lines, words or characters of a text",cat file.tx
 "Pipes, Redirection & Operators",\,"At the end of a line, splits a long command across several lines",whoami && \\\n ls
 Users & Groups,sudo,Runs a single command with administrator privileges without switching users,sudo apt update
 Users & Groups,id,"Shows user info: UID, GID and the groups they belong to",id root
+Users & Groups,whoami,Shows the name of the user you're currently logged in as,whoami
 Permissions & Attributes,chmod,Changes the permissions of a file or folder; + adds and - removes a permission,chmod 755 script.sh
 Permissions & Attributes,getcap,Shows the capabilities assigned to a file,getcap /usr/bin/ping
 Permissions & Attributes,lsattr,Shows a file's special attributes (beyond the normal permissions),lsattr file.txt
@@ -56,6 +58,7 @@ Shell & Environment,env,Lists the environment variables of the current session,e
 Shell & Environment,export,"Turns a variable into an environment variable, available to other processes started from that terminal",export TERM=xterm
 Shell & Environment,type,"Tells what a name is: builtin, keyword, alias or a file on disk",type [[
 Shell & Environment,shopt,Turns shell options on or off (e.g. extglob for extended patterns),shopt -s extglob
+Shell & Environment,Ctrl + Z,"Suspends the running process (resume with fg, kill it with kill %)",Ctrl + Z
 Processes & Scheduling,ps,Shows the processes running on the system,ps
 Processes & Scheduling,timeout,Runs a command and kills it automatically if it goes over the given time,timeout 5 ping 8.8.8.8
 Processes & Scheduling,pkill,Kills processes by name instead of by PID,sudo pkill netcat
@@ -70,6 +73,8 @@ Networking,ifconfig,Shows and configures network interfaces (the IP of each card
 Networking,nc,"Netcat: creates manual TCP/UDP connections to send and receive data, scan ports or open remote shells",nc 192.168.1.10 80
 Networking,lsof,"Lists the files opened by running processes, including network connections",lsof /var/log/syslog
 Networking,ss,"Shows information about active network sockets, a modern alternative to netstat",ss
+Networking,arp-scan,Lists the devices connected to the network,sudo arp-scan -I ens33 --localnet
+Networking,ipcalc,Works out a network's host range (already discounts network and broadcast),ipcalc 192.168.1.0/24
 SSH & Remote Access,ssh-keygen,Generates an SSH key pair (public and private) to log in without a password,ssh-keygen -t ed25519
 "Binary, Encoding & Compression",bc,"Terminal calculator; does arithmetic and converts numbers between bases (hexadecimal, decimal)","echo ""obase=10; ibase=16; FF"" | bc"
 "Binary, Encoding & Compression",strings,Shows the readable text strings (ASCII) inside a binary file; useful for finding hidden info,strings program.bin
@@ -119,11 +124,13 @@ Conditionals,true,Always returns exit code 0 (success),true; echo $?
 Conditionals,false,Always returns exit code 1 (failure),false; echo $?
 Conditionals,[[ ]],"Bash's improved test: no word-splitting, allows && || inside, glob == and regex =~ (use [ ] only for sh)",[[ $var == *.py ]]
 Conditionals,BASH_REMATCH,"Array filled after =~ : [0] is the whole match, [1],[2]... the capture groups",[[ $l =~ ([0-9.]+) ]]; echo ${BASH_REMATCH[1]}
+Conditionals,case,Compares a variable against several patterns and runs the block that matches; closed with esac,"case $arg in m) echo ""option m"";; esac"
 Loops & Sequences,seq,"Generates a sequence of numbers within a range, handy for loops",seq 1 10
 Loops & Sequences,for,"Loops over a list of items one by one, running a block of code for each",for i in $(seq 1 5); do echo $i; done
 Loops & Sequences,while,Repeats a block of code while a condition is true,while [ $i -lt 5 ]; do echo $i; i=$((i+1)); done
 Functions & Signals,function name(){ commands },Defines a custom function that groups several commands under one name,"function greet(){ echo ""Hello $1""; }"
 "Jobs, Temp Files & Terminal",wait,Waits for one or more background processes to finish before continuing,sleep 5 & wait
+"Jobs, Temp Files & Terminal",tput,"Controls the terminal, for example hiding or showing the cursor",tput civis
 Networking in Bash,/dev/tcp/$ip/$port,"Special Bash path that opens a TCP connection to an IP and port as if it were a file, no netcat needed","echo '' > /dev/tcp/127.0.0.1/22 && echo ""open"""
 Networking in Bash,curl,"Sends requests to a URL from the terminal (HTTP, HTTPS, etc.) and shows the response",curl -s -X GET https://example.com
 Helper Tools,bat,"Like cat, but with syntax highlighting and line numbers (called batcat on Debian/Parrot)",bat example.sh

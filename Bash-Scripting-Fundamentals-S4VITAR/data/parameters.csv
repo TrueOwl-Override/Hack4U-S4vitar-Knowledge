@@ -128,8 +128,10 @@ curl,-w,"Chooses what to print, e.g. %{http_code} for the HTTP code","curl -s -o
 curl,--connect-timeout,Sets a maximum time to connect,curl --connect-timeout 2 http://ip
 curl,-s,Silent mode: hides the progress bar and error messages,curl -s https://example.com
 curl,-X GET,"Sets the request's HTTP method (GET, POST, PUT...)",curl -s -X GET https://example.com
+curl,-I,Shows only the response headers (head),curl -s -I http://ip
 kill,-15,SIGTERM: ends the process in an orderly way (exit code 143),kill -15 $!
 kill,-9,Forces the process to end immediately (SIGKILL),kill -9 1234
+kill,%,Kills a job by its job number (after Ctrl + Z),kill %1
 date,+%Y-%m-%d %H:%M:%S,"Format: %Y year, %m month, %d day, %H hour, %M minute, %S second",date '+%Y-%m-%d %H:%M:%S'
 exit,2,Ends the script with code 2 (wrong usage / not found),exit 2
 exit,0,"Ends the script with exit code 0, signalling success",exit 0
@@ -168,3 +170,11 @@ ssh-keygen,-f,Sets the path/name of the key files,ssh-keygen -f ~/.ssh/my_key
 function name(){ commands },local,Creates a variable that only exists inside the function,"local file=""$1"""
 shopt,-s,Enables (sets) a shell option,shopt -s extglob
 vi,:%s/old/new/g,"In Vim/Neovim, replaces in the whole file (% = whole file, g = all per line)",:%s/local_port/port/g
+vi,u,"In Vim, undoes the last change",u
+case,*),"Wildcard: the else of case, matches anything not matched above","*) echo ""unknown"" ;;"
+case,a|b),| acts as OR between patterns,"s|S|yes|YES) echo ""Accepted"" ;;"
+case,*.ext) [a-z]),"Patterns are globs, not regex: * any, ? one char, [...] a range","*.sh|*.bash) echo ""Bash"" ;;"
+case,;&,Runs the block and falls through to the next WITHOUT checking it (fall-through),critical) ... ;& high) ... ;;
+case,;;&,Runs the block and keeps checking the remaining patterns,80|443) ... ;;& 443) ... ;;
+sed,s/old/new/,Substitutes text (s/^/ / adds spaces at the start of each line),sed 's/HTTP/s4vitar/'
+arp-scan,-I --localnet,"-I picks the interface, --localnet scans the whole local network",sudo arp-scan -I ens33 --localnet

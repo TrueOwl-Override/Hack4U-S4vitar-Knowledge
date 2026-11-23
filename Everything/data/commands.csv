@@ -90,6 +90,7 @@ Shell & Environment,Ctrl + C,Shortcut that stops the command or script that's ru
 Shell & Environment,sh,"Runs a script with sh, ignoring its shebang (sh is often a link to dash or bash)",sh script.sh
 Shell & Environment,type,"Tells what a name is: builtin, keyword, alias or a file on disk",type [[
 Shell & Environment,shopt,Turns shell options on or off (e.g. extglob for extended patterns),shopt -s extglob
+Shell & Environment,Ctrl + Z,"Suspends the running process (resume with fg, kill it with kill %)",Ctrl + Z
 Processes & Scheduling,ps,Shows the processes running on the system,ps
 Processes & Scheduling,kill,Ends a process by its PID,kill 1234
 Processes & Scheduling,fg,Brings a background process back to the foreground,sleep 60 & then fg
@@ -110,6 +111,8 @@ Networking,ncat,Improved netcat (from the Nmap project) with SSL/TLS encryption 
 Networking,ping,Sends packets to a host to check if it's reachable,ping -c 1 192.168.100.1
 Networking,ip,Shows and manages network interfaces and their IPs,ip a
 Networking,dig,Resolves a domain's IP (DNS lookup),dig +short scanme.nmap.org
+Networking,arp-scan,Lists the devices connected to the network,sudo arp-scan -I ens33 --localnet
+Networking,ipcalc,Works out a network's host range (already discounts network and broadcast),ipcalc 192.168.1.0/24
 SSH & Remote Access,ssh,"Connects remotely and securely to another machine over the network, using a password or an SSH key",ssh user@192.168.1.10
 SSH & Remote Access,sshpass,Passes the SSH password directly in the command; handy for automation,sshpass -p 'my_password' ssh user@192.168.1.10
 SSH & Remote Access,ssh-keygen,Generates an SSH key pair (public and private) to log in without a password,ssh-keygen -t ed25519

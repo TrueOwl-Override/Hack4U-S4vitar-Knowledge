@@ -2,7 +2,7 @@
 
 > Check who you are, switch users, and manage accounts, passwords and groups.
 
-**Linux Commands** · **2** commands · **3** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **3** commands · **3** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -10,6 +10,7 @@
 |:--|:--|
 | [`sudo`](#cmd-sudo) | Runs a single command with administrator privileges without switching users |
 | [`id`](#cmd-id) | Shows user info: UID, GID and the groups they belong to |
+| [`whoami`](#cmd-whoami) | Shows the name of the user you're currently logged in as |
 
 ---
 
@@ -45,5 +46,19 @@ id root
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `-u` | Shows your UID (0 = root) | `[ "$(id -u)" -eq 0 ]` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-whoami"></a>
+
+## `whoami`
+
+Shows the name of the user you're currently logged in as
+
+```bash
+whoami
+```
 
 <sub>[⬆ Back to top](#commands)</sub>
