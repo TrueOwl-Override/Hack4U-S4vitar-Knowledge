@@ -2,7 +2,7 @@
 
 > Store values in variables, read them back and do math with them.
 
-**Bash Scripting** · **9** commands · **17** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **10** commands · **23** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -17,6 +17,7 @@
 | [`read`](#cmd-read) | Saves what the user types into a variable |
 | [`IFS`](#cmd-ifs) | Variable that sets the separator Bash uses to split text (default: space) |
 | [`(( ))`](#cmd-sym-40-40-41-41) | Arithmetic evaluation; handy to increment counters without $ |
+| [`mapfile`](#cmd-mapfile) | Reads lines of input into an array, one element per line |
 
 ---
 
@@ -71,6 +72,7 @@ greeting="Hello"; echo $greeting
 |:--|:--|:--|
 | `${name:-default}` | Uses 'default' if the variable is empty, without assigning it | `echo ${name:-Marcelo}` |
 | `${name:=default}` | Uses 'default' and also assigns it to the variable | `echo ${name:=Marcelo}` |
+| `${var##*:}` | Removes the longest match from the start (here everything up to the last :) | `port=${addr##*:}` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -160,6 +162,11 @@ Variable that sets the separator Bash uses to split text (default: space)
 IFS=',' read -ra ports <<< "21,22,80"
 ```
 
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `IFS=` | Empty IFS keeps leading and trailing spaces when reading lines | `while IFS= read -r line; do echo "$line"; done < file.txt` |
+| `IFS=:` | Splits on : (e.g. the fields of /etc/passwd) | `while IFS=: read -r user _ uid _; do echo $user; done < /etc/passwd` |
+
 <sub>[⬆ Back to top](#commands)</sub>
 
 ---
@@ -179,5 +186,25 @@ Arithmetic evaluation; handy to increment counters without $
 | `((var++))` | Increments a counter (same as var=$((var+1))) | `((up_hosts++))` |
 | `(( a > b ))` | Arithmetic comparison without $ or quotes (>, <, >=, <=, ==, && ) | `(( port > 0 && port <= 65535 ))` |
 | `((var+=5))` | Compound arithmetic assignment (+=, -=, **, ...) | `((counter += 5))` |
+| `((var--))` | Decrements a counter (same as var=$((var-1))) | `((j--))` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-mapfile"></a>
+
+## `mapfile`
+
+Reads lines of input into an array, one element per line
+
+```bash
+mapfile -t hosts < hosts.txt
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `-t` | Removes the trailing newline from each line it stores | `mapfile -t lines < <(cat /etc/hosts)` |
+| `--help` | Shows mapfile's help (it's a builtin, so it has no man page of its own) | `mapfile --help` |
 
 <sub>[⬆ Back to top](#commands)</sub>

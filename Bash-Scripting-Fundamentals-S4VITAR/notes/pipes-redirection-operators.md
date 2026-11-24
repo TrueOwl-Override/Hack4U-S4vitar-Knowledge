@@ -2,7 +2,7 @@
 
 > Chain commands, decide where output and errors go, and run things in the background.
 
-**Linux Commands** · **16** commands · **1** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **17** commands · **2** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -24,6 +24,7 @@
 | [`>(command)`](#cmd-command) | Process substitution: passes output to a command as if it were a file |
 | [`>&2`](#cmd-2) | Sends the output to stderr (e.g. usage messages) |
 | [`\`](#cmd-sym-92) | At the end of a line, splits a long command across several lines |
+| [`>>`](#cmd-sym-62-62) | Redirects output to a file, appending it to the end |
 
 ---
 
@@ -209,6 +210,10 @@ Process substitution: treats a command's output as if it were a file
 diff a.txt <(ss -tln)
 ```
 
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `< <(command)` | Feeds a command's output to a loop without running the loop in a subshell | `while read -r l; do echo $l; done < <(ss -tln)` |
+
 <sub>[⬆ Back to top](#commands)</sub>
 
 ---
@@ -249,6 +254,20 @@ At the end of a line, splits a long command across several lines
 
 ```bash
 whoami && \\\n ls
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-sym-62-62"></a>
+
+## `>>`
+
+Redirects output to a file, appending it to the end
+
+```bash
+echo "another line" >> file.txt
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

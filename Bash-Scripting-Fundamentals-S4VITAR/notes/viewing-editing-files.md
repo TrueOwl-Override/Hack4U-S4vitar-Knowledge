@@ -2,7 +2,7 @@
 
 > Read files in the terminal, page through output, compare files and edit text.
 
-**Linux Commands** · **6** commands · **10** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **6** commands · **11** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -52,6 +52,7 @@ head -n 1 file.txt
 |:--|:--|:--|
 | `-n 1` | Shows only the first line of the file or text | `head -n 1 file.txt` |
 | `-c` | Keeps the first N characters (bytes) | `cat /dev/urandom \| tr -dc 'a-z' \| head -c 16` |
+| `-1` | Short form of head -n 1 (the first line) | `dig +short domain \| head -1` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

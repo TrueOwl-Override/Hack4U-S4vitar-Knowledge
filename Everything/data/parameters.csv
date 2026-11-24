@@ -102,6 +102,7 @@ tail,-1,Short form of tail -n 1 (the last line),dig +short domain | tail -1
 head,-n 1,Shows only the first line of the file or text,head -n 1 file.txt
 head,-n -3,"With a negative number, shows everything except the last 3 lines",cat /etc/hosts | head -n -3
 head,-c,Keeps the first N characters (bytes),cat /dev/urandom | tr -dc 'a-z' | head -c 16
+head,-1,Short form of head -n 1 (the first line),dig +short domain | head -1
 cat,"""spaces in this filename""",Reads a file with spaces by wrapping its name in quotes so it's treated as a single name,"cat ""spaces in this filename"""
 cat,spaces\ in\ this\ filename,Reads a file with spaces by escaping each space with a backslash so they don't split the arguments,cat spaces\ in\ this\ filename
 cat,s*,"Uses a wildcard to fill in the file name, as long as no other file starts the same way",cat s*
@@ -224,6 +225,7 @@ let,-=,Subtracts a value from what the variable already holds; without let it gi
 "variable=""Hello""","=""""","Starts the variable empty, ready to fill it later","bad_plays="""""
 "variable=""Hello""",${name:-default},"Uses 'default' if the variable is empty, without assigning it",echo ${name:-Marcelo}
 "variable=""Hello""",${name:=default},Uses 'default' and also assigns it to the variable,echo ${name:=Marcelo}
+"variable=""Hello""",${var##*:},Removes the longest match from the start (here everything up to the last :),port=${addr##*:}
 $variable or ${variable},"""$variable text""",Sticks fixed text right after a variable's value,"echo ""$bad_plays]"""
 $(( )),+ - *,"Add, subtract and multiply inside the arithmetic expansion",echo $((5 + 3)) $((5 - 3)) $((5 * 3))
 $(( )),%,"Modulo: the remainder of a division, for example to limit a random number to a range",echo $(($RANDOM % 37))
@@ -274,6 +276,8 @@ while,read line; do; done,Reads input line by line and runs the block for each l
 while,true,"Infinite loop; it only stops with break, exit or Ctrl+C","while true; do echo ""playing""; sleep 1; done"
 for,line in; do; done,Goes through the items of a list one by one and runs the block for each,for line in $(cat list.txt); do echo $line; done
 for,element in ${array[@]}; do; done,Goes through each element of an array,for element in ${my_array[@]}; do echo $element; done
+for,((i=0; i<10; i++)),C-style loop: start; condition; step,for ((i=0; i<10; i++)); do echo $i; done
+for,"((i=1, j=10; i<10; i++, j--))","C-style loop with two variables, separated by commas","for ((i=1, j=10; i<10; i++, j--)); do echo ""$i $j""; done"
 function name(){ commands },ctrl_c(){},Defines the ctrl_c function that runs when trap catches Ctrl+C,"function ctrl_c(){ echo ""Exiting...""; exit 1; }"
 function name(){ commands },local,Creates a variable that only exists inside the function,"local file=""$1"""
 trap,ctrl_c INT,Catches the Ctrl+C signal and runs the ctrl_c function instead of stopping the script,trap ctrl_c INT
@@ -282,6 +286,8 @@ mktemp,-d,"Creates a temporary folder instead of a file, with a unique name",mkt
 tput,civis,Hides the terminal cursor,tput civis
 tput,cnorm,Shows the terminal cursor again,tput cnorm
 {0000..9999},"{a,b,c}","With commas, expands to each value of the list","touch file.{summary,report,results}"
+{0000..9999},{1..254..10},"A third number sets the step (here 1, 11, 21...)",echo {1..254..10}
+{0000..9999},{a..h},Also works with letters,echo {a..h}
 curl,-s,Silent mode: hides the progress bar and error messages,curl -s https://example.com
 curl,-X GET,"Sets the request's HTTP method (GET, POST, PUT...)",curl -s -X GET https://example.com
 curl,-o,Where to save the output (/dev/null to discard the body),"curl -s -o /dev/null -w ""%{http_code}"" https://site"
@@ -333,9 +339,11 @@ dd,bs= count=,Block size (bs) and number of blocks (count),dd if=/dev/zero of=fi
 date,+%Y-%m-%d %H:%M:%S,"Format: %Y year, %m month, %d day, %H hour, %M minute, %S second",date '+%Y-%m-%d %H:%M:%S'
 pgrep,-x,Matches the exact process name,pgrep -x nginx
 wait,$!,Waits for a background process and collects its exit code,sleep 5 & wait $!
+wait,-n,Waits only for the next background job to finish (handy to cap parallel jobs),wait -n
 (( )),((var++)),Increments a counter (same as var=$((var+1))),((up_hosts++))
 (( )),(( a > b )),"Arithmetic comparison without $ or quotes (>, <, >=, <=, ==, && )",(( port > 0 && port <= 65535 ))
 (( )),((var+=5)),"Compound arithmetic assignment (+=, -=, **, ...)",((counter += 5))
+(( )),((var--)),Decrements a counter (same as var=$((var-1))),((j--))
 id,-u,Shows your UID (0 = root),"[ ""$(id -u)"" -eq 0 ]"
 ssh-keygen,-f,Sets the path/name of the key files,ssh-keygen -f ~/.ssh/my_key
 [[ ]],==,"Glob pattern match, pattern without quotes: *.py, arch*, *chi*",[[ $name == *.py ]]
@@ -345,4 +353,10 @@ ssh-keygen,-f,Sets the path/name of the key files,ssh-keygen -f ~/.ssh/my_key
 [[ ]],@(a|b),extglob: matches one of several alternatives (needs shopt -s extglob),[[ $f == *.@(tar|gz|zip) ]]
 [[ ]],!(...),extglob: matches everything except those,[[ $f == !(*.sh|*.py) ]]
 shopt,-s,Enables (sets) a shell option,shopt -s extglob
+shopt,-s globstar,Lets ** match files in any subfolder (recursive glob),shopt -s globstar; ls /etc/**/*.conf
 arp-scan,-I --localnet,"-I picks the interface, --localnet scans the whole local network",sudo arp-scan -I ens33 --localnet
+mapfile,-t,Removes the trailing newline from each line it stores,mapfile -t lines < <(cat /etc/hosts)
+mapfile,--help,"Shows mapfile's help (it's a builtin, so it has no man page of its own)",mapfile --help
+IFS,IFS=,Empty IFS keeps leading and trailing spaces when reading lines,"while IFS= read -r line; do echo ""$line""; done < file.txt"
+IFS,IFS=:,Splits on : (e.g. the fields of /etc/passwd),while IFS=: read -r user _ uid _; do echo $user; done < /etc/passwd
+<(command),< <(command),Feeds a command's output to a loop without running the loop in a subshell,while read -r l; do echo $l; done < <(ss -tln)

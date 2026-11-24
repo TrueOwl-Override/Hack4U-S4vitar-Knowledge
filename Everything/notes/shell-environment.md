@@ -2,7 +2,7 @@
 
 > Shell settings, environment variables, aliases and handy history shortcuts.
 
-**Linux Commands** · **15** commands · **8** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **15** commands · **9** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -237,6 +237,7 @@ shopt -s extglob
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `-s` | Enables (sets) a shell option | `shopt -s extglob` |
+| `-s globstar` | Lets ** match files in any subfolder (recursive glob) | `shopt -s globstar; ls /etc/**/*.conf` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

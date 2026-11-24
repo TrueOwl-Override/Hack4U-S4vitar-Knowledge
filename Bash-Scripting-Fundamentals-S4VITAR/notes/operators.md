@@ -2,7 +2,7 @@
 
 > Assign, do math, compare numbers and text, and negate conditions.
 
-**Bash Scripting** · **2** commands · **0** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **3** commands · **0** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -10,6 +10,7 @@
 |:--|:--|
 | [`**`](#cmd-sym-42-42) | Raises a number to a power inside $(( )) |
 | [`/`](#cmd-sym-47) | Divides inside $(( )); keeps only the integer part |
+| [`!`](#cmd-sym-33) | Negates the condition: [ ! $a -le 0 ] is the same as [ $a -gt 0 ] |
 
 ---
 
@@ -35,6 +36,20 @@ Divides inside $(( )); keeps only the integer part
 
 ```bash
 echo $((10 / 3))
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-sym-33"></a>
+
+## `!`
+
+Negates the condition: [ ! $a -le 0 ] is the same as [ $a -gt 0 ]
+
+```bash
+if [ ! "$money" -le 0 ]; then echo "still have money"; fi
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

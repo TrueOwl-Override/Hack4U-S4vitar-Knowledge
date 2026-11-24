@@ -72,6 +72,7 @@ array=(1 2 3),${array[0]},Gives the first element (the braces are required),echo
 array=(1 2 3),${array[@]},Shows all the elements,echo ${my_array[@]}
 head,-n 1,Shows only the first line of the file or text,head -n 1 file.txt
 head,-c,Keeps the first N characters (bytes),cat /dev/urandom | tr -dc 'a-z' | head -c 16
+head,-1,Short form of head -n 1 (the first line),dig +short domain | head -1
 $(( )),**,Raises to a power,echo $((2 ** 8))
 $(( )),/,"Divides, keeping only the integer part",echo $((10 / 3))
 bc,scale=2,Sets how many decimals bc uses,"echo ""scale=2; 10/3"" | bc"
@@ -81,6 +82,7 @@ awk,NR>1 {print $N},Skips the first line (the header) and prints a field,ss -tn 
 set,-u,Aborts the script if you use an undefined variable,set -u
 "variable=""Hello""",${name:-default},"Uses 'default' if the variable is empty, without assigning it",echo ${name:-Marcelo}
 "variable=""Hello""",${name:=default},Uses 'default' and also assigns it to the variable,echo ${name:=Marcelo}
+"variable=""Hello""",${var##*:},Removes the longest match from the start (here everything up to the last :),port=${addr##*:}
 dig,+short,Shows only the resolved IP,dig +short scanme.nmap.org
 nc,-nlvp,"Leaves a listener on a port (n no DNS, l listen, v verbose, p port)",nc -nlvp 443
 tr,"' ' ','",Replaces spaces with commas,"echo ""a b c"" | tr ' ' ','"
@@ -138,9 +140,11 @@ exit,0,"Ends the script with exit code 0, signalling success",exit 0
 exit,1,"Ends the script with exit code 1, signalling an error",exit 1
 pgrep,-x,Matches the exact process name,pgrep -x nginx
 wait,$!,Waits for a background process and collects its exit code,sleep 5 & wait $!
+wait,-n,Waits only for the next background job to finish (handy to cap parallel jobs),wait -n
 (( )),((var++)),Increments a counter (same as var=$((var+1))),((up_hosts++))
 (( )),(( a > b )),"Arithmetic comparison without $ or quotes (>, <, >=, <=, ==, && )",(( port > 0 && port <= 65535 ))
 (( )),((var+=5)),"Compound arithmetic assignment (+=, -=, **, ...)",((counter += 5))
+(( )),((var--)),Decrements a counter (same as var=$((var-1))),((j--))
 if,=,Compares two strings (equal),"[ ""$name"" = ""sabitar"" ]"
 if,!=,Compares two strings (not equal),"[ ""$name"" != ""test"" ]"
 if,-z,True if the variable is empty,"[ -z ""$var"" ]"
@@ -159,6 +163,11 @@ if,-nt,True if the first file is newer than the second (newer than),[ /etc/passw
 if,-ot,True if the first file is older than the second (older than),[ /etc/passwd -ot /etc/hosts ]
 if,-a,AND inside a single [ ] (fragile; prefer [ ] && [ ]),"[ ""$u"" = root -a -f /etc/passwd ]"
 if,-o,OR inside a single [ ] (prefer [ ] || [ ]),[ -f a -o -f b ]
+if,-f,Checks whether the file exists and is a regular file (not a folder),"if [ -f file.txt ]; then echo ""exists""; fi"
+if,-eq,Checks whether two numbers are equal,"if [ $a -eq $b ]; then echo ""equal""; fi"
+if,-gt,Checks whether the first number is greater than the second,"if [ $a -gt $b ]; then echo ""greater""; fi"
+if,-lt,Checks whether the first number is less than the second,"if [ $a -lt $b ]; then echo ""less""; fi"
+if,-le,Checks whether the first number is less than or equal to the second,"if [ $a -le $b ]; then echo ""less or equal""; fi"
 id,-u,Shows your UID (0 = root),"[ ""$(id -u)"" -eq 0 ]"
 ssh-keygen,-f,Sets the path/name of the key files,ssh-keygen -f ~/.ssh/my_key
 [[ ]],==,"Glob pattern match, pattern without quotes: *.py, arch*, *chi*",[[ $name == *.py ]]
@@ -169,6 +178,7 @@ ssh-keygen,-f,Sets the path/name of the key files,ssh-keygen -f ~/.ssh/my_key
 [[ ]],!(...),extglob: matches everything except those,[[ $f == !(*.sh|*.py) ]]
 function name(){ commands },local,Creates a variable that only exists inside the function,"local file=""$1"""
 shopt,-s,Enables (sets) a shell option,shopt -s extglob
+shopt,-s globstar,Lets ** match files in any subfolder (recursive glob),shopt -s globstar; ls /etc/**/*.conf
 vi,:%s/old/new/g,"In Vim/Neovim, replaces in the whole file (% = whole file, g = all per line)",:%s/local_port/port/g
 vi,u,"In Vim, undoes the last change",u
 case,*),"Wildcard: the else of case, matches anything not matched above","*) echo ""unknown"" ;;"
@@ -178,3 +188,16 @@ case,;&,Runs the block and falls through to the next WITHOUT checking it (fall-t
 case,;;&,Runs the block and keeps checking the remaining patterns,80|443) ... ;;& 443) ... ;;
 sed,s/old/new/,Substitutes text (s/^/ / adds spaces at the start of each line),sed 's/HTTP/s4vitar/'
 arp-scan,-I --localnet,"-I picks the interface, --localnet scans the whole local network",sudo arp-scan -I ens33 --localnet
+for,line in; do; done,Goes through the items of a list one by one and runs the block for each,for line in $(cat list.txt); do echo $line; done
+for,((i=0; i<10; i++)),C-style loop: start; condition; step,for ((i=0; i<10; i++)); do echo $i; done
+for,"((i=1, j=10; i<10; i++, j--))","C-style loop with two variables, separated by commas","for ((i=1, j=10; i<10; i++, j--)); do echo ""$i $j""; done"
+while,true,"Infinite loop; it only stops with break, exit or Ctrl+C","while true; do echo ""playing""; sleep 1; done"
+tput,civis,Hides the terminal cursor,tput civis
+tput,cnorm,Shows the terminal cursor again,tput cnorm
+mapfile,-t,Removes the trailing newline from each line it stores,mapfile -t lines < <(cat /etc/hosts)
+mapfile,--help,"Shows mapfile's help (it's a builtin, so it has no man page of its own)",mapfile --help
+IFS,IFS=,Empty IFS keeps leading and trailing spaces when reading lines,"while IFS= read -r line; do echo ""$line""; done < file.txt"
+IFS,IFS=:,Splits on : (e.g. the fields of /etc/passwd),while IFS=: read -r user _ uid _; do echo $user; done < /etc/passwd
+<(command),< <(command),Feeds a command's output to a loop without running the loop in a subshell,while read -r l; do echo $l; done < <(ss -tln)
+{0000..9999},{1..254..10},"A third number sets the step (here 1, 11, 21...)",echo {1..254..10}
+{0000..9999},{a..h},Also works with letters,echo {a..h}

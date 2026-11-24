@@ -2,7 +2,7 @@
 
 > Shell settings, environment variables, aliases and handy history shortcuts.
 
-**Linux Commands** · **7** commands · **5** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **8** commands · **6** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -15,6 +15,7 @@
 | [`type`](#cmd-type) | Tells what a name is: builtin, keyword, alias or a file on disk |
 | [`shopt`](#cmd-shopt) | Turns shell options on or off (e.g. extglob for extended patterns) |
 | [`Ctrl + Z`](#cmd-ctrl-z) | Suspends the running process (resume with fg, kill it with kill %) |
+| [`Ctrl + C`](#cmd-ctrl-c) | Shortcut that stops the command or script that's running |
 
 ---
 
@@ -111,6 +112,7 @@ shopt -s extglob
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `-s` | Enables (sets) a shell option | `shopt -s extglob` |
+| `-s globstar` | Lets ** match files in any subfolder (recursive glob) | `shopt -s globstar; ls /etc/**/*.conf` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -124,6 +126,20 @@ Suspends the running process (resume with fg, kill it with kill %)
 
 ```bash
 Ctrl + Z
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-ctrl-c"></a>
+
+## `Ctrl + C`
+
+Shortcut that stops the command or script that's running
+
+```bash
+Ctrl + C (while a script runs)
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

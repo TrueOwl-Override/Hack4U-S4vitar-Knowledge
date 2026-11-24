@@ -2,7 +2,7 @@
 
 > Make decisions with if and case.
 
-**Bash Scripting** · **8** commands · **29** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **8** commands · **34** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -49,6 +49,11 @@ if [ $n -eq 1 ]; then echo "one"; else echo "other"; fi
 | `-ot` | True if the first file is older than the second (older than) | `[ /etc/passwd -ot /etc/hosts ]` |
 | `-a` | AND inside a single [ ] (fragile; prefer [ ] && [ ]) | `[ "$u" = root -a -f /etc/passwd ]` |
 | `-o` | OR inside a single [ ] (prefer [ ] \|\| [ ]) | `[ -f a -o -f b ]` |
+| `-f` | Checks whether the file exists and is a regular file (not a folder) | `if [ -f file.txt ]; then echo "exists"; fi` |
+| `-eq` | Checks whether two numbers are equal | `if [ $a -eq $b ]; then echo "equal"; fi` |
+| `-gt` | Checks whether the first number is greater than the second | `if [ $a -gt $b ]; then echo "greater"; fi` |
+| `-lt` | Checks whether the first number is less than the second | `if [ $a -lt $b ]; then echo "less"; fi` |
+| `-le` | Checks whether the first number is less than or equal to the second | `if [ $a -le $b ]; then echo "less or equal"; fi` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

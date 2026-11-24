@@ -2,7 +2,7 @@
 
 > Move around the filesystem and create, copy, delete and inspect files and folders.
 
-**Linux Commands** · **11** commands · **7** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **12** commands · **7** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -19,6 +19,7 @@
 | [`pushd`](#cmd-pushd) | Enters a directory and saves the previous one on a stack |
 | [`popd`](#cmd-popd) | Returns to the directory saved by pushd |
 | [`cp`](#cmd-cp) | Copies files or folders from one place to another |
+| [`*`](#cmd-sym-42) | Wildcard that matches anything, to select several files at once |
 
 ---
 
@@ -192,6 +193,20 @@ Copies files or folders from one place to another
 
 ```bash
 cp file.txt copy.txt
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-sym-42"></a>
+
+## `*`
+
+Wildcard that matches anything, to select several files at once
+
+```bash
+ls *.txt
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

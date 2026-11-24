@@ -10,6 +10,7 @@ Navigation & Files,basename,"Keeps just the file name, without the path",basenam
 Navigation & Files,pushd,Enters a directory and saves the previous one on a stack,pushd /root/.ssh
 Navigation & Files,popd,Returns to the directory saved by pushd,popd
 Navigation & Files,cp,Copies files or folders from one place to another,cp file.txt copy.txt
+Navigation & Files,*,"Wildcard that matches anything, to select several files at once",ls *.txt
 Viewing & Editing Files,cat,Prints a file's contents to the terminal,cat notes.txt
 Viewing & Editing Files,head,Shows the first lines of a file or text (10 by default),head -n 1 file.txt
 Viewing & Editing Files,man,Opens the manual of a command,man bc
@@ -46,6 +47,7 @@ Text Processing,sed,"Finds, replaces, deletes or modifies text in a file or stre
 "Pipes, Redirection & Operators",>(command),Process substitution: passes output to a command as if it were a file,find / -name '*.conf' 2>/dev/null > >(grep security > security.txt)
 "Pipes, Redirection & Operators",>&2,Sends the output to stderr (e.g. usage messages),"echo ""Usage: $0 <ip>"" >&2"
 "Pipes, Redirection & Operators",\,"At the end of a line, splits a long command across several lines",whoami && \\\n ls
+"Pipes, Redirection & Operators",>>,"Redirects output to a file, appending it to the end","echo ""another line"" >> file.txt"
 Users & Groups,sudo,Runs a single command with administrator privileges without switching users,sudo apt update
 Users & Groups,id,"Shows user info: UID, GID and the groups they belong to",id root
 Users & Groups,whoami,Shows the name of the user you're currently logged in as,whoami
@@ -59,6 +61,7 @@ Shell & Environment,export,"Turns a variable into an environment variable, avail
 Shell & Environment,type,"Tells what a name is: builtin, keyword, alias or a file on disk",type [[
 Shell & Environment,shopt,Turns shell options on or off (e.g. extglob for extended patterns),shopt -s extglob
 Shell & Environment,Ctrl + Z,"Suspends the running process (resume with fg, kill it with kill %)",Ctrl + Z
+Shell & Environment,Ctrl + C,Shortcut that stops the command or script that's running,Ctrl + C (while a script runs)
 Processes & Scheduling,ps,Shows the processes running on the system,ps
 Processes & Scheduling,timeout,Runs a command and kills it automatically if it goes over the given time,timeout 5 ping 8.8.8.8
 Processes & Scheduling,pkill,Kills processes by name instead of by PID,sudo pkill netcat
@@ -87,6 +90,8 @@ System & Packages,date,Shows or formats the system date and time,date '+%H:%M:%S
 System & Device Files,/dev/null,The black hole: anything sent here is discarded,command 2>/dev/null
 System & Device Files,/dev/zero,An endless source of null bytes,dd if=/dev/zero of=file bs=1M count=1
 System & Device Files,/dev/urandom,A source of random data,cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 16
+System & Device Files,/etc/,System folder that holds the configuration files,ls /etc/
+System & Device Files,/tmp/,Temporary folder any user can write to; it's emptied on reboot,cd /tmp/
 Script Basics,(command),"Runs the command in a subshell, a child process separate from the main script",(ping -c 1 192.168.1.1) &
 Script Basics,$(),Runs the command inside the parentheses and uses its output (command substitution),"echo ""I'm in $(pwd)"""
 Script Basics,$$,Special variable with the PID of the current shell,echo $$
@@ -109,8 +114,10 @@ Variables & Arithmetic,unset,Deletes a variable or an element of an array,unset 
 Variables & Arithmetic,read,Saves what the user types into a variable,"echo -n ""Bet: ""; read initial_bet"
 Variables & Arithmetic,IFS,Variable that sets the separator Bash uses to split text (default: space),"IFS=',' read -ra ports <<< ""21,22,80"""
 Variables & Arithmetic,(( )),Arithmetic evaluation; handy to increment counters without $,((count++))
+Variables & Arithmetic,mapfile,"Reads lines of input into an array, one element per line",mapfile -t hosts < hosts.txt
 Operators,**,Raises a number to a power inside $(( )),echo $((2 ** 8))
 Operators,/,Divides inside $(( )); keeps only the integer part,echo $((10 / 3))
+Operators,!,Negates the condition: [ ! $a -le 0 ] is the same as [ $a -gt 0 ],"if [ ! ""$money"" -le 0 ]; then echo ""still have money""; fi"
 Arguments & Options,$0,Holds the name of the script as it was called from the terminal,echo $0
 Arguments & Options,"$1, $2...","The first, second (and so on) argument passed on the command line",./script.sh hello world → echo $1
 Arguments & Options,$@,"All the arguments, each kept separate; always prefer ""$@"" over ""$*""","for a in ""$@""; do echo ""[$a]""; done"
@@ -128,9 +135,14 @@ Conditionals,case,Compares a variable against several patterns and runs the bloc
 Loops & Sequences,seq,"Generates a sequence of numbers within a range, handy for loops",seq 1 10
 Loops & Sequences,for,"Loops over a list of items one by one, running a block of code for each",for i in $(seq 1 5); do echo $i; done
 Loops & Sequences,while,Repeats a block of code while a condition is true,while [ $i -lt 5 ]; do echo $i; i=$((i+1)); done
+Loops & Sequences,until,Repeats a block of code until a condition becomes true (the opposite of while),"until ping -c 1 -W 1 ""$ip"" &>/dev/null; do sleep 1; done"
+Loops & Sequences,continue,Skips the rest of the current iteration and jumps to the next one,for i in {1..5}; do [[ $i -eq 3 ]] && continue; echo $i; done
+Loops & Sequences,{0000..9999},"Brace expansion: generates a sequence of values (here 0000 to 9999), useful as a counter in loops",for i in {0000..9999}; do echo $i; done
 Functions & Signals,function name(){ commands },Defines a custom function that groups several commands under one name,"function greet(){ echo ""Hello $1""; }"
 "Jobs, Temp Files & Terminal",wait,Waits for one or more background processes to finish before continuing,sleep 5 & wait
 "Jobs, Temp Files & Terminal",tput,"Controls the terminal, for example hiding or showing the cursor",tput civis
+"Jobs, Temp Files & Terminal",mktemp,"Creates a temporary file with a unique name, avoiding clashes with other files",mktemp
 Networking in Bash,/dev/tcp/$ip/$port,"Special Bash path that opens a TCP connection to an IP and port as if it were a file, no netcat needed","echo '' > /dev/tcp/127.0.0.1/22 && echo ""open"""
 Networking in Bash,curl,"Sends requests to a URL from the terminal (HTTP, HTTPS, etc.) and shows the response",curl -s -X GET https://example.com
 Helper Tools,bat,"Like cat, but with syntax highlighting and line numbers (called batcat on Debian/Parrot)",bat example.sh
+Helper Tools,python,Runs Python code or scripts from the terminal,python3 -c 'print(2**10)'

@@ -2,7 +2,7 @@
 
 > Wait for background jobs, set time limits, create temp files and control the cursor.
 
-**Bash Scripting** · **3** commands · **4** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **3** commands · **5** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -27,6 +27,7 @@ sleep 5 & wait
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `$!` | Waits for a background process and collects its exit code | `sleep 5 & wait $!` |
+| `-n` | Waits only for the next background job to finish (handy to cap parallel jobs) | `wait -n` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

@@ -2,13 +2,14 @@
 
 > Handy tools for reading and prettifying code while you script.
 
-**Bash Scripting** · **1** commands · **0** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **2** commands · **0** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
 | Command | What it does |
 |:--|:--|
 | [`bat`](#cmd-bat) | Like cat, but with syntax highlighting and line numbers (called batcat on Debian/Parrot) |
+| [`python`](#cmd-python) | Runs Python code or scripts from the terminal |
 
 ---
 
@@ -20,6 +21,20 @@ Like cat, but with syntax highlighting and line numbers (called batcat on Debian
 
 ```bash
 bat example.sh
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-python"></a>
+
+## `python`
+
+Runs Python code or scripts from the terminal
+
+```bash
+python3 -c 'print(2**10)'
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

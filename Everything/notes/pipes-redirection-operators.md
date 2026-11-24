@@ -2,7 +2,7 @@
 
 > Chain commands, decide where output and errors go, and run things in the background.
 
-**Linux Commands** · **21** commands · **9** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **21** commands · **10** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -297,6 +297,10 @@ Process substitution: treats a command's output as if it were a file
 ```bash
 diff a.txt <(ss -tln)
 ```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `< <(command)` | Feeds a command's output to a loop without running the loop in a subshell | `while read -r l; do echo $l; done < <(ss -tln)` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

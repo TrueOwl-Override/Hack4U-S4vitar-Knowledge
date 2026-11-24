@@ -136,6 +136,8 @@ System & Packages,date,Shows or formats the system date and time,date '+%H:%M:%S
 System & Device Files,/dev/null,The black hole: anything sent here is discarded,command 2>/dev/null
 System & Device Files,/dev/zero,An endless source of null bytes,dd if=/dev/zero of=file bs=1M count=1
 System & Device Files,/dev/urandom,A source of random data,cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 16
+System & Device Files,/etc/,System folder that holds the configuration files,ls /etc/
+System & Device Files,/tmp/,Temporary folder any user can write to; it's emptied on reboot,cd /tmp/
 Git,git clone,"Downloads a full copy of a remote repository (like GitHub), with all its files and history",git clone https://github.com/user/project.git
 Git,git log,"Lists every commit in the project with its ID, author, date and message",git log
 Git,git show,Shows the details and changes applied in a specific commit,git show a1b2c3d
@@ -171,6 +173,7 @@ Variables & Arithmetic,read,Saves what the user types into a variable,"echo -n "
 Variables & Arithmetic,$RANDOM,Returns a random number between 0 and 32767 each time it's read,echo $RANDOM
 Variables & Arithmetic,IFS,Variable that sets the separator Bash uses to split text (default: space),"IFS=',' read -ra ports <<< ""21,22,80"""
 Variables & Arithmetic,(( )),Arithmetic evaluation; handy to increment counters without $,((count++))
+Variables & Arithmetic,mapfile,"Reads lines of input into an array, one element per line",mapfile -t hosts < hosts.txt
 Operators,=,"Assigns a value to a variable, or copies another variable's value (no spaces around it)",backup_bet=$initial_bet
 Operators,+=,"Adds to what the variable already holds: sums with numbers (with let), appends with text","let counter+=1; bad_plays+=""$random_number """
 Operators,+ - *,"Add, subtract and multiply inside $(( )) or let",echo $((5 + 3)) $((5 - 3)) $((5 * 3))
@@ -205,6 +208,8 @@ Loops & Sequences,while,Repeats a block of code while a condition is true,while 
 Loops & Sequences,seq,"Generates a sequence of numbers within a range, handy for loops",seq 1 10
 Loops & Sequences,{0000..9999},"Brace expansion: generates a sequence of values (here 0000 to 9999), useful as a counter in loops",for i in {0000..9999}; do echo $i; done
 Loops & Sequences,break,Leaves only the current loop; the script keeps running after it,"while true; do break; done; echo ""out of the loop"""
+Loops & Sequences,until,Repeats a block of code until a condition becomes true (the opposite of while),"until ping -c 1 -W 1 ""$ip"" &>/dev/null; do sleep 1; done"
+Loops & Sequences,continue,Skips the rest of the current iteration and jumps to the next one,for i in {1..5}; do [[ $i -eq 3 ]] && continue; echo $i; done
 Functions & Signals,function name(){ commands },Defines a custom function that groups several commands under one name,"function greet(){ echo ""Hello $1""; }"
 Functions & Signals,trap,Catches a signal (like Ctrl+C) and runs a function instead of stopping the script right away,trap ctrl_c INT
 "Jobs, Temp Files & Terminal",wait,Waits for one or more background processes to finish before continuing,sleep 5 & wait
@@ -214,3 +219,4 @@ Networking in Bash,/dev/tcp/$ip/$port,"Special Bash path that opens a TCP connec
 Networking in Bash,curl,"Sends requests to a URL from the terminal (HTTP, HTTPS, etc.) and shows the response",curl -s -X GET https://example.com
 Helper Tools,batcat,"Shows a file like cat, but with syntax highlighting and line numbers",batcat script.sh
 Helper Tools,js-beautify,Formats minified JavaScript or JSON so it's readable (line breaks and indentation),curl -s -X GET https://example.com/bundle.js | js-beautify
+Helper Tools,python,Runs Python code or scripts from the terminal,python3 -c 'print(2**10)'

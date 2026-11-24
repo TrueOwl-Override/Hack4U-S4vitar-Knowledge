@@ -2,7 +2,7 @@
 
 > Special device files and system paths you read from or write to.
 
-**Linux Commands** · **3** commands · **0** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **5** commands · **0** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -11,6 +11,8 @@
 | [`/dev/null`](#cmd-dev-null) | The black hole: anything sent here is discarded |
 | [`/dev/zero`](#cmd-dev-zero) | An endless source of null bytes |
 | [`/dev/urandom`](#cmd-dev-urandom) | A source of random data |
+| [`/etc/`](#cmd-etc) | System folder that holds the configuration files |
+| [`/tmp/`](#cmd-tmp) | Temporary folder any user can write to; it's emptied on reboot |
 
 ---
 
@@ -50,6 +52,34 @@ A source of random data
 
 ```bash
 cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 16
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-etc"></a>
+
+## `/etc/`
+
+System folder that holds the configuration files
+
+```bash
+ls /etc/
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-tmp"></a>
+
+## `/tmp/`
+
+Temporary folder any user can write to; it's emptied on reboot
+
+```bash
+cd /tmp/
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

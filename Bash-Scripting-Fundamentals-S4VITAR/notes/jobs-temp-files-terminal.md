@@ -2,7 +2,7 @@
 
 > Wait for background jobs, set time limits, create temp files and control the cursor.
 
-**Bash Scripting** · **2** commands · **1** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **3** commands · **4** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -10,6 +10,7 @@
 |:--|:--|
 | [`wait`](#cmd-wait) | Waits for one or more background processes to finish before continuing |
 | [`tput`](#cmd-tput) | Controls the terminal, for example hiding or showing the cursor |
+| [`mktemp`](#cmd-mktemp) | Creates a temporary file with a unique name, avoiding clashes with other files |
 
 ---
 
@@ -26,6 +27,7 @@ sleep 5 & wait
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `$!` | Waits for a background process and collects its exit code | `sleep 5 & wait $!` |
+| `-n` | Waits only for the next background job to finish (handy to cap parallel jobs) | `wait -n` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -39,6 +41,25 @@ Controls the terminal, for example hiding or showing the cursor
 
 ```bash
 tput civis
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `civis` | Hides the terminal cursor | `tput civis` |
+| `cnorm` | Shows the terminal cursor again | `tput cnorm` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-mktemp"></a>
+
+## `mktemp`
+
+Creates a temporary file with a unique name, avoiding clashes with other files
+
+```bash
+mktemp
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>
