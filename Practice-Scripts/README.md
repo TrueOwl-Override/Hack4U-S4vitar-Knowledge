@@ -8,5 +8,6 @@ My own practice scripts from the course — real Bash I wrote while learning.
 | [`multihost-port-scanner.sh`](multihost-port-scanner.sh) | Scans ports across several hosts in parallel |
 | [`host-and-port-validator.sh`](host-and-port-validator.sh) | Validates IPv4 hosts (regex + octets ≤ 255) and a list of ports, with colored output |
 | [`target-recon-scanner.sh`](target-recon-scanner.sh) | Recon on a target by modules (`ports`, `ip`, `web`, `all`): parallel port scan via `/dev/tcp`, DNS resolution with `dig` and HTTP status code with `curl` |
+| [`port-service-monitor.sh`](port-service-monitor.sh) | Monitors local services by port every 3 seconds via `/dev/tcp`, counting consecutive failures per port with an associative array and flagging a service as down after 3 failed checks |
 
 > The scripts keep my original code and comments; only the file names were put in English.
