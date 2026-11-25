@@ -2,7 +2,7 @@
 
 > Assign, do math, compare numbers and text, and negate conditions.
 
-**Bash Scripting** · **3** commands · **0** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **4** commands · **0** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -11,6 +11,7 @@
 | [`**`](#cmd-sym-42-42) | Raises a number to a power inside $(( )) |
 | [`/`](#cmd-sym-47) | Divides inside $(( )); keeps only the integer part |
 | [`!`](#cmd-sym-33) | Negates the condition: [ ! $a -le 0 ] is the same as [ $a -gt 0 ] |
+| [`%`](#cmd-sym-37) | Modulo: returns the remainder of a division; handy to limit a range or tell even (0) from odd (1) |
 
 ---
 
@@ -50,6 +51,20 @@ Negates the condition: [ ! $a -le 0 ] is the same as [ $a -gt 0 ]
 
 ```bash
 if [ ! "$money" -le 0 ]; then echo "still have money"; fi
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-sym-37"></a>
+
+## `%`
+
+Modulo: returns the remainder of a division; handy to limit a range or tell even (0) from odd (1)
+
+```bash
+echo $(($RANDOM % 37))
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

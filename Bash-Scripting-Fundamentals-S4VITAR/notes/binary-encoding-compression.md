@@ -2,7 +2,7 @@
 
 > Inspect binary data, convert between formats, hash files and work with archives.
 
-**Linux Commands** · **5** commands · **5** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **6** commands · **5** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -13,6 +13,7 @@
 | [`dd`](#cmd-dd) | Copies and converts data block by block (create files, images, wipe) |
 | [`hexedit`](#cmd-hexedit) | Opens a file in a hex editor to view and change its bytes |
 | [`xxd`](#cmd-xxd) | Shows a file's contents in hexadecimal |
+| [`md5sum`](#cmd-md5sum) | Calculates the MD5 hash of a file or input, useful to check whether its content has changed |
 
 ---
 
@@ -95,5 +96,19 @@ xxd file.bin
 |:--|:--|:--|
 | `-l` | Limits the output to N bytes | `xxd -p -l 32 /dev/urandom` |
 | `-p` | Shows plain hexadecimal output, without addresses or text alongside | `xxd -p file.bin` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-md5sum"></a>
+
+## `md5sum`
+
+Calculates the MD5 hash of a file or input, useful to check whether its content has changed
+
+```bash
+md5sum file.txt
+```
 
 <sub>[⬆ Back to top](#commands)</sub>

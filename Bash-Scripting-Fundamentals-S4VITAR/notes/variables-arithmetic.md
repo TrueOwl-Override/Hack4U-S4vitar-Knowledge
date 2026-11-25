@@ -2,7 +2,7 @@
 
 > Store values in variables, read them back and do math with them.
 
-**Bash Scripting** · **10** commands · **23** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **10** commands · **26** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -34,6 +34,7 @@ declare -i counter=0
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `-a` | Declares the variable as an array | `declare -a my_array=(1 2 3 4)` |
+| `-A` | Declares an associative array (keys are text instead of numbers) | `declare -A students; students[marcelo]=30; echo ${students[marcelo]}` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -53,6 +54,8 @@ my_array=(1 2 3 4)
 |:--|:--|:--|
 | `${array[0]}` | Gives the first element (the braces are required) | `echo ${my_array[0]}` |
 | `${array[@]}` | Shows all the elements | `echo ${my_array[@]}` |
+| `array[$key]=value` | Assigns a value to a key (or index) of the array | `alerts[$port]=0` |
+| `${array[$key]:-0}` | Reads a key's value, or 0 if that key doesn't exist yet | `count=${alerts[$port]:-0}` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

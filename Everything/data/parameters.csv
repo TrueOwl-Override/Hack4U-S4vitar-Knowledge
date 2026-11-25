@@ -63,6 +63,7 @@ alias,name='absolute_path',Creates a shortcut that runs a long command or path w
 export,variable_name,Turns a variable into an environment variable available to other processes,"export MY_VAR=""hello"""
 apt,update,Refreshes the list of available packages from the repositories without installing anything,sudo apt update
 apt,upgrade,Installs updates for the packages you have installed (don't use it on Parrot),sudo apt upgrade
+apt,install,Installs one or more packages from the repositories,sudo apt install seclists
 sudo,pacman -Syu,Arch Linux: syncs the package list and upgrades the whole system,sudo pacman -Syu
 sudo,pacman -S,Arch Linux: installs a package,sudo pacman -S dash
 find,-name,Searches for files by exact name or with wildcards,find -name '*xampl*.sh'
@@ -208,6 +209,7 @@ exit,2,Ends the script with code 2 (wrong usage / not found),exit 2
 declare,-i,"Makes the variable an integer, so its value is treated as a number",declare -i counter=0
 declare,-a,Declares the variable as an array,declare -a my_array=(1 2 3 4)
 declare,-r,Makes the variable read-only; changing it gives a readonly variable error,"declare -r name=""test"""
+declare,-A,Declares an associative array (keys are text instead of numbers),declare -A students; students[marcelo]=30; echo ${students[marcelo]}
 array=(1 2 3),$array,"Without an index, shows only the first element",echo $my_array
 array=(1 2 3),${array[@]},Shows all the elements,echo ${my_array[@]}
 array=(1 2 3),${#array[@]},Gives the total number of elements,echo ${#my_array[@]}
@@ -215,6 +217,8 @@ array=(1 2 3),${array[0]},Gives the first element (the braces are required),echo
 array=(1 2 3),${array[-1]},Gives the last element,echo ${my_array[-1]}
 array=(1 2 3),+=(5),Adds an element to the end,my_array+=(5)
 array=(1 2 3),=(${array[@]}),"Re-indexes the array after an unset, so positions don't stay shifted",my_array=(${my_array[@]})
+array=(1 2 3),array[$key]=value,Assigns a value to a key (or index) of the array,alerts[$port]=0
+array=(1 2 3),${array[$key]:-0},"Reads a key's value, or 0 if that key doesn't exist yet",count=${alerts[$port]:-0}
 unset,array[0],Deletes the first element of the array,unset my_array[0]
 unset,array[-1],Deletes the last element of the array,unset my_array[-1]
 unset,variable,Removes a variable,unset my_var
@@ -280,6 +284,7 @@ for,((i=0; i<10; i++)),C-style loop: start; condition; step,for ((i=0; i<10; i++
 for,"((i=1, j=10; i<10; i++, j--))","C-style loop with two variables, separated by commas","for ((i=1, j=10; i<10; i++, j--)); do echo ""$i $j""; done"
 function name(){ commands },ctrl_c(){},Defines the ctrl_c function that runs when trap catches Ctrl+C,"function ctrl_c(){ echo ""Exiting...""; exit 1; }"
 function name(){ commands },local,Creates a variable that only exists inside the function,"local file=""$1"""
+function name(){ commands },name() { ...; },The function keyword is optional; call it just by its name,my_function() { echo hi; }; my_function
 trap,ctrl_c INT,Catches the Ctrl+C signal and runs the ctrl_c function instead of stopping the script,trap ctrl_c INT
 timeout,"1 bash -c """"","Runs a command with a 1-second limit; if it doesn't finish, it's cancelled","timeout 1 bash -c ""echo > /dev/tcp/127.0.0.1/22"" && echo ""open"""
 mktemp,-d,"Creates a temporary folder instead of a file, with a unique name",mktemp -d
@@ -360,3 +365,6 @@ mapfile,--help,"Shows mapfile's help (it's a builtin, so it has no man page of i
 IFS,IFS=,Empty IFS keeps leading and trailing spaces when reading lines,"while IFS= read -r line; do echo ""$line""; done < file.txt"
 IFS,IFS=:,Splits on : (e.g. the fields of /etc/passwd),while IFS=: read -r user _ uid _; do echo $user; done < /etc/passwd
 <(command),< <(command),Feeds a command's output to a loop without running the loop in a subshell,while read -r l; do echo $l; done < <(ss -tln)
+break,2,Leaves 2 nested loops at once (break N leaves N loops),for h in $hosts; do for p in $ports; do break 2; done; done
+continue,2,Skips straight to the next iteration of the outer loop,for t in $targets; do for p in / /admin; do continue 2; done; done
+/usr/share/seclists/,Discovery/Web-Content/directory-list-2.3-small.txt,Common wordlist of web directories for fuzzing,ffuf -u http://site/FUZZ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-small.txt

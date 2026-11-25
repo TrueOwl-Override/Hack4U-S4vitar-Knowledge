@@ -2,7 +2,7 @@
 
 > Repeat work with for and while, and generate sequences to loop over.
 
-**Bash Scripting** · **6** commands · **6** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **7** commands · **9** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -14,6 +14,7 @@
 | [`until`](#cmd-until) | Repeats a block of code until a condition becomes true (the opposite of while) |
 | [`continue`](#cmd-continue) | Skips the rest of the current iteration and jumps to the next one |
 | [`{0000..9999}`](#cmd-0000-9999) | Brace expansion: generates a sequence of values (here 0000 to 9999), useful as a counter in loops |
+| [`break`](#cmd-break) | Leaves only the current loop; the script keeps running after it |
 
 ---
 
@@ -93,6 +94,10 @@ Skips the rest of the current iteration and jumps to the next one
 for i in {1..5}; do [[ $i -eq 3 ]] && continue; echo $i; done
 ```
 
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `2` | Skips straight to the next iteration of the outer loop | `for t in $targets; do for p in / /admin; do continue 2; done; done` |
+
 <sub>[⬆ Back to top](#commands)</sub>
 
 ---
@@ -111,5 +116,24 @@ for i in {0000..9999}; do echo $i; done
 |:--|:--|:--|
 | `{1..254..10}` | A third number sets the step (here 1, 11, 21...) | `echo {1..254..10}` |
 | `{a..h}` | Also works with letters | `echo {a..h}` |
+| `{a,b,c}` | With commas, expands to each value of the list | `touch file.{summary,report,results}` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-break"></a>
+
+## `break`
+
+Leaves only the current loop; the script keeps running after it
+
+```bash
+while true; do break; done; echo "out of the loop"
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `2` | Leaves 2 nested loops at once (break N leaves N loops) | `for h in $hosts; do for p in $ports; do break 2; done; done` |
 
 <sub>[⬆ Back to top](#commands)</sub>

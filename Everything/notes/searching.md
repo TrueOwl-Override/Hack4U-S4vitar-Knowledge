@@ -2,7 +2,7 @@
 
 > Find files anywhere on the system and locate where commands live.
 
-**Linux Commands** · **5** commands · **30** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **6** commands · **30** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -13,6 +13,7 @@
 | [`which`](#cmd-which) | Shows where a command or program is installed |
 | [`command`](#cmd-command) | With -v, shows the path of a command, similar to which |
 | [`xargs`](#cmd-xargs) | Takes a command's output and uses it as the arguments of another command |
+| [`locate`](#cmd-locate) | Finds files by name using a prebuilt database; fast (refresh it with updatedb) |
 
 ---
 
@@ -126,5 +127,19 @@ find . -name "*.log" | xargs ls -l
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `(join lines)` | With no command, joins all the lines into a single one | `cat ips.txt \| xargs` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-locate"></a>
+
+## `locate`
+
+Finds files by name using a prebuilt database; fast (refresh it with updatedb)
+
+```bash
+locate seclists
+```
 
 <sub>[⬆ Back to top](#commands)</sub>

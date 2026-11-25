@@ -21,6 +21,7 @@ Searching,which,Shows where a command or program is installed,which python3
 Searching,grep,Searches and filters lines of text that match a pattern,"grep ""error"" log.txt"
 Searching,find,"Searches for files and folders by criteria (name, type, permissions, date, etc.)","find /home -name ""*.txt"""
 Searching,xargs,Takes a command's output and uses it as the arguments of another command,"find . -name ""*.log"" | xargs ls -l"
+Searching,locate,Finds files by name using a prebuilt database; fast (refresh it with updatedb),locate seclists
 Text Processing,echo,Prints text or a variable's value to the terminal,"echo ""Hello world"""
 Text Processing,awk,Processes and filters text by columns,awk '{print $2}' data.txt
 Text Processing,tr,Translates or replaces characters of the incoming text with others,"echo ""a:b:c"" | tr ':' ' '"
@@ -78,20 +79,27 @@ Networking,lsof,"Lists the files opened by running processes, including network 
 Networking,ss,"Shows information about active network sockets, a modern alternative to netstat",ss
 Networking,arp-scan,Lists the devices connected to the network,sudo arp-scan -I ens33 --localnet
 Networking,ipcalc,Works out a network's host range (already discounts network and broadcast),ipcalc 192.168.1.0/24
+Networking,ffuf,"Fast web fuzzer: tries every word of a wordlist in place of FUZZ (directories, params, subdomains)",ffuf -u http://10.10.10.5/FUZZ -w directory-list-2.3-small.txt
 SSH & Remote Access,ssh-keygen,Generates an SSH key pair (public and private) to log in without a password,ssh-keygen -t ed25519
 "Binary, Encoding & Compression",bc,"Terminal calculator; does arithmetic and converts numbers between bases (hexadecimal, decimal)","echo ""obase=10; ibase=16; FF"" | bc"
 "Binary, Encoding & Compression",strings,Shows the readable text strings (ASCII) inside a binary file; useful for finding hidden info,strings program.bin
 "Binary, Encoding & Compression",dd,"Copies and converts data block by block (create files, images, wipe)",dd if=/dev/zero of=file.txt bs=1M count=1
 "Binary, Encoding & Compression",hexedit,Opens a file in a hex editor to view and change its bytes,hexedit file.txt
 "Binary, Encoding & Compression",xxd,Shows a file's contents in hexadecimal,xxd file.bin
+"Binary, Encoding & Compression",md5sum,"Calculates the MD5 hash of a file or input, useful to check whether its content has changed",md5sum file.txt
 System & Packages,uname,Shows information about the system and its kernel,uname -a
 System & Packages,uptime,Shows how long the system has been on,uptime
 System & Packages,date,Shows or formats the system date and time,date '+%H:%M:%S'
+System & Packages,apt,Debian's package manager: refreshes the package list (update) and installs available updates (upgrade),sudo apt update
+System & Packages,notify-send,Shows a desktop notification (needs a notification daemon like dunst),"notify-send ""Port 80 open"""
+System & Packages,dunst,Lightweight notification daemon that displays the notify-send pop-ups,dunst &
 System & Device Files,/dev/null,The black hole: anything sent here is discarded,command 2>/dev/null
 System & Device Files,/dev/zero,An endless source of null bytes,dd if=/dev/zero of=file bs=1M count=1
 System & Device Files,/dev/urandom,A source of random data,cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 16
 System & Device Files,/etc/,System folder that holds the configuration files,ls /etc/
 System & Device Files,/tmp/,Temporary folder any user can write to; it's emptied on reboot,cd /tmp/
+System & Device Files,/usr/share/seclists/,Default SecLists folder (wordlists for fuzzing and brute force) after apt install seclists,ls /usr/share/seclists/
+System & Device Files,/opt/,Folder for optional third-party software installed by hand,ls /opt/
 Script Basics,(command),"Runs the command in a subshell, a child process separate from the main script",(ping -c 1 192.168.1.1) &
 Script Basics,$(),Runs the command inside the parentheses and uses its output (command substitution),"echo ""I'm in $(pwd)"""
 Script Basics,$$,Special variable with the PID of the current shell,echo $$
@@ -118,6 +126,7 @@ Variables & Arithmetic,mapfile,"Reads lines of input into an array, one element 
 Operators,**,Raises a number to a power inside $(( )),echo $((2 ** 8))
 Operators,/,Divides inside $(( )); keeps only the integer part,echo $((10 / 3))
 Operators,!,Negates the condition: [ ! $a -le 0 ] is the same as [ $a -gt 0 ],"if [ ! ""$money"" -le 0 ]; then echo ""still have money""; fi"
+Operators,%,Modulo: returns the remainder of a division; handy to limit a range or tell even (0) from odd (1),echo $(($RANDOM % 37))
 Arguments & Options,$0,Holds the name of the script as it was called from the terminal,echo $0
 Arguments & Options,"$1, $2...","The first, second (and so on) argument passed on the command line",./script.sh hello world → echo $1
 Arguments & Options,$@,"All the arguments, each kept separate; always prefer ""$@"" over ""$*""","for a in ""$@""; do echo ""[$a]""; done"
@@ -138,7 +147,9 @@ Loops & Sequences,while,Repeats a block of code while a condition is true,while 
 Loops & Sequences,until,Repeats a block of code until a condition becomes true (the opposite of while),"until ping -c 1 -W 1 ""$ip"" &>/dev/null; do sleep 1; done"
 Loops & Sequences,continue,Skips the rest of the current iteration and jumps to the next one,for i in {1..5}; do [[ $i -eq 3 ]] && continue; echo $i; done
 Loops & Sequences,{0000..9999},"Brace expansion: generates a sequence of values (here 0000 to 9999), useful as a counter in loops",for i in {0000..9999}; do echo $i; done
+Loops & Sequences,break,Leaves only the current loop; the script keeps running after it,"while true; do break; done; echo ""out of the loop"""
 Functions & Signals,function name(){ commands },Defines a custom function that groups several commands under one name,"function greet(){ echo ""Hello $1""; }"
+Functions & Signals,return,Leaves the function (optionally with an exit code) without ending the script,"(( i == 3 )) && { echo ""found 3""; return; }"
 "Jobs, Temp Files & Terminal",wait,Waits for one or more background processes to finish before continuing,sleep 5 & wait
 "Jobs, Temp Files & Terminal",tput,"Controls the terminal, for example hiding or showing the cursor",tput civis
 "Jobs, Temp Files & Terminal",mktemp,"Creates a temporary file with a unique name, avoiding clashes with other files",mktemp

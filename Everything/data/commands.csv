@@ -29,6 +29,7 @@ Searching,grep,Searches and filters lines of text that match a pattern,"grep ""e
 Searching,which,Shows where a command or program is installed,which python3
 Searching,command,"With -v, shows the path of a command, similar to which",command -v python3
 Searching,xargs,Takes a command's output and uses it as the arguments of another command,"find . -name ""*.log"" | xargs ls -l"
+Searching,locate,Finds files by name using a prebuilt database; fast (refresh it with updatedb),locate seclists
 Text Processing,echo,Prints text or a variable's value to the terminal,"echo ""Hello world"""
 Text Processing,awk,Processes and filters text by columns,awk '{print $2}' data.txt
 Text Processing,cut,"Extracts parts of a line of text, splitting it by a delimiter","cut -d "":"" -f 1 /etc/passwd"
@@ -113,6 +114,7 @@ Networking,ip,Shows and manages network interfaces and their IPs,ip a
 Networking,dig,Resolves a domain's IP (DNS lookup),dig +short scanme.nmap.org
 Networking,arp-scan,Lists the devices connected to the network,sudo arp-scan -I ens33 --localnet
 Networking,ipcalc,Works out a network's host range (already discounts network and broadcast),ipcalc 192.168.1.0/24
+Networking,ffuf,"Fast web fuzzer: tries every word of a wordlist in place of FUZZ (directories, params, subdomains)",ffuf -u http://10.10.10.5/FUZZ -w directory-list-2.3-small.txt
 SSH & Remote Access,ssh,"Connects remotely and securely to another machine over the network, using a password or an SSH key",ssh user@192.168.1.10
 SSH & Remote Access,sshpass,Passes the SSH password directly in the command; handy for automation,sshpass -p 'my_password' ssh user@192.168.1.10
 SSH & Remote Access,ssh-keygen,Generates an SSH key pair (public and private) to log in without a password,ssh-keygen -t ed25519
@@ -133,11 +135,15 @@ System & Packages,neofetch,"Shows system info (kernel, RAM, CPU, distro logo) in
 System & Packages,uname,Shows information about the system and its kernel,uname -a
 System & Packages,uptime,Shows how long the system has been on,uptime
 System & Packages,date,Shows or formats the system date and time,date '+%H:%M:%S'
+System & Packages,notify-send,Shows a desktop notification (needs a notification daemon like dunst),"notify-send ""Port 80 open"""
+System & Packages,dunst,Lightweight notification daemon that displays the notify-send pop-ups,dunst &
 System & Device Files,/dev/null,The black hole: anything sent here is discarded,command 2>/dev/null
 System & Device Files,/dev/zero,An endless source of null bytes,dd if=/dev/zero of=file bs=1M count=1
 System & Device Files,/dev/urandom,A source of random data,cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 16
 System & Device Files,/etc/,System folder that holds the configuration files,ls /etc/
 System & Device Files,/tmp/,Temporary folder any user can write to; it's emptied on reboot,cd /tmp/
+System & Device Files,/usr/share/seclists/,Default SecLists folder (wordlists for fuzzing and brute force) after apt install seclists,ls /usr/share/seclists/
+System & Device Files,/opt/,Folder for optional third-party software installed by hand,ls /opt/
 Git,git clone,"Downloads a full copy of a remote repository (like GitHub), with all its files and history",git clone https://github.com/user/project.git
 Git,git log,"Lists every commit in the project with its ID, author, date and message",git log
 Git,git show,Shows the details and changes applied in a specific commit,git show a1b2c3d
@@ -212,6 +218,7 @@ Loops & Sequences,until,Repeats a block of code until a condition becomes true (
 Loops & Sequences,continue,Skips the rest of the current iteration and jumps to the next one,for i in {1..5}; do [[ $i -eq 3 ]] && continue; echo $i; done
 Functions & Signals,function name(){ commands },Defines a custom function that groups several commands under one name,"function greet(){ echo ""Hello $1""; }"
 Functions & Signals,trap,Catches a signal (like Ctrl+C) and runs a function instead of stopping the script right away,trap ctrl_c INT
+Functions & Signals,return,Leaves the function (optionally with an exit code) without ending the script,"(( i == 3 )) && { echo ""found 3""; return; }"
 "Jobs, Temp Files & Terminal",wait,Waits for one or more background processes to finish before continuing,sleep 5 & wait
 "Jobs, Temp Files & Terminal",mktemp,"Creates a temporary file with a unique name, avoiding clashes with other files",mktemp
 "Jobs, Temp Files & Terminal",tput,"Controls the terminal, for example hiding or showing the cursor",tput civis

@@ -4,7 +4,7 @@
 
 **Everything I've learned from every course, mixed together and grouped by what it does, with copy-ready examples.**
 
-![Commands](https://img.shields.io/badge/commands-221-2ea44f?style=for-the-badge) ![Parameters](https://img.shields.io/badge/parameters-361-0969da?style=for-the-badge) ![Categories](https://img.shields.io/badge/categories-25-8250df?style=for-the-badge)
+![Commands](https://img.shields.io/badge/commands-228-2ea44f?style=for-the-badge) ![Parameters](https://img.shields.io/badge/parameters-369-0969da?style=for-the-badge) ![Categories](https://img.shields.io/badge/categories-25-8250df?style=for-the-badge)
 
 🌐 **Searchable web version:** [`docs/index.html`](docs/index.html)
 
@@ -20,18 +20,18 @@
 |:-:|:--|:--|
 | 📁 | **[Navigation & Files](notes/navigation-files.md)** | `pwd` `ls` `cd` `mkdir` `touch` `cp` `ln` `rm` `file` `stat` `*` `readlink` `basename` `pushd` `popd` |
 | 📝 | **[Viewing & Editing Files](notes/viewing-editing-files.md)** | `cat` `more` `less` `head` `tail` `rev` `diff` `nano` `vi` `man` |
-| 🔍 | **[Searching](notes/searching.md)** | `find` `grep` `which` `command` `xargs` |
+| 🔍 | **[Searching](notes/searching.md)** | `find` `grep` `which` `command` `xargs` `locate` |
 | ✂️ | **[Text Processing](notes/text-processing.md)** | `echo` `awk` `cut` `tr` `sed` `sort` `wc` `uniq` `tee` `sponge` `column` |
 | 🔀 | **[Pipes, Redirection & Operators](notes/pipes-redirection-operators.md)** | `\|` `;` `&&` `\|\|` `&` `>` `>>` `2>/dev/null` `2>&1` `&>/dev/null` `exec` `disown` `<` `<<` `<<<` `\|&` `2>` `<(command)` `>(command)` `>&2` `\` |
 | 👤 | **[Users & Groups](notes/users-groups.md)** | `whoami` `id` `sudo` `su` `useradd` `usermod` `passwd` `groupadd` |
 | 🔐 | **[Permissions & Attributes](notes/permissions-attributes.md)** | `chmod` `chown` `chgrp` `lsattr` `chattr` `getcap` `setcap` |
 | 🐚 | **[Shell & Environment](notes/shell-environment.md)** | `bash` `export` `env` `tty` `alias` `!$` `!!` `!?` `Ctrl + L` `Tab` `Ctrl + C` `sh` `type` `shopt` `Ctrl + Z` |
 | ⏱️ | **[Processes & Scheduling](notes/processes-scheduling.md)** | `ps` `kill` `fg` `sleep` `timeout` `time` `watch` `crontab` `pkill` `pgrep` |
-| 🌐 | **[Networking](notes/networking.md)** | `hostname` `ifconfig` `iwconfig` `ss` `lsof` `nc` `ncat` `ping` `ip` `dig` `arp-scan` `ipcalc` |
+| 🌐 | **[Networking](notes/networking.md)** | `hostname` `ifconfig` `iwconfig` `ss` `lsof` `nc` `ncat` `ping` `ip` `dig` `arp-scan` `ipcalc` `ffuf` |
 | 🔑 | **[SSH & Remote Access](notes/ssh-remote-access.md)** | `ssh` `sshpass` `ssh-keygen` `ssh-copy-id` |
 | 🧬 | **[Binary, Encoding & Compression](notes/binary-encoding-compression.md)** | `strings` `xxd` `ghex` `base64` `md5sum` `bc` `7z` `dd` `hexedit` |
-| 📦 | **[System & Packages](notes/system-packages.md)** | `apt` `parrot-upgrade` `reboot` `neofetch` `uname` `uptime` `date` |
-| 🗂️ | **[System & Device Files](notes/system-device-files.md)** | `/dev/null` `/dev/zero` `/dev/urandom` `/etc/` `/tmp/` |
+| 📦 | **[System & Packages](notes/system-packages.md)** | `apt` `parrot-upgrade` `reboot` `neofetch` `uname` `uptime` `date` `notify-send` `dunst` |
+| 🗂️ | **[System & Device Files](notes/system-device-files.md)** | `/dev/null` `/dev/zero` `/dev/urandom` `/etc/` `/tmp/` `/usr/share/seclists/` `/opt/` |
 | 🌿 | **[Git](notes/git.md)** | `git clone` `git log` `git show` `git branch` `git checkout` `git tag` `git add` `git commit` `git push` |
 
 ### 🐚 Bash Scripting
@@ -44,7 +44,7 @@
 | 🎯 | **[Arguments & Options](notes/arguments-options.md)** | `$0` `$1, $2...` `$#` `$*` `getopts` `$@` `shift` |
 | 🔀 | **[Conditionals](notes/conditionals.md)** | `if` `case` `test` `[` `true` `false` `[[ ]]` `BASH_REMATCH` |
 | 🔁 | **[Loops & Sequences](notes/loops-sequences.md)** | `for` `while` `seq` `{0000..9999}` `break` `until` `continue` |
-| 🧩 | **[Functions & Signals](notes/functions-signals.md)** | `function name(){ commands }` `trap` |
+| 🧩 | **[Functions & Signals](notes/functions-signals.md)** | `function name(){ commands }` `trap` `return` |
 | ⚙️ | **[Jobs, Temp Files & Terminal](notes/jobs-temp-files-terminal.md)** | `wait` `mktemp` `tput` |
 | 🌐 | **[Networking in Bash](notes/networking-in-bash.md)** | `/dev/tcp/$ip/$port` `curl` |
 | 🛠️ | **[Helper Tools](notes/helper-tools.md)** | `batcat` `js-beautify` `python` |

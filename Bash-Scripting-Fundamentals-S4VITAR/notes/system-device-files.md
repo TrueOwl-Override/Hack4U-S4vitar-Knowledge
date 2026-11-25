@@ -2,7 +2,7 @@
 
 > Special device files and system paths you read from or write to.
 
-**Linux Commands** · **5** commands · **0** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **7** commands · **1** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -13,6 +13,8 @@
 | [`/dev/urandom`](#cmd-dev-urandom) | A source of random data |
 | [`/etc/`](#cmd-etc) | System folder that holds the configuration files |
 | [`/tmp/`](#cmd-tmp) | Temporary folder any user can write to; it's emptied on reboot |
+| [`/usr/share/seclists/`](#cmd-usr-share-seclists) | Default SecLists folder (wordlists for fuzzing and brute force) after apt install seclists |
+| [`/opt/`](#cmd-opt) | Folder for optional third-party software installed by hand |
 
 ---
 
@@ -80,6 +82,38 @@ Temporary folder any user can write to; it's emptied on reboot
 
 ```bash
 cd /tmp/
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-usr-share-seclists"></a>
+
+## `/usr/share/seclists/`
+
+Default SecLists folder (wordlists for fuzzing and brute force) after apt install seclists
+
+```bash
+ls /usr/share/seclists/
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `Discovery/Web-Content/directory-list-2.3-small.txt` | Common wordlist of web directories for fuzzing | `ffuf -u http://site/FUZZ -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-small.txt` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-opt"></a>
+
+## `/opt/`
+
+Folder for optional third-party software installed by hand
+
+```bash
+ls /opt/
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

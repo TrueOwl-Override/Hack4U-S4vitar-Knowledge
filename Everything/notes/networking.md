@@ -2,7 +2,7 @@
 
 > Network interfaces, open ports and sockets, and raw connections with netcat.
 
-**Linux Commands** · **12** commands · **13** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **13** commands · **13** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -20,6 +20,7 @@
 | [`dig`](#cmd-dig) | Resolves a domain's IP (DNS lookup) |
 | [`arp-scan`](#cmd-arp-scan) | Lists the devices connected to the network |
 | [`ipcalc`](#cmd-ipcalc) | Works out a network's host range (already discounts network and broadcast) |
+| [`ffuf`](#cmd-ffuf) | Fast web fuzzer: tries every word of a wordlist in place of FUZZ (directories, params, subdomains) |
 
 ---
 
@@ -225,6 +226,20 @@ Works out a network's host range (already discounts network and broadcast)
 
 ```bash
 ipcalc 192.168.1.0/24
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-ffuf"></a>
+
+## `ffuf`
+
+Fast web fuzzer: tries every word of a wordlist in place of FUZZ (directories, params, subdomains)
+
+```bash
+ffuf -u http://10.10.10.5/FUZZ -w directory-list-2.3-small.txt
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

@@ -2,7 +2,7 @@
 
 > Find files anywhere on the system and locate where commands live.
 
-**Linux Commands** · **4** commands · **17** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **5** commands · **18** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -12,6 +12,7 @@
 | [`grep`](#cmd-grep) | Searches and filters lines of text that match a pattern |
 | [`find`](#cmd-find) | Searches for files and folders by criteria (name, type, permissions, date, etc.) |
 | [`xargs`](#cmd-xargs) | Takes a command's output and uses it as the arguments of another command |
+| [`locate`](#cmd-locate) | Finds files by name using a prebuilt database; fast (refresh it with updatedb) |
 
 ---
 
@@ -53,6 +54,7 @@ grep "error" log.txt
 | `-q` | Quiet: shows nothing, only sets the exit code | `grep -q "root" /etc/passwd && echo found` |
 | `-qE` | Quiet + extended regex; good to validate formats like an IP | `echo "$ip" \| grep -qE '^[0-9]{1,3}(\.[0-9]{1,3}){3}$'` |
 | `-oP` | -o shows only the matching part and -P enables Perl regex (\K drops what came before, (?=...) checks what comes after); this one extracts what's between brackets | `grep -oP '\[\K.*?(?=\])' output.txt` |
+| `-i` | Ignores uppercase and lowercase when looking for matches | `grep -i "error" log.txt` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -95,5 +97,19 @@ find . -name "*.log" | xargs ls -l
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `(join lines)` | With no command, joins all the lines into a single one | `cat ips.txt \| xargs` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-locate"></a>
+
+## `locate`
+
+Finds files by name using a prebuilt database; fast (refresh it with updatedb)
+
+```bash
+locate seclists
+```
 
 <sub>[⬆ Back to top](#commands)</sub>

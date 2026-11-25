@@ -2,7 +2,7 @@
 
 > Repeat work with for and while, and generate sequences to loop over.
 
-**Bash Scripting** · **7** commands · **10** parameters  ·  [⬅ Back to index](../README.md)
+**Bash Scripting** · **7** commands · **12** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -103,6 +103,10 @@ Leaves only the current loop; the script keeps running after it
 while true; do break; done; echo "out of the loop"
 ```
 
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `2` | Leaves 2 nested loops at once (break N leaves N loops) | `for h in $hosts; do for p in $ports; do break 2; done; done` |
+
 <sub>[⬆ Back to top](#commands)</sub>
 
 ---
@@ -130,5 +134,9 @@ Skips the rest of the current iteration and jumps to the next one
 ```bash
 for i in {1..5}; do [[ $i -eq 3 ]] && continue; echo $i; done
 ```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `2` | Skips straight to the next iteration of the outer loop | `for t in $targets; do for p in / /admin; do continue 2; done; done` |
 
 <sub>[⬆ Back to top](#commands)</sub>
