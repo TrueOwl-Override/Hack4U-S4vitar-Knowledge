@@ -14,6 +14,7 @@ Navigation & Files,readlink,Shows where a link points,readlink /usr/bin/sh
 Navigation & Files,basename,"Keeps just the file name, without the path",basename /tmp/scan.txt
 Navigation & Files,pushd,Enters a directory and saves the previous one on a stack,pushd /root/.ssh
 Navigation & Files,popd,Returns to the directory saved by pushd,popd
+Navigation & Files,mv,Moves or renames files and folders,mv old.txt new.txt
 Viewing & Editing Files,cat,Prints a file's contents to the terminal,cat notes.txt
 Viewing & Editing Files,more,"Shows a command's output or a file one page at a time (space to advance, q to quit)",cat /etc/passwd | more
 Viewing & Editing Files,less,"Shows a long output or file with scroll (arrows to move, q to quit)",cat output.txt | less
@@ -128,6 +129,8 @@ SSH & Remote Access,ssh-copy-id,Copies your SSH public key to a remote server's 
 "Binary, Encoding & Compression",7z,Compresses and extracts .7z archives,7z a backup.7z folder/
 "Binary, Encoding & Compression",dd,"Copies and converts data block by block (create files, images, wipe)",dd if=/dev/zero of=file.txt bs=1M count=1
 "Binary, Encoding & Compression",hexedit,Opens a file in a hex editor to view and change its bytes,hexedit file.txt
+"Binary, Encoding & Compression",dump,Backs up ext2/3/4 filesystems; skips files with the chattr d attribute,sudo dump -0f backup.dump /home
+"Binary, Encoding & Compression",extundelete,Recovers deleted files from an ext3/ext4 partition (unmount it first),sudo extundelete /dev/sda1 --restore-all
 System & Packages,apt,Debian's package manager: refreshes the package list (update) and installs available updates (upgrade),sudo apt update
 System & Packages,parrot-upgrade,Safely upgrades Parrot OS without breaking its own components,sudo parrot-upgrade
 System & Packages,reboot,Restarts the machine,sudo reboot

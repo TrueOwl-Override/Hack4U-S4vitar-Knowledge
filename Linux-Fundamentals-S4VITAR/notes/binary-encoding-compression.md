@@ -2,7 +2,7 @@
 
 > Inspect binary data, convert between formats, hash files and work with archives.
 
-**Linux Commands** · **7** commands · **6** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **9** commands · **6** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -15,6 +15,8 @@
 | [`md5sum`](#cmd-md5sum) | Calculates the MD5 hash of a file or input, useful to check whether its content has changed |
 | [`bc`](#cmd-bc) | Terminal calculator; does arithmetic and converts numbers between bases (hexadecimal, decimal) |
 | [`7z`](#cmd-7z) | Compresses and extracts .7z archives |
+| [`dump`](#cmd-dump) | Backs up ext2/3/4 filesystems; skips files with the chattr d attribute |
+| [`extundelete`](#cmd-extundelete) | Recovers deleted files from an ext3/ext4 partition (unmount it first) |
 
 ---
 
@@ -126,5 +128,33 @@ Compresses and extracts .7z archives
 |:--|:--|:--|
 | `l` | Lists an archive's contents without extracting it | `7z l backup.7z` |
 | `x` | Extracts an archive's contents keeping its folder structure | `7z x backup.7z` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-dump"></a>
+
+## `dump`
+
+Backs up ext2/3/4 filesystems; skips files with the chattr d attribute
+
+```bash
+sudo dump -0f backup.dump /home
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-extundelete"></a>
+
+## `extundelete`
+
+Recovers deleted files from an ext3/ext4 partition (unmount it first)
+
+```bash
+sudo extundelete /dev/sda1 --restore-all
+```
 
 <sub>[⬆ Back to top](#commands)</sub>

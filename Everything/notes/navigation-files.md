@@ -2,7 +2,7 @@
 
 > Move around the filesystem and create, copy, delete and inspect files and folders.
 
-**Linux Commands** · **15** commands · **20** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **16** commands · **21** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -23,6 +23,7 @@
 | [`basename`](#cmd-basename) | Keeps just the file name, without the path |
 | [`pushd`](#cmd-pushd) | Enters a directory and saves the previous one on a stack |
 | [`popd`](#cmd-popd) | Returns to the directory saved by pushd |
+| [`mv`](#cmd-mv) | Moves or renames files and folders |
 
 ---
 
@@ -59,6 +60,7 @@ ls /etc
 | `/bin /sbin /usr/sbin` | Folders where programs are usually stored (it depends on the distro) | `ls /usr/sbin` |
 | `/dev` | Folder with the system's devices; many of them aren't physical but virtual | `ls /dev` |
 | `-l /usr/bin/sh` | On a link, shows where it points (sh → dash or bash) | `ls -l /usr/bin/sh` |
+| `/home` | Folder holding each user's personal directory (/home/mary, /home/john) | `ls -l /home` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -268,6 +270,20 @@ Returns to the directory saved by pushd
 
 ```bash
 popd
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-mv"></a>
+
+## `mv`
+
+Moves or renames files and folders
+
+```bash
+mv old.txt new.txt
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

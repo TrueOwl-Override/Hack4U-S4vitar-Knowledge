@@ -2,7 +2,7 @@
 
 > Move around the filesystem and create, copy, delete and inspect files and folders.
 
-**Linux Commands** · **11** commands · **15** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **12** commands · **17** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -19,6 +19,7 @@
 | [`file`](#cmd-file) | Analyzes a file and tells you what kind of content it has, regardless of its extension |
 | [`stat`](#cmd-stat) | Shows detailed info about a file or directory: permissions, size and access/modification dates |
 | [`*`](#cmd-sym-42) | Wildcard that matches anything, to select several files at once |
+| [`mv`](#cmd-mv) | Moves or renames files and folders |
 
 ---
 
@@ -54,6 +55,7 @@ ls /etc
 | `/etc` | Folder where the system's configuration files live | `ls /etc` |
 | `/bin /sbin /usr/sbin` | Folders where programs are usually stored (it depends on the distro) | `ls /usr/sbin` |
 | `/dev` | Folder with the system's devices; many of them aren't physical but virtual | `ls /dev` |
+| `/home` | Folder holding each user's personal directory (/home/mary, /home/john) | `ls -l /home` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -91,6 +93,10 @@ Creates a new folder
 ```bash
 mkdir projects
 ```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `-p` | Doesn't fail if the folder exists, and can create nested paths | `mkdir -p a/b/c` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -197,6 +203,20 @@ Wildcard that matches anything, to select several files at once
 
 ```bash
 ls *.txt
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-mv"></a>
+
+## `mv`
+
+Moves or renames files and folders
+
+```bash
+mv old.txt new.txt
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

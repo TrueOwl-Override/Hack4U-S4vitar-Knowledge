@@ -40,6 +40,28 @@ chmod,+t,Enables the Sticky Bit on a folder: only a file's owner or root can del
 rm,-f,"Forces deletion without asking, even if the file is write-protected",rm -f protected_file.txt
 chattr,+i,"Makes the file immutable: nobody, not even root, can modify, delete or rename it until the attribute is removed",sudo chattr +i file.txt
 chattr,-V,Verbose mode when changing the attribute,sudo chattr -V +i file.txt
+chattr,-R,Applies the change recursively to a folder and everything inside it,sudo chattr -R +i folder/
+chattr,-f,Suppresses most error messages,sudo chattr -f +i file.txt
+chattr,-v,Sets the file's version (generation) number,sudo chattr -v 2 file.txt
+chattr,-p,Sets the file's project number,sudo chattr -p 1 file.txt
+chattr,+ - =,"+ adds attributes, - removes them, = sets exactly those and removes the rest",sudo chattr =es file.txt
+chattr,+caS,Several attributes can be combined in a single flag,sudo chattr +caS file.txt
+chattr,-i,Removes the immutable attribute so the file can be changed or deleted again,sudo chattr -i file.txt
+chattr,+a,"Append only: data can only be added (>>), not overwritten or deleted",sudo chattr +a log.txt
+chattr,-a,"Removes append only, so the file can be overwritten again",sudo chattr -a log.txt
+chattr,+A,No atime: the last access time isn't updated,sudo chattr +A file.txt
+chattr,+c,Compressed: the kernel compresses the file on disk,sudo chattr +c file.txt
+chattr,+C,No copy-on-write (on filesystems like Btrfs),sudo chattr +C file.txt
+chattr,+d,No dump: the dump backup program skips the file,sudo chattr +d file.txt
+chattr,+D,Synchronous directory: changes to the folder are written to disk at once,sudo chattr +D folder/
+chattr,+e,Extents: the file maps its blocks with extents (set by default on ext4; can't be removed),lsattr file.txt
+chattr,+j,Data journaling: the file's data goes through the journal first (ext3/ext4),sudo chattr +j file.txt
+chattr,+P,Project hierarchy: new files inherit the folder's project ID,sudo chattr +P folder/
+chattr,+s,Secure deletion: its blocks are zeroed when the file is deleted,sudo chattr +s secret.txt
+chattr,+S,Synchronous updates: changes are written to disk immediately,sudo chattr +S file.txt
+chattr,+t,No tail-merging: the last partial block isn't shared with other files,sudo chattr +t file.txt
+chattr,+T,Top of directory hierarchy (hint for the block allocator),sudo chattr +T folder/
+chattr,+u,Undeletable: its contents are saved when deleted so they can be recovered,sudo chattr +u file.txt
 chmod,4000,Octal value of the SUID special permission,chmod 4755 program
 chmod,u+s,Symbolic way to set SUID (s bit on the owner's execute permission),chmod u+s program
 chmod,2000,Octal value of the SGID special permission,chmod 2755 folder
@@ -132,6 +154,7 @@ ls,/etc/cron.d,Directory holding the configuration files of the system's Cron jo
 ls,/etc,Folder where the system's configuration files live,ls /etc
 ls,/bin /sbin /usr/sbin,Folders where programs are usually stored (it depends on the distro),ls /usr/sbin
 ls,/dev,Folder with the system's devices; many of them aren't physical but virtual,ls /dev
+ls,/home,"Folder holding each user's personal directory (/home/mary, /home/john)",ls -l /home
 crontab,* * * * * command,"Cron job format: Minute Hour Day-of-month Month Day-of-week Command; * means every value (every minute, hour, etc.)",* * * * * /home/user/script.sh
 crontab,*/3 * * * *,*/N means every N units; this one runs every 3 minutes,*/3 * * * * /home/user/script.sh
 crontab,* * * * 6,The 5th field is the day of the week: 0 or 7 Sunday ... 6 Saturday; this one runs every minute on Saturdays,* * * * 6 /home/user/script.sh
@@ -209,3 +232,9 @@ vi,p / P,"In Vim, pastes below (p) or above (P) the current line","y to copy, mo
 vi,d,"In Vim, deletes (cuts) the selection; paste it back with p","V, select the lines, then d"
 vi,yy,"In Vim, copies the current line (paste it with p)","yy, then p"
 vi,.file.swp,Swap file Vim leaves when it closes badly; delete it with rm so you can open the file again,rm .roulette.sh.swp
+lsattr,-R,Lists the attributes of a folder's contents recursively,lsattr -R folder/
+lsattr,-V,Shows the lsattr version,lsattr -V
+lsattr,-a,Includes hidden files (those starting with a dot),lsattr -a
+lsattr,-d,"Shows the attributes of the folder itself, not of its contents",lsattr -d /home/mary
+lsattr,-v,Shows each file's version (generation) number,lsattr -v file.txt
+mkdir,-p,"Doesn't fail if the folder exists, and can create nested paths",mkdir -p a/b/c

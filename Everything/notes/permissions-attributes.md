@@ -2,7 +2,7 @@
 
 > Control who can read, write and run files, plus special attributes and capabilities.
 
-**Linux Commands** · **7** commands · **18** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **7** commands · **45** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -87,6 +87,14 @@ Shows a file's special attributes (beyond the normal permissions)
 lsattr file.txt
 ```
 
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `-R` | Lists the attributes of a folder's contents recursively | `lsattr -R folder/` |
+| `-V` | Shows the lsattr version | `lsattr -V` |
+| `-a` | Includes hidden files (those starting with a dot) | `lsattr -a` |
+| `-d` | Shows the attributes of the folder itself, not of its contents | `lsattr -d /home/mary` |
+| `-v` | Shows each file's version (generation) number | `lsattr -v file.txt` |
+
 <sub>[⬆ Back to top](#commands)</sub>
 
 ---
@@ -105,6 +113,28 @@ sudo chattr +i file.txt
 |:--|:--|:--|
 | `+i` | Makes the file immutable: nobody, not even root, can modify, delete or rename it until the attribute is removed | `sudo chattr +i file.txt` |
 | `-V` | Verbose mode when changing the attribute | `sudo chattr -V +i file.txt` |
+| `-R` | Applies the change recursively to a folder and everything inside it | `sudo chattr -R +i folder/` |
+| `-f` | Suppresses most error messages | `sudo chattr -f +i file.txt` |
+| `-v` | Sets the file's version (generation) number | `sudo chattr -v 2 file.txt` |
+| `-p` | Sets the file's project number | `sudo chattr -p 1 file.txt` |
+| `+ - =` | + adds attributes, - removes them, = sets exactly those and removes the rest | `sudo chattr =es file.txt` |
+| `+caS` | Several attributes can be combined in a single flag | `sudo chattr +caS file.txt` |
+| `-i` | Removes the immutable attribute so the file can be changed or deleted again | `sudo chattr -i file.txt` |
+| `+a` | Append only: data can only be added (>>), not overwritten or deleted | `sudo chattr +a log.txt` |
+| `-a` | Removes append only, so the file can be overwritten again | `sudo chattr -a log.txt` |
+| `+A` | No atime: the last access time isn't updated | `sudo chattr +A file.txt` |
+| `+c` | Compressed: the kernel compresses the file on disk | `sudo chattr +c file.txt` |
+| `+C` | No copy-on-write (on filesystems like Btrfs) | `sudo chattr +C file.txt` |
+| `+d` | No dump: the dump backup program skips the file | `sudo chattr +d file.txt` |
+| `+D` | Synchronous directory: changes to the folder are written to disk at once | `sudo chattr +D folder/` |
+| `+e` | Extents: the file maps its blocks with extents (set by default on ext4; can't be removed) | `lsattr file.txt` |
+| `+j` | Data journaling: the file's data goes through the journal first (ext3/ext4) | `sudo chattr +j file.txt` |
+| `+P` | Project hierarchy: new files inherit the folder's project ID | `sudo chattr +P folder/` |
+| `+s` | Secure deletion: its blocks are zeroed when the file is deleted | `sudo chattr +s secret.txt` |
+| `+S` | Synchronous updates: changes are written to disk immediately | `sudo chattr +S file.txt` |
+| `+t` | No tail-merging: the last partial block isn't shared with other files | `sudo chattr +t file.txt` |
+| `+T` | Top of directory hierarchy (hint for the block allocator) | `sudo chattr +T folder/` |
+| `+u` | Undeletable: its contents are saved when deleted so they can be recovered | `sudo chattr +u file.txt` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

@@ -10,6 +10,7 @@ Navigation & Files,rm,Deletes files or folders,rm old.txt
 Navigation & Files,file,"Analyzes a file and tells you what kind of content it has, regardless of its extension",file image.png
 Navigation & Files,stat,"Shows detailed info about a file or directory: permissions, size and access/modification dates",stat file.txt
 Navigation & Files,*,"Wildcard that matches anything, to select several files at once",ls *.txt
+Navigation & Files,mv,Moves or renames files and folders,mv old.txt new.txt
 Viewing & Editing Files,cat,Prints a file's contents to the terminal,cat notes.txt
 Viewing & Editing Files,more,"Shows a command's output or a file one page at a time (space to advance, q to quit)",cat /etc/passwd | more
 Viewing & Editing Files,less,"Shows a long output or file with scroll (arrows to move, q to quit)",cat output.txt | less
@@ -99,6 +100,8 @@ SSH & Remote Access,ssh-copy-id,Copies your SSH public key to a remote server's 
 "Binary, Encoding & Compression",md5sum,"Calculates the MD5 hash of a file or input, useful to check whether its content has changed",md5sum file.txt
 "Binary, Encoding & Compression",bc,"Terminal calculator; does arithmetic and converts numbers between bases (hexadecimal, decimal)","echo ""obase=10; ibase=16; FF"" | bc"
 "Binary, Encoding & Compression",7z,Compresses and extracts .7z archives,7z a backup.7z folder/
+"Binary, Encoding & Compression",dump,Backs up ext2/3/4 filesystems; skips files with the chattr d attribute,sudo dump -0f backup.dump /home
+"Binary, Encoding & Compression",extundelete,Recovers deleted files from an ext3/ext4 partition (unmount it first),sudo extundelete /dev/sda1 --restore-all
 System & Packages,apt,Debian's package manager: refreshes the package list (update) and installs available updates (upgrade),sudo apt update
 System & Packages,parrot-upgrade,Safely upgrades Parrot OS without breaking its own components,sudo parrot-upgrade
 System & Packages,reboot,Restarts the machine,sudo reboot

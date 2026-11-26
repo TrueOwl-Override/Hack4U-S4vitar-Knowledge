@@ -2,7 +2,7 @@
 
 > Inspect binary data, convert between formats, hash files and work with archives.
 
-**Linux Commands** · **9** commands · **10** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **11** commands · **10** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -17,6 +17,8 @@
 | [`7z`](#cmd-7z) | Compresses and extracts .7z archives |
 | [`dd`](#cmd-dd) | Copies and converts data block by block (create files, images, wipe) |
 | [`hexedit`](#cmd-hexedit) | Opens a file in a hex editor to view and change its bytes |
+| [`dump`](#cmd-dump) | Backs up ext2/3/4 filesystems; skips files with the chattr d attribute |
+| [`extundelete`](#cmd-extundelete) | Recovers deleted files from an ext3/ext4 partition (unmount it first) |
 
 ---
 
@@ -165,6 +167,34 @@ Opens a file in a hex editor to view and change its bytes
 
 ```bash
 hexedit file.txt
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-dump"></a>
+
+## `dump`
+
+Backs up ext2/3/4 filesystems; skips files with the chattr d attribute
+
+```bash
+sudo dump -0f backup.dump /home
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-extundelete"></a>
+
+## `extundelete`
+
+Recovers deleted files from an ext3/ext4 partition (unmount it first)
+
+```bash
+sudo extundelete /dev/sda1 --restore-all
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>
