@@ -4,7 +4,7 @@
 
 **My notes from S4vitar's Linux fundamentals course: Linux commands and Bash scripting, grouped by what they do, with copy-ready examples.**
 
-![Commands](https://img.shields.io/badge/commands-174-2ea44f?style=for-the-badge) ![Parameters](https://img.shields.io/badge/parameters-257-0969da?style=for-the-badge) ![Categories](https://img.shields.io/badge/categories-24-8250df?style=for-the-badge)
+![Commands](https://img.shields.io/badge/commands-185-2ea44f?style=for-the-badge) ![Parameters](https://img.shields.io/badge/parameters-273-0969da?style=for-the-badge) ![Categories](https://img.shields.io/badge/categories-24-8250df?style=for-the-badge)
 
 🌐 **Searchable web version:** [`docs/index.html`](docs/index.html)
 
@@ -18,8 +18,8 @@
 
 | | Category | Commands |
 |:-:|:--|:--|
-| 📁 | **[Navigation & Files](notes/navigation-files.md)** | `pwd` `ls` `cd` `mkdir` `touch` `cp` `ln` `rm` `file` `stat` `*` `mv` `shred` |
-| 📝 | **[Viewing & Editing Files](notes/viewing-editing-files.md)** | `cat` `more` `less` `head` `tail` `rev` `diff` `nano` `vi` |
+| 📁 | **[Navigation & Files](notes/navigation-files.md)** | `pwd` `ls` `cd` `mkdir` `touch` `cp` `ln` `rm` `file` `stat` `*` `mv` `shred` `rsync` |
+| 📝 | **[Viewing & Editing Files](notes/viewing-editing-files.md)** | `cat` `more` `less` `head` `tail` `rev` `diff` `nano` `vi` `cmp` |
 | 🔍 | **[Searching](notes/searching.md)** | `find` `grep` `which` `command` `xargs` |
 | ✂️ | **[Text Processing](notes/text-processing.md)** | `echo` `awk` `cut` `tr` `sed` `sort` `wc` `uniq` `tee` `sponge` `column` |
 | 🔀 | **[Pipes, Redirection & Operators](notes/pipes-redirection-operators.md)** | `\|` `;` `&&` `\|\|` `&` `>` `>>` `2>/dev/null` `2>&1` `&>/dev/null` `exec` `disown` |
@@ -29,8 +29,8 @@
 | ⏱️ | **[Processes & Scheduling](notes/processes-scheduling.md)** | `ps` `kill` `fg` `sleep` `timeout` `time` `watch` `crontab` |
 | 🌐 | **[Networking](notes/networking.md)** | `hostname` `ifconfig` `iwconfig` `ss` `lsof` `nc` `ncat` |
 | 🔑 | **[SSH & Remote Access](notes/ssh-remote-access.md)** | `ssh` `sshpass` `ssh-keygen` `ssh-copy-id` |
-| 🧬 | **[Binary, Encoding & Compression](notes/binary-encoding-compression.md)** | `strings` `xxd` `ghex` `base64` `md5sum` `bc` `7z` `dump` `extundelete` `restore` `ext4magic` `photorec` `debugfs` |
-| 📦 | **[System & Packages](notes/system-packages.md)** | `apt` `parrot-upgrade` `reboot` `neofetch` `uname` `mount` `umount` `lsblk` `fstrim` |
+| 🧬 | **[Binary, Encoding & Compression](notes/binary-encoding-compression.md)** | `strings` `xxd` `ghex` `base64` `md5sum` `bc` `7z` `dump` `extundelete` `restore` `ext4magic` `photorec` `debugfs` `dd` `tar` |
+| 📦 | **[System & Packages](notes/system-packages.md)** | `apt` `parrot-upgrade` `reboot` `neofetch` `uname` `mount` `umount` `lsblk` `fstrim` `date` `df` `sync` `mkfs.ext4` `blkdiscard` `nvme` `systemctl` |
 | 🌿 | **[Git](notes/git.md)** | `git clone` `git log` `git show` `git branch` `git checkout` `git tag` `git add` `git commit` `git push` |
 
 ### 🐚 Bash Scripting

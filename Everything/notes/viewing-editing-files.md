@@ -2,7 +2,7 @@
 
 > Read files in the terminal, page through output, compare files and edit text.
 
-**Linux Commands** · **10** commands · **35** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **11** commands · **35** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -18,6 +18,7 @@
 | [`nano`](#cmd-nano) | Simple text editor in the terminal |
 | [`vi`](#cmd-vi) | Advanced, powerful text editor with a steeper learning curve than nano |
 | [`man`](#cmd-man) | Opens the manual of a command |
+| [`cmp`](#cmd-cmp) | Compares two files byte by byte and says where they first differ |
 
 ---
 
@@ -205,6 +206,20 @@ Opens the manual of a command
 
 ```bash
 man bc
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-cmp"></a>
+
+## `cmp`
+
+Compares two files byte by byte and says where they first differ
+
+```bash
+sudo cmp /dev/zero /dev/sdb
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

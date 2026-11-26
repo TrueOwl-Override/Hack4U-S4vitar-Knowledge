@@ -2,7 +2,7 @@
 
 > Find files anywhere on the system and locate where commands live.
 
-**Linux Commands** · **6** commands · **31** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **6** commands · **33** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -74,6 +74,8 @@ grep "error" log.txt
 | `-oE` | Shows only the match, with extended regex (good for extracting emails) | `grep -oE '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}' file.txt` |
 | `-q` | Quiet: shows nothing, only sets the exit code | `grep -q "root" /etc/passwd && echo found` |
 | `-qE` | Quiet + extended regex; good to validate formats like an IP | `echo "$ip" \| grep -qE '^[0-9]{1,3}(\.[0-9]{1,3}){3}$'` |
+| `-a` | Treats binary data (like a whole disk) as text; good for finding deleted text | `sudo grep -a -C 50 "a phrase" /dev/sdb1 > /media/usb/rescue.txt` |
+| `-l` | Shows only the names of the files that match | `grep -l "phrase" recup_dir*/*.txt` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

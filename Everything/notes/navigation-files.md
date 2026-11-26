@@ -2,7 +2,7 @@
 
 > Move around the filesystem and create, copy, delete and inspect files and folders.
 
-**Linux Commands** · **17** commands · **27** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **18** commands · **29** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -25,6 +25,7 @@
 | [`popd`](#cmd-popd) | Returns to the directory saved by pushd |
 | [`mv`](#cmd-mv) | Moves or renames files and folders |
 | [`shred`](#cmd-shred) | Overwrites a file several times so it can't be recovered (unreliable on SSDs, journaling and CoW filesystems) |
+| [`rsync`](#cmd-rsync) | Copies or syncs folders, sending only what changed (handy for backups to another disk) |
 
 ---
 
@@ -62,6 +63,8 @@ ls /etc
 | `/dev` | Folder with the system's devices; many of them aren't physical but virtual | `ls /dev` |
 | `-l /usr/bin/sh` | On a link, shows where it points (sh → dash or bash) | `ls -l /usr/bin/sh` |
 | `/home` | Folder holding each user's personal directory (/home/mary, /home/john) | `ls -l /home` |
+| `~/.local/share/Trash/files/` | Trash folder of the desktop (files deleted with rm never go here) | `ls ~/.local/share/Trash/files/` |
+| `/mnt` | Folder used to temporarily mount disks and partitions | `sudo mount /dev/nvme0n1p3 /mnt && ls /mnt/Users/` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -309,5 +312,19 @@ shred -u secret.txt
 | `-v` | Shows the progress of each pass | `shred -vzu secret.txt` |
 | `-f` | Changes permissions if needed so it can write to the file | `shred -fu protected.txt` |
 | `/dev/sdX` | Wipes a whole disk or partition (destroys everything on it) | `sudo shred -vzn 1 /dev/sdb` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-rsync"></a>
+
+## `rsync`
+
+Copies or syncs folders, sending only what changed (handy for backups to another disk)
+
+```bash
+rsync -av ~/projects/ /media/usb/projects/
+```
 
 <sub>[⬆ Back to top](#commands)</sub>

@@ -16,6 +16,7 @@ Navigation & Files,pushd,Enters a directory and saves the previous one on a stac
 Navigation & Files,popd,Returns to the directory saved by pushd,popd
 Navigation & Files,mv,Moves or renames files and folders,mv old.txt new.txt
 Navigation & Files,shred,"Overwrites a file several times so it can't be recovered (unreliable on SSDs, journaling and CoW filesystems)",shred -u secret.txt
+Navigation & Files,rsync,"Copies or syncs folders, sending only what changed (handy for backups to another disk)",rsync -av ~/projects/ /media/usb/projects/
 Viewing & Editing Files,cat,Prints a file's contents to the terminal,cat notes.txt
 Viewing & Editing Files,more,"Shows a command's output or a file one page at a time (space to advance, q to quit)",cat /etc/passwd | more
 Viewing & Editing Files,less,"Shows a long output or file with scroll (arrows to move, q to quit)",cat output.txt | less
@@ -26,6 +27,7 @@ Viewing & Editing Files,diff,Compares two files line by line and shows the diffe
 Viewing & Editing Files,nano,Simple text editor in the terminal,nano notes.txt
 Viewing & Editing Files,vi,"Advanced, powerful text editor with a steeper learning curve than nano",vi notes.txt
 Viewing & Editing Files,man,Opens the manual of a command,man bc
+Viewing & Editing Files,cmp,Compares two files byte by byte and says where they first differ,sudo cmp /dev/zero /dev/sdb
 Searching,find,"Searches for files and folders by criteria (name, type, permissions, date, etc.)","find /home -name ""*.txt"""
 Searching,grep,Searches and filters lines of text that match a pattern,"grep ""error"" log.txt"
 Searching,which,Shows where a command or program is installed,which python3
@@ -136,6 +138,7 @@ SSH & Remote Access,ssh-copy-id,Copies your SSH public key to a remote server's 
 "Binary, Encoding & Compression",ext4magic,Recovers deleted files from ext3/ext4 using the journal; more maintained than extundelete,sudo ext4magic /dev/sdb1 -r -a $(date -d '-1 day' +%s)
 "Binary, Encoding & Compression",photorec,"Recovers files by their signatures (JPG, PDF, ZIP...) on any filesystem, without original names",sudo photorec /dev/sdb1
 "Binary, Encoding & Compression",debugfs,Low-level ext2/3/4 debugger to inspect inodes and blocks by hand,sudo debugfs /dev/sdb1
+"Binary, Encoding & Compression",tar,Packs (and optionally compresses) files and folders into a single archive,tar -czf backup.tar.gz project/
 System & Packages,apt,Debian's package manager: refreshes the package list (update) and installs available updates (upgrade),sudo apt update
 System & Packages,parrot-upgrade,Safely upgrades Parrot OS without breaking its own components,sudo parrot-upgrade
 System & Packages,reboot,Restarts the machine,sudo reboot
@@ -149,6 +152,12 @@ System & Packages,mount,Mounts a partition or shows the mounted ones,sudo mount 
 System & Packages,umount,Unmounts a partition so nothing else writes to it,sudo umount /dev/sdb1
 System & Packages,lsblk,Lists disks and partitions as a tree,lsblk
 System & Packages,fstrim,Tells an SSD which blocks are free (TRIM) so it can wipe them,sudo fstrim -v /
+System & Packages,df,Shows disk usage per partition and which partition a path is on,df -h /home/mary
+System & Packages,sync,Forces pending data in memory to be written to disk,sync
+System & Packages,mkfs.ext4,Formats a partition (or image file) with the ext4 filesystem,mkfs.ext4 /tmp/lab.img
+System & Packages,blkdiscard,"Discards every block of an SSD (TRIM), wiping it fast",sudo blkdiscard /dev/sdb
+System & Packages,nvme,Manages NVMe SSDs (package nvme-cli),sudo nvme list
+System & Packages,systemctl,"Manages systemd services and timers (start, stop, status)",systemctl status fstrim.timer
 System & Device Files,/dev/null,The black hole: anything sent here is discarded,command 2>/dev/null
 System & Device Files,/dev/zero,An endless source of null bytes,dd if=/dev/zero of=file bs=1M count=1
 System & Device Files,/dev/urandom,A source of random data,cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 16

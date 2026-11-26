@@ -2,7 +2,7 @@
 
 > Find files anywhere on the system and locate where commands live.
 
-**Linux Commands** · **5** commands · **20** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **5** commands · **22** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -64,6 +64,8 @@ grep "error" log.txt
 | `-B 5` | Shows the match and the 5 lines that come before it (Before) | `grep -B 5 "root" /etc/passwd` |
 | `-C 5` | Shows the match with 5 lines of context before and after it (Context) | `grep -C 5 "root" /etc/passwd` |
 | `-oP` | -o shows only the matching part and -P enables Perl regex (\K drops what came before, (?=...) checks what comes after); this one extracts what's between brackets | `grep -oP '\[\K.*?(?=\])' output.txt` |
+| `-a` | Treats binary data (like a whole disk) as text; good for finding deleted text | `sudo grep -a -C 50 "a phrase" /dev/sdb1 > /media/usb/rescue.txt` |
+| `-l` | Shows only the names of the files that match | `grep -l "phrase" recup_dir*/*.txt` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

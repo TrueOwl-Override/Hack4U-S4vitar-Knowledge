@@ -120,6 +120,8 @@ grep,-A 5,Shows the match and the 5 lines that come after it (After),"grep -A 5 
 grep,-B 5,Shows the match and the 5 lines that come before it (Before),"grep -B 5 ""root"" /etc/passwd"
 grep,-C 5,Shows the match with 5 lines of context before and after it (Context),"grep -C 5 ""root"" /etc/passwd"
 grep,-oP,"-o shows only the matching part and -P enables Perl regex (\K drops what came before, (?=...) checks what comes after); this one extracts what's between brackets",grep -oP '\[\K.*?(?=\])' output.txt
+grep,-a,Treats binary data (like a whole disk) as text; good for finding deleted text,"sudo grep -a -C 50 ""a phrase"" /dev/sdb1 > /media/usb/rescue.txt"
+grep,-l,Shows only the names of the files that match,"grep -l ""phrase"" recup_dir*/*.txt"
 find,-size,Filters the search by file size,find -size 1033c
 find,-exec ... {} \;,Runs a command on each file found ({} is the file),find folder/ -type f -exec shred -u {} \;
 uniq,-u,"Shows only completely unique lines, the ones that never repeat",sort data.txt | uniq -u
@@ -156,6 +158,8 @@ ls,/etc,Folder where the system's configuration files live,ls /etc
 ls,/bin /sbin /usr/sbin,Folders where programs are usually stored (it depends on the distro),ls /usr/sbin
 ls,/dev,Folder with the system's devices; many of them aren't physical but virtual,ls /dev
 ls,/home,"Folder holding each user's personal directory (/home/mary, /home/john)",ls -l /home
+ls,~/.local/share/Trash/files/,Trash folder of the desktop (files deleted with rm never go here),ls ~/.local/share/Trash/files/
+ls,/mnt,Folder used to temporarily mount disks and partitions,sudo mount /dev/nvme0n1p3 /mnt && ls /mnt/Users/
 crontab,* * * * * command,"Cron job format: Minute Hour Day-of-month Month Day-of-week Command; * means every value (every minute, hour, etc.)",* * * * * /home/user/script.sh
 crontab,*/3 * * * *,*/N means every N units; this one runs every 3 minutes,*/3 * * * * /home/user/script.sh
 crontab,* * * * 6,The 5th field is the day of the week: 0 or 7 Sunday ... 6 Saturday; this one runs every minute on Saturdays,* * * * 6 /home/user/script.sh
@@ -250,9 +254,21 @@ dump,-u,Records the backup date in /etc/dumpdates so the next level knows where 
 dump,-f,File (or device) where the backup is saved,sudo dump -0f /backups/home.dump /home
 restore,-i,Interactive mode: browse the backup and pick which files to extract,sudo restore -i -f home.dump
 restore,-f,Backup file to read from,sudo restore -r -f home.dump
+restore,-r,Restores the whole backup into the current folder,sudo restore -r -f home.dump
 extundelete,--restore-file,Recovers a single file (path relative to the partition) into RECOVERED_FILES/,sudo extundelete /dev/sdb1 --restore-file home/mary/notes.txt
 extundelete,--restore-directory,Recovers a whole folder,sudo extundelete /dev/sdb1 --restore-directory home/mary
 extundelete,--restore-all,Recovers everything it can find,sudo extundelete /dev/sdb1 --restore-all
 mount,"-o remount,ro",Remounts a partition read-only so nothing overwrites deleted data,"sudo mount -o remount,ro /dev/sdb1"
 lsblk,--discard,Shows whether each disk supports TRIM (DISC-GRAN and DISC-MAX not 0),lsblk --discard
+lsblk,-o,Chooses which columns to show,"lsblk -o NAME,SIZE,MODEL,MOUNTPOINTS"
 fstrim,-v,Shows how many bytes were trimmed,sudo fstrim -v /
+dd,if= of=,Input file (if) and output file (of),dd if=/dev/zero of=file.txt
+dd,bs= count=,Block size (bs) and number of blocks (count),dd if=/dev/zero of=file.txt bs=1M count=1
+dd,if=/dev/urandom,Writes random data instead of zeros (slower),sudo dd if=/dev/urandom of=/dev/sdb bs=4M
+dd,status=progress,Shows the progress while it copies,sudo dd if=/dev/zero of=/dev/sdb bs=4M status=progress
+dd,conv=fsync,Makes sure everything is written to disk before it finishes,sudo dd if=/dev/zero of=/dev/sdb bs=4M conv=fsync
+date,+%Y-%m-%d %H:%M:%S,"Format: %Y year, %m month, %d day, %H hour, %M minute, %S second",date '+%Y-%m-%d %H:%M:%S'
+date,-d,Shows a date other than now (e.g. '-1 day'); +%s prints it as a Unix timestamp,date -d '-1 day' +%s
+df,-h,"Sizes in human-readable units (G, M)",df -h
+nvme,format -s 1,Manufacturer secure erase of an NVMe SSD (destroys everything),sudo nvme format /dev/nvme0n1 -s 1
+systemctl,status,Shows whether a service or timer is active and its latest logs,systemctl status fstrim.timer

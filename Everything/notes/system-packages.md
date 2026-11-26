@@ -2,7 +2,7 @@
 
 > Update the system, manage packages and check system info.
 
-**Linux Commands** · **13** commands · **11** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **19** commands · **16** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -21,6 +21,12 @@
 | [`umount`](#cmd-umount) | Unmounts a partition so nothing else writes to it |
 | [`lsblk`](#cmd-lsblk) | Lists disks and partitions as a tree |
 | [`fstrim`](#cmd-fstrim) | Tells an SSD which blocks are free (TRIM) so it can wipe them |
+| [`df`](#cmd-df) | Shows disk usage per partition and which partition a path is on |
+| [`sync`](#cmd-sync) | Forces pending data in memory to be written to disk |
+| [`mkfs.ext4`](#cmd-mkfs-ext4) | Formats a partition (or image file) with the ext4 filesystem |
+| [`blkdiscard`](#cmd-blkdiscard) | Discards every block of an SSD (TRIM), wiping it fast |
+| [`nvme`](#cmd-nvme) | Manages NVMe SSDs (package nvme-cli) |
+| [`systemctl`](#cmd-systemctl) | Manages systemd services and timers (start, stop, status) |
 
 ---
 
@@ -137,6 +143,7 @@ date '+%H:%M:%S'
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `+%Y-%m-%d %H:%M:%S` | Format: %Y year, %m month, %d day, %H hour, %M minute, %S second | `date '+%Y-%m-%d %H:%M:%S'` |
+| `-d` | Shows a date other than now (e.g. '-1 day'); +%s prints it as a Unix timestamp | `date -d '-1 day' +%s` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -215,6 +222,7 @@ lsblk
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `--discard` | Shows whether each disk supports TRIM (DISC-GRAN and DISC-MAX not 0) | `lsblk --discard` |
+| `-o` | Chooses which columns to show | `lsblk -o NAME,SIZE,MODEL,MOUNTPOINTS` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -233,5 +241,101 @@ sudo fstrim -v /
 | Parameter | What it does | Example |
 |:--|:--|:--|
 | `-v` | Shows how many bytes were trimmed | `sudo fstrim -v /` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-df"></a>
+
+## `df`
+
+Shows disk usage per partition and which partition a path is on
+
+```bash
+df -h /home/mary
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `-h` | Sizes in human-readable units (G, M) | `df -h` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-sync"></a>
+
+## `sync`
+
+Forces pending data in memory to be written to disk
+
+```bash
+sync
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-mkfs-ext4"></a>
+
+## `mkfs.ext4`
+
+Formats a partition (or image file) with the ext4 filesystem
+
+```bash
+mkfs.ext4 /tmp/lab.img
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-blkdiscard"></a>
+
+## `blkdiscard`
+
+Discards every block of an SSD (TRIM), wiping it fast
+
+```bash
+sudo blkdiscard /dev/sdb
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-nvme"></a>
+
+## `nvme`
+
+Manages NVMe SSDs (package nvme-cli)
+
+```bash
+sudo nvme list
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `format -s 1` | Manufacturer secure erase of an NVMe SSD (destroys everything) | `sudo nvme format /dev/nvme0n1 -s 1` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-systemctl"></a>
+
+## `systemctl`
+
+Manages systemd services and timers (start, stop, status)
+
+```bash
+systemctl status fstrim.timer
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `status` | Shows whether a service or timer is active and its latest logs | `systemctl status fstrim.timer` |
 
 <sub>[⬆ Back to top](#commands)</sub>

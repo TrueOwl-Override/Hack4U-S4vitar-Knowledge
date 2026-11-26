@@ -2,7 +2,7 @@
 
 > Read files in the terminal, page through output, compare files and edit text.
 
-**Linux Commands** · **9** commands · **29** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **10** commands · **29** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -17,6 +17,7 @@
 | [`diff`](#cmd-diff) | Compares two files line by line and shows the differences between them |
 | [`nano`](#cmd-nano) | Simple text editor in the terminal |
 | [`vi`](#cmd-vi) | Advanced, powerful text editor with a steeper learning curve than nano |
+| [`cmp`](#cmd-cmp) | Compares two files byte by byte and says where they first differ |
 
 ---
 
@@ -185,5 +186,19 @@ vi notes.txt
 | `d` | In Vim, deletes (cuts) the selection; paste it back with p | `V, select the lines, then d` |
 | `yy` | In Vim, copies the current line (paste it with p) | `yy, then p` |
 | `.file.swp` | Swap file Vim leaves when it closes badly; delete it with rm so you can open the file again | `rm .roulette.sh.swp` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-cmp"></a>
+
+## `cmp`
+
+Compares two files byte by byte and says where they first differ
+
+```bash
+sudo cmp /dev/zero /dev/sdb
+```
 
 <sub>[⬆ Back to top](#commands)</sub>

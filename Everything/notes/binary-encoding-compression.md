@@ -2,7 +2,7 @@
 
 > Inspect binary data, convert between formats, hash files and work with archives.
 
-**Linux Commands** · **15** commands · **18** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **16** commands · **22** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -23,6 +23,7 @@
 | [`ext4magic`](#cmd-ext4magic) | Recovers deleted files from ext3/ext4 using the journal; more maintained than extundelete |
 | [`photorec`](#cmd-photorec) | Recovers files by their signatures (JPG, PDF, ZIP...) on any filesystem, without original names |
 | [`debugfs`](#cmd-debugfs) | Low-level ext2/3/4 debugger to inspect inodes and blocks by hand |
+| [`tar`](#cmd-tar) | Packs (and optionally compresses) files and folders into a single archive |
 
 ---
 
@@ -158,6 +159,9 @@ dd if=/dev/zero of=file.txt bs=1M count=1
 |:--|:--|:--|
 | `if= of=` | Input file (if) and output file (of) | `dd if=/dev/zero of=file.txt` |
 | `bs= count=` | Block size (bs) and number of blocks (count) | `dd if=/dev/zero of=file.txt bs=1M count=1` |
+| `if=/dev/urandom` | Writes random data instead of zeros (slower) | `sudo dd if=/dev/urandom of=/dev/sdb bs=4M` |
+| `status=progress` | Shows the progress while it copies | `sudo dd if=/dev/zero of=/dev/sdb bs=4M status=progress` |
+| `conv=fsync` | Makes sure everything is written to disk before it finishes | `sudo dd if=/dev/zero of=/dev/sdb bs=4M conv=fsync` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -231,6 +235,7 @@ sudo restore -i -f home.dump
 |:--|:--|:--|
 | `-i` | Interactive mode: browse the backup and pick which files to extract | `sudo restore -i -f home.dump` |
 | `-f` | Backup file to read from | `sudo restore -r -f home.dump` |
+| `-r` | Restores the whole backup into the current folder | `sudo restore -r -f home.dump` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 
@@ -272,6 +277,20 @@ Low-level ext2/3/4 debugger to inspect inodes and blocks by hand
 
 ```bash
 sudo debugfs /dev/sdb1
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-tar"></a>
+
+## `tar`
+
+Packs (and optionally compresses) files and folders into a single archive
+
+```bash
+tar -czf backup.tar.gz project/
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>
