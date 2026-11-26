@@ -2,7 +2,7 @@
 
 > Find files anywhere on the system and locate where commands live.
 
-**Linux Commands** · **5** commands · **19** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **5** commands · **20** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -38,6 +38,7 @@ find /home -name "*.txt"
 | `-readable` | Shows only files you have read permission on | `find /var -readable 2>/dev/null` |
 | `.` | Lists every file and folder in the current directory, including subdirectories | `find .` |
 | `-size` | Filters the search by file size | `find -size 1033c` |
+| `-exec ... {} \;` | Runs a command on each file found ({} is the file) | `find folder/ -type f -exec shred -u {} \;` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

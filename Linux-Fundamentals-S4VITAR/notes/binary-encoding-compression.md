@@ -2,7 +2,7 @@
 
 > Inspect binary data, convert between formats, hash files and work with archives.
 
-**Linux Commands** · **9** commands · **6** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **13** commands · **14** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -17,6 +17,10 @@
 | [`7z`](#cmd-7z) | Compresses and extracts .7z archives |
 | [`dump`](#cmd-dump) | Backs up ext2/3/4 filesystems; skips files with the chattr d attribute |
 | [`extundelete`](#cmd-extundelete) | Recovers deleted files from an ext3/ext4 partition (unmount it first) |
+| [`restore`](#cmd-restore) | Restores files from a backup made with dump |
+| [`ext4magic`](#cmd-ext4magic) | Recovers deleted files from ext3/ext4 using the journal; more maintained than extundelete |
+| [`photorec`](#cmd-photorec) | Recovers files by their signatures (JPG, PDF, ZIP...) on any filesystem, without original names |
+| [`debugfs`](#cmd-debugfs) | Low-level ext2/3/4 debugger to inspect inodes and blocks by hand |
 
 ---
 
@@ -143,6 +147,12 @@ Backs up ext2/3/4 filesystems; skips files with the chattr d attribute
 sudo dump -0f backup.dump /home
 ```
 
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `-0 / -1` | Backup level: 0 is full, 1 saves only what changed since the last level 0 (up to 9) | `sudo dump -1uf home-1.dump /home` |
+| `-u` | Records the backup date in /etc/dumpdates so the next level knows where to start | `sudo dump -0uf home.dump /home` |
+| `-f` | File (or device) where the backup is saved | `sudo dump -0f /backups/home.dump /home` |
+
 <sub>[⬆ Back to top](#commands)</sub>
 
 ---
@@ -155,6 +165,73 @@ Recovers deleted files from an ext3/ext4 partition (unmount it first)
 
 ```bash
 sudo extundelete /dev/sda1 --restore-all
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `--restore-file` | Recovers a single file (path relative to the partition) into RECOVERED_FILES/ | `sudo extundelete /dev/sdb1 --restore-file home/mary/notes.txt` |
+| `--restore-directory` | Recovers a whole folder | `sudo extundelete /dev/sdb1 --restore-directory home/mary` |
+| `--restore-all` | Recovers everything it can find | `sudo extundelete /dev/sdb1 --restore-all` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-restore"></a>
+
+## `restore`
+
+Restores files from a backup made with dump
+
+```bash
+sudo restore -i -f home.dump
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `-i` | Interactive mode: browse the backup and pick which files to extract | `sudo restore -i -f home.dump` |
+| `-f` | Backup file to read from | `sudo restore -r -f home.dump` |
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-ext4magic"></a>
+
+## `ext4magic`
+
+Recovers deleted files from ext3/ext4 using the journal; more maintained than extundelete
+
+```bash
+sudo ext4magic /dev/sdb1 -r -a $(date -d '-1 day' +%s)
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-photorec"></a>
+
+## `photorec`
+
+Recovers files by their signatures (JPG, PDF, ZIP...) on any filesystem, without original names
+
+```bash
+sudo photorec /dev/sdb1
+```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-debugfs"></a>
+
+## `debugfs`
+
+Low-level ext2/3/4 debugger to inspect inodes and blocks by hand
+
+```bash
+sudo debugfs /dev/sdb1
 ```
 
 <sub>[⬆ Back to top](#commands)</sub>

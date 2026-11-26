@@ -121,6 +121,7 @@ grep,-B 5,Shows the match and the 5 lines that come before it (Before),"grep -B 
 grep,-C 5,Shows the match with 5 lines of context before and after it (Context),"grep -C 5 ""root"" /etc/passwd"
 grep,-oP,"-o shows only the matching part and -P enables Perl regex (\K drops what came before, (?=...) checks what comes after); this one extracts what's between brackets",grep -oP '\[\K.*?(?=\])' output.txt
 find,-size,Filters the search by file size,find -size 1033c
+find,-exec ... {} \;,Runs a command on each file found ({} is the file),find folder/ -type f -exec shred -u {} \;
 uniq,-u,"Shows only completely unique lines, the ones that never repeat",sort data.txt | uniq -u
 base64,-d,Decodes Base64 text back to its original form,"echo ""aG9sYQ=="" | base64 -d"
 tr,'[A-Za-z]' '[N-ZA-Mn-za-m]',"Replaces each letter with the one 13 positions ahead, applying the ROT13 cipher","echo ""Uryyb"" | tr '[A-Za-z]' '[N-ZA-Mn-za-m]'"
@@ -238,3 +239,20 @@ lsattr,-a,Includes hidden files (those starting with a dot),lsattr -a
 lsattr,-d,"Shows the attributes of the folder itself, not of its contents",lsattr -d /home/mary
 lsattr,-v,Shows each file's version (generation) number,lsattr -v file.txt
 mkdir,-p,"Doesn't fail if the folder exists, and can create nested paths",mkdir -p a/b/c
+shred,-u,"Deletes the file after overwriting it (without it, the file stays full of garbage)",shred -u secret.txt
+shred,-n,Number of overwrite passes (3 by default),shred -n 5 -u secret.txt
+shred,-z,Adds a final pass with zeros to hide that shred was used,shred -zu secret.txt
+shred,-v,Shows the progress of each pass,shred -vzu secret.txt
+shred,-f,Changes permissions if needed so it can write to the file,shred -fu protected.txt
+shred,/dev/sdX,Wipes a whole disk or partition (destroys everything on it),sudo shred -vzn 1 /dev/sdb
+dump,-0 / -1,"Backup level: 0 is full, 1 saves only what changed since the last level 0 (up to 9)",sudo dump -1uf home-1.dump /home
+dump,-u,Records the backup date in /etc/dumpdates so the next level knows where to start,sudo dump -0uf home.dump /home
+dump,-f,File (or device) where the backup is saved,sudo dump -0f /backups/home.dump /home
+restore,-i,Interactive mode: browse the backup and pick which files to extract,sudo restore -i -f home.dump
+restore,-f,Backup file to read from,sudo restore -r -f home.dump
+extundelete,--restore-file,Recovers a single file (path relative to the partition) into RECOVERED_FILES/,sudo extundelete /dev/sdb1 --restore-file home/mary/notes.txt
+extundelete,--restore-directory,Recovers a whole folder,sudo extundelete /dev/sdb1 --restore-directory home/mary
+extundelete,--restore-all,Recovers everything it can find,sudo extundelete /dev/sdb1 --restore-all
+mount,"-o remount,ro",Remounts a partition read-only so nothing overwrites deleted data,"sudo mount -o remount,ro /dev/sdb1"
+lsblk,--discard,Shows whether each disk supports TRIM (DISC-GRAN and DISC-MAX not 0),lsblk --discard
+fstrim,-v,Shows how many bytes were trimmed,sudo fstrim -v /

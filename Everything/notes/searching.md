@@ -2,7 +2,7 @@
 
 > Find files anywhere on the system and locate where commands live.
 
-**Linux Commands** · **6** commands · **30** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **6** commands · **31** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -41,6 +41,7 @@ find /home -name "*.txt"
 | `-size` | Filters the search by file size | `find -size 1033c` |
 | `-perm -o+w` | Finds files that others can write to | `find / -type f -name "*.sh" -user root -perm -o+w 2>/dev/null` |
 | `-perm -2000` | Finds files with the SGID permission | `find / -perm -2000 2>/dev/null` |
+| `-exec ... {} \;` | Runs a command on each file found ({} is the file) | `find folder/ -type f -exec shred -u {} \;` |
 
 <sub>[⬆ Back to top](#commands)</sub>
 

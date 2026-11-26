@@ -11,6 +11,7 @@ Navigation & Files,file,"Analyzes a file and tells you what kind of content it h
 Navigation & Files,stat,"Shows detailed info about a file or directory: permissions, size and access/modification dates",stat file.txt
 Navigation & Files,*,"Wildcard that matches anything, to select several files at once",ls *.txt
 Navigation & Files,mv,Moves or renames files and folders,mv old.txt new.txt
+Navigation & Files,shred,"Overwrites a file several times so it can't be recovered (unreliable on SSDs, journaling and CoW filesystems)",shred -u secret.txt
 Viewing & Editing Files,cat,Prints a file's contents to the terminal,cat notes.txt
 Viewing & Editing Files,more,"Shows a command's output or a file one page at a time (space to advance, q to quit)",cat /etc/passwd | more
 Viewing & Editing Files,less,"Shows a long output or file with scroll (arrows to move, q to quit)",cat output.txt | less
@@ -102,11 +103,19 @@ SSH & Remote Access,ssh-copy-id,Copies your SSH public key to a remote server's 
 "Binary, Encoding & Compression",7z,Compresses and extracts .7z archives,7z a backup.7z folder/
 "Binary, Encoding & Compression",dump,Backs up ext2/3/4 filesystems; skips files with the chattr d attribute,sudo dump -0f backup.dump /home
 "Binary, Encoding & Compression",extundelete,Recovers deleted files from an ext3/ext4 partition (unmount it first),sudo extundelete /dev/sda1 --restore-all
+"Binary, Encoding & Compression",restore,Restores files from a backup made with dump,sudo restore -i -f home.dump
+"Binary, Encoding & Compression",ext4magic,Recovers deleted files from ext3/ext4 using the journal; more maintained than extundelete,sudo ext4magic /dev/sdb1 -r -a $(date -d '-1 day' +%s)
+"Binary, Encoding & Compression",photorec,"Recovers files by their signatures (JPG, PDF, ZIP...) on any filesystem, without original names",sudo photorec /dev/sdb1
+"Binary, Encoding & Compression",debugfs,Low-level ext2/3/4 debugger to inspect inodes and blocks by hand,sudo debugfs /dev/sdb1
 System & Packages,apt,Debian's package manager: refreshes the package list (update) and installs available updates (upgrade),sudo apt update
 System & Packages,parrot-upgrade,Safely upgrades Parrot OS without breaking its own components,sudo parrot-upgrade
 System & Packages,reboot,Restarts the machine,sudo reboot
 System & Packages,neofetch,"Shows system info (kernel, RAM, CPU, distro logo) in a visual way",neofetch
 System & Packages,uname,Shows information about the system and its kernel,uname -a
+System & Packages,mount,Mounts a partition or shows the mounted ones,sudo mount /dev/sdb1 /mnt
+System & Packages,umount,Unmounts a partition so nothing else writes to it,sudo umount /dev/sdb1
+System & Packages,lsblk,Lists disks and partitions as a tree,lsblk
+System & Packages,fstrim,Tells an SSD which blocks are free (TRIM) so it can wipe them,sudo fstrim -v /
 Git,git clone,"Downloads a full copy of a remote repository (like GitHub), with all its files and history",git clone https://github.com/user/project.git
 Git,git log,"Lists every commit in the project with its ID, author, date and message",git log
 Git,git show,Shows the details and changes applied in a specific commit,git show a1b2c3d

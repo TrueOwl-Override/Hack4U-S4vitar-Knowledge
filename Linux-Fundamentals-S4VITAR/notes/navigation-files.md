@@ -2,7 +2,7 @@
 
 > Move around the filesystem and create, copy, delete and inspect files and folders.
 
-**Linux Commands** · **12** commands · **17** parameters  ·  [⬅ Back to index](../README.md)
+**Linux Commands** · **13** commands · **23** parameters  ·  [⬅ Back to index](../README.md)
 
 <a id="commands"></a>
 
@@ -20,6 +20,7 @@
 | [`stat`](#cmd-stat) | Shows detailed info about a file or directory: permissions, size and access/modification dates |
 | [`*`](#cmd-sym-42) | Wildcard that matches anything, to select several files at once |
 | [`mv`](#cmd-mv) | Moves or renames files and folders |
+| [`shred`](#cmd-shred) | Overwrites a file several times so it can't be recovered (unreliable on SSDs, journaling and CoW filesystems) |
 
 ---
 
@@ -218,5 +219,28 @@ Moves or renames files and folders
 ```bash
 mv old.txt new.txt
 ```
+
+<sub>[⬆ Back to top](#commands)</sub>
+
+---
+
+<a id="cmd-shred"></a>
+
+## `shred`
+
+Overwrites a file several times so it can't be recovered (unreliable on SSDs, journaling and CoW filesystems)
+
+```bash
+shred -u secret.txt
+```
+
+| Parameter | What it does | Example |
+|:--|:--|:--|
+| `-u` | Deletes the file after overwriting it (without it, the file stays full of garbage) | `shred -u secret.txt` |
+| `-n` | Number of overwrite passes (3 by default) | `shred -n 5 -u secret.txt` |
+| `-z` | Adds a final pass with zeros to hide that shred was used | `shred -zu secret.txt` |
+| `-v` | Shows the progress of each pass | `shred -vzu secret.txt` |
+| `-f` | Changes permissions if needed so it can write to the file | `shred -fu protected.txt` |
+| `/dev/sdX` | Wipes a whole disk or partition (destroys everything on it) | `sudo shred -vzn 1 /dev/sdb` |
 
 <sub>[⬆ Back to top](#commands)</sub>

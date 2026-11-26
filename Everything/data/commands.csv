@@ -15,6 +15,7 @@ Navigation & Files,basename,"Keeps just the file name, without the path",basenam
 Navigation & Files,pushd,Enters a directory and saves the previous one on a stack,pushd /root/.ssh
 Navigation & Files,popd,Returns to the directory saved by pushd,popd
 Navigation & Files,mv,Moves or renames files and folders,mv old.txt new.txt
+Navigation & Files,shred,"Overwrites a file several times so it can't be recovered (unreliable on SSDs, journaling and CoW filesystems)",shred -u secret.txt
 Viewing & Editing Files,cat,Prints a file's contents to the terminal,cat notes.txt
 Viewing & Editing Files,more,"Shows a command's output or a file one page at a time (space to advance, q to quit)",cat /etc/passwd | more
 Viewing & Editing Files,less,"Shows a long output or file with scroll (arrows to move, q to quit)",cat output.txt | less
@@ -131,6 +132,10 @@ SSH & Remote Access,ssh-copy-id,Copies your SSH public key to a remote server's 
 "Binary, Encoding & Compression",hexedit,Opens a file in a hex editor to view and change its bytes,hexedit file.txt
 "Binary, Encoding & Compression",dump,Backs up ext2/3/4 filesystems; skips files with the chattr d attribute,sudo dump -0f backup.dump /home
 "Binary, Encoding & Compression",extundelete,Recovers deleted files from an ext3/ext4 partition (unmount it first),sudo extundelete /dev/sda1 --restore-all
+"Binary, Encoding & Compression",restore,Restores files from a backup made with dump,sudo restore -i -f home.dump
+"Binary, Encoding & Compression",ext4magic,Recovers deleted files from ext3/ext4 using the journal; more maintained than extundelete,sudo ext4magic /dev/sdb1 -r -a $(date -d '-1 day' +%s)
+"Binary, Encoding & Compression",photorec,"Recovers files by their signatures (JPG, PDF, ZIP...) on any filesystem, without original names",sudo photorec /dev/sdb1
+"Binary, Encoding & Compression",debugfs,Low-level ext2/3/4 debugger to inspect inodes and blocks by hand,sudo debugfs /dev/sdb1
 System & Packages,apt,Debian's package manager: refreshes the package list (update) and installs available updates (upgrade),sudo apt update
 System & Packages,parrot-upgrade,Safely upgrades Parrot OS without breaking its own components,sudo parrot-upgrade
 System & Packages,reboot,Restarts the machine,sudo reboot
@@ -140,6 +145,10 @@ System & Packages,uptime,Shows how long the system has been on,uptime
 System & Packages,date,Shows or formats the system date and time,date '+%H:%M:%S'
 System & Packages,notify-send,Shows a desktop notification (needs a notification daemon like dunst),"notify-send ""Port 80 open"""
 System & Packages,dunst,Lightweight notification daemon that displays the notify-send pop-ups,dunst &
+System & Packages,mount,Mounts a partition or shows the mounted ones,sudo mount /dev/sdb1 /mnt
+System & Packages,umount,Unmounts a partition so nothing else writes to it,sudo umount /dev/sdb1
+System & Packages,lsblk,Lists disks and partitions as a tree,lsblk
+System & Packages,fstrim,Tells an SSD which blocks are free (TRIM) so it can wipe them,sudo fstrim -v /
 System & Device Files,/dev/null,The black hole: anything sent here is discarded,command 2>/dev/null
 System & Device Files,/dev/zero,An endless source of null bytes,dd if=/dev/zero of=file bs=1M count=1
 System & Device Files,/dev/urandom,A source of random data,cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 16

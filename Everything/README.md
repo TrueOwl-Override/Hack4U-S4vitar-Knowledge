@@ -4,7 +4,7 @@
 
 **Everything I've learned from every course, mixed together and grouped by what it does, with copy-ready examples.**
 
-![Commands](https://img.shields.io/badge/commands-231-2ea44f?style=for-the-badge) ![Parameters](https://img.shields.io/badge/parameters-397-0969da?style=for-the-badge) ![Categories](https://img.shields.io/badge/categories-25-8250df?style=for-the-badge)
+![Commands](https://img.shields.io/badge/commands-240-2ea44f?style=for-the-badge) ![Parameters](https://img.shields.io/badge/parameters-415-0969da?style=for-the-badge) ![Categories](https://img.shields.io/badge/categories-25-8250df?style=for-the-badge)
 
 🌐 **Searchable web version:** [`docs/index.html`](docs/index.html)
 
@@ -18,7 +18,7 @@
 
 | | Category | Commands |
 |:-:|:--|:--|
-| 📁 | **[Navigation & Files](notes/navigation-files.md)** | `pwd` `ls` `cd` `mkdir` `touch` `cp` `ln` `rm` `file` `stat` `*` `readlink` `basename` `pushd` `popd` `mv` |
+| 📁 | **[Navigation & Files](notes/navigation-files.md)** | `pwd` `ls` `cd` `mkdir` `touch` `cp` `ln` `rm` `file` `stat` `*` `readlink` `basename` `pushd` `popd` `mv` `shred` |
 | 📝 | **[Viewing & Editing Files](notes/viewing-editing-files.md)** | `cat` `more` `less` `head` `tail` `rev` `diff` `nano` `vi` `man` |
 | 🔍 | **[Searching](notes/searching.md)** | `find` `grep` `which` `command` `xargs` `locate` |
 | ✂️ | **[Text Processing](notes/text-processing.md)** | `echo` `awk` `cut` `tr` `sed` `sort` `wc` `uniq` `tee` `sponge` `column` |
@@ -29,8 +29,8 @@
 | ⏱️ | **[Processes & Scheduling](notes/processes-scheduling.md)** | `ps` `kill` `fg` `sleep` `timeout` `time` `watch` `crontab` `pkill` `pgrep` |
 | 🌐 | **[Networking](notes/networking.md)** | `hostname` `ifconfig` `iwconfig` `ss` `lsof` `nc` `ncat` `ping` `ip` `dig` `arp-scan` `ipcalc` `ffuf` |
 | 🔑 | **[SSH & Remote Access](notes/ssh-remote-access.md)** | `ssh` `sshpass` `ssh-keygen` `ssh-copy-id` |
-| 🧬 | **[Binary, Encoding & Compression](notes/binary-encoding-compression.md)** | `strings` `xxd` `ghex` `base64` `md5sum` `bc` `7z` `dd` `hexedit` `dump` `extundelete` |
-| 📦 | **[System & Packages](notes/system-packages.md)** | `apt` `parrot-upgrade` `reboot` `neofetch` `uname` `uptime` `date` `notify-send` `dunst` |
+| 🧬 | **[Binary, Encoding & Compression](notes/binary-encoding-compression.md)** | `strings` `xxd` `ghex` `base64` `md5sum` `bc` `7z` `dd` `hexedit` `dump` `extundelete` `restore` `ext4magic` `photorec` `debugfs` |
+| 📦 | **[System & Packages](notes/system-packages.md)** | `apt` `parrot-upgrade` `reboot` `neofetch` `uname` `uptime` `date` `notify-send` `dunst` `mount` `umount` `lsblk` `fstrim` |
 | 🗂️ | **[System & Device Files](notes/system-device-files.md)** | `/dev/null` `/dev/zero` `/dev/urandom` `/etc/` `/tmp/` `/usr/share/seclists/` `/opt/` |
 | 🌿 | **[Git](notes/git.md)** | `git clone` `git log` `git show` `git branch` `git checkout` `git tag` `git add` `git commit` `git push` |
 
